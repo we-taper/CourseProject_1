@@ -1,2 +1,0 @@
-RunTimeCounter: 
-6
