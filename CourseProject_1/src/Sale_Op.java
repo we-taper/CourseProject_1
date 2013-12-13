@@ -1,6 +1,4 @@
-//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-//We have an empty warehouse, with the (alarm line) +(minimal price)+( recommended price) not set.
-//So there're still sth i can't test.
+
 
 import java.math.BigDecimal;
 import java.util.Scanner;
@@ -106,27 +104,26 @@ public class Sale_Op
 				ioPak.printf("The total profit is %.2f\n", profit);
 				if (Data.getAlarmPrice().compareTo(profit) == -1)
 				{
-					ioPak.println("\nThe profit is too low!\n"
+					ioPak.println("The profit is too low!\n"
 							+ "Please consider it carefully!");
 				}
 				break;
 			}
 			else
 			{
-				ioPak.println("\nEnter 1 (for Price) or 2 (for Profit) please:");
+				ioPak.println("Enter 1 (for Price) or 2 (for Profit) please:");
 			}
 
 		}
 	}
 
 	public static Salesman ShowAccount(Salesman salesman)
-	{
-		ioPak.printf("\nYou are now viewing your account.\n"
-				+ "Have you work well these days?Check!\n"
-				+ "Account ID:%6d\n" + "Name:%14s\n"
-				+ "Sales Amount:%10.2f\n" + "Sales Profit:%10.2f\n",
-				salesman.getAccountID(), salesman.getName(),
-				salesman.getSale(), salesman.getSaleProfit());
+	{System.out.println("You are now viewing your account.\n"
+	+"Have you work well these days?Check!\n");
+		ioPak.printTable(20, "!!","Account ID:!!%d\n"
+	+"Name:!!%s\n"+ "Sales Amount:!!%.2f\n"+ 
+				"Sales Profit:!!%.2f\n", salesman.getAccountID(), 
+				salesman.getName(),salesman.getSale(), salesman.getSaleProfit());
 		return salesman;
 	}
 
@@ -134,16 +131,14 @@ public class Sale_Op
 
 	{
 		
-		String space =" ";
 		Scanner input = new Scanner(System.in);
-		ioPak.printf(80,1,1,
-				"\nYou are now ready to sell something!\n"
-						+ "Here is our products and their amount left in our store:\n"
-						+ "||Name||%5s||Amount||%10s||Minimal Price||%10s||Recommended Price||\n"
-						+ "1.IPAD2:\t%5d\t\t%10.2f\n2.IPAD3:\t%5d\t\t%10.2f\t\n"
-						+ "3.IPHONE4:\t%5d\t\t%10.2f\n4.IPHONE4S:\t%5d\t\t%10.2f\n"
-						+ "5.IPHONE5:\t%5d\t\t%10.2f\n6.IPHONE5S:\t%5d\t\t%10.2f\n",
-						space,space,space,
+		System.out.print(
+				"You are now ready to sell something!\n"
+						+ "Here is our products and their amount left in our store:\n");
+						ioPak.printTable(21,"!!", " ||Name||!!||Amount||!!||Minimal Price||!!||Recommended Price||\n"
+						+ "1.IPAD2:!!%d!!%.2f\n2.IPAD3:!!%d!!%.2f\n"
+						+ "3.IPHONE4:!!%d!!%.2f\n4.IPHONE4S:!!%d!!%.2f\n"
+						+ "5.IPHONE5:!!%d!!%.2f\n6.IPHONE5S:!!%d!!%.2f\n",
 				Data.getStorageAmount(Money.IPAD2),
 				Data.getBasePrice(Money.IPAD2),
 				Data.getStorageAmount(Money.IPAD3),
@@ -157,7 +152,7 @@ public class Sale_Op
 				Data.getStorageAmount(Money.IPHONE5S),
 				Data.getBasePrice(Money.IPHONE5S));
 		// Print out all the products & their information!
-		System.out.println("\nSo, which product do you want to sell?");
+		ioPak.println("So, which product do you want to sell?");
 		int productChoice = ioPak.getInt("Please enter an integer here:", 1, 6);
 
 		BigDecimal productPrice = ioPak
@@ -173,11 +168,9 @@ public class Sale_Op
 		// --------
 		BigDecimal base = Data.getBasePrice(
 				productChoice);
-		BigDecimal sub = totalPrice.subtract(base);
-		BigDecimal totalProfit = sub.multiply(new BigDecimal("" + productNum));
-		// TODO 
-		//BigDecimal totalProfit = totalPrice.subtract(Data.getBasePrice(
-		//		productChoice)).multiply(new BigDecimal("" + productNum));
+		
+		BigDecimal totalProfit = totalPrice.subtract(Data.getBasePrice(
+				productChoice)).multiply(new BigDecimal("" + productNum));
 		String judge = "above";
 		switch (totalProfit.compareTo(Data.getAlarmPrice()))
 		{
@@ -194,26 +187,25 @@ public class Sale_Op
 		ioPak.printf("The total price is %.2f"
 				+ "\nThe profit is %s the alarm line.\n", totalPrice, judge);
 
-		ioPak.println("\nNow,please enter these information from the customer:\n"
-				+ "What about the address?\nPlease enter here:");
+		ioPak.println("Now,please enter these information from the customer:\n"
+				+ "What about the address?");
+		System.out.println("Please enter here:");
 		String address = input.nextLine();
 		System.out.println("Then the telephone number.\nPlease enter it here:");
 		String tele = input.nextLine();
 		// Now that we get all the information,let's print it out!
 		while (true)
-		{
-			ioPak.printf("\nSale confirmation:\n"
-					+ "ID of the employee:\t\t\t%d\n"
-					+ "Product ID:\t\t\t\t%d\n"
-					+ "Amount of the product:\t\t\t%d\n"
-					+ "Total price:\t\t\t\t%.2f\n"
-					+ "Total profit:\t\t\t\t%.2f\n" + "Address:\t\t\t\t%s\n"
-					+ "Telephone number:\t\t\t%s\n"
-					+ "In comparison to the alarming rate:\t%s\n",
+		{System.out.print("\nSale confirmation:");
+			ioPak.printTable(30,"!!",
+					"ID of the employee:!!%d\n"
+					+ "Product ID:!!%d\n"
+					+ "Amount of the product:!!%d\n"
+					+ "Total price:!!%.2f\n"
+					+ "Total profit:!!%.2f\n" + "Address:!!%s\n"
+					+ "Telephone number:!!%s\n"
+					+ "Compared to alarming rate:!!%s\n",
 					salesman.getAccountID(), productChoice, productNum,
 					totalPrice, totalProfit, address, tele, judge);
-			// This's where that lacks a
-			// method!!!!!!!!!!!!!!!!!!!!(Product ID!!!)Perhaps???
 
 			ioPak.println("Confirm this order?\nPlease enter yes or no here:");
 			String confirm = input.nextLine();
