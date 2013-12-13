@@ -112,7 +112,8 @@ public class Main_Interface {
 				System.out.printf(
 						"Please enter your passowrd for user \"%s\"\nInput: ",
 						Data.getSalesman(CurrentUserID).getName());
-				count++;
+				count++;// Use count so that user can only make no more than three
+				// mistakes.(Anti-force-break)
 				password = ioPak.getConPD();
 				if (password.equals(Data.getSalesman(CurrentUserID)
 						.getPassword()))
