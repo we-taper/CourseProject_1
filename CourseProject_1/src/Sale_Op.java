@@ -122,8 +122,10 @@ public class Sale_Op
 	+"Have you work well these days?Check!\n");
 		ioPak.printTable(20, "!!","Account ID:!!%d\n"
 	+"Name:!!%s\n"+ "Sales Amount:!!%.2f\n"+ 
-				"Sales Profit:!!%.2f\n", salesman.getAccountID(), 
-				salesman.getName(),salesman.getSale(), salesman.getSaleProfit());
+				"Sales Profit:!!%.2f\n"
+				+ "Alarming sales made:!!%.2f",
+				salesman.getAccountID(), 
+				salesman.getName(),salesman.getSale(), salesman.getSaleProfit(),salesman.getAlarmDegree());
 		return salesman;
 	}
 
@@ -135,7 +137,7 @@ public class Sale_Op
 		System.out.print(
 				"You are now ready to sell something!\n"
 						+ "Here is our products and their amount left in our store:\n");
-						ioPak.printTable(21,"!!", " ||Name||!!||Amount||!!||Minimal Price||!!||Recommended Price||\n"
+						ioPak.printTable(17,"!!", " Name!!Amount!!Minimal Price!!Recommended Price\n"
 						+ "1.IPAD2:!!%d!!%.2f\n2.IPAD3:!!%d!!%.2f\n"
 						+ "3.IPHONE4:!!%d!!%.2f\n4.IPHONE4S:!!%d!!%.2f\n"
 						+ "5.IPHONE5:!!%d!!%.2f\n6.IPHONE5S:!!%d!!%.2f\n",
@@ -165,12 +167,10 @@ public class Sale_Op
 
 		BigDecimal totalPrice = productPrice.multiply(new BigDecimal(""
 				+ productNum));
-		// --------
-		BigDecimal base = Data.getBasePrice(
-				productChoice);
 		
-		BigDecimal totalProfit = totalPrice.subtract(Data.getBasePrice(
-				productChoice)).multiply(new BigDecimal("" + productNum));
+		
+		BigDecimal totalProfit = totalPrice.subtract((Data.getBasePrice(
+				productChoice)).multiply(new BigDecimal("" + productNum)));
 		String judge = "above";
 		switch (totalProfit.compareTo(Data.getAlarmPrice()))
 		{
@@ -185,17 +185,16 @@ public class Sale_Op
 			break;
 		}
 		ioPak.printf("The total price is %.2f"
-				+ "\nThe profit is %s the alarm line.\n", totalPrice, judge);
+				+ "\nThe profit is %.2f,%s the alarm line.\n", totalPrice,totalProfit, judge);
 
-		ioPak.println("Now,please enter these information from the customer:\n"
-				+ "What about the address?");
-		System.out.println("Please enter here:");
+		ioPak.println("Now,please enter these information from the customer:");
+		System.out.println("What about the address?\n"+"Please enter here:");
 		String address = input.nextLine();
 		System.out.println("Then the telephone number.\nPlease enter it here:");
 		String tele = input.nextLine();
 		// Now that we get all the information,let's print it out!
 		while (true)
-		{System.out.print("\nSale confirmation:");
+		{System.out.print("\nSale confirmation:\n");
 			ioPak.printTable(30,"!!",
 					"ID of the employee:!!%d\n"
 					+ "Product ID:!!%d\n"
@@ -207,34 +206,34 @@ public class Sale_Op
 					salesman.getAccountID(), productChoice, productNum,
 					totalPrice, totalProfit, address, tele, judge);
 
-			ioPak.println("Confirm this order?\nPlease enter yes or no here:");
+			ioPak.println("Confirm this order?");
+			System.out.println("Please enter yes or no here:");
 			String confirm = input.nextLine();
 			if (confirm.contains("yes"))
 			{
-				System.out.println("Deal accomplished!");
+				ioPak.println("Deal accomplished!");
 				Data.changeStorageAmount(productChoice, -productNum);
 				Data.changeCurrentFunds(totalPrice);
 				salesman.changeSaleAmount(totalPrice);
 				salesman.changeSaleProfit(totalProfit);
-				if (judge == "below")
+				if (judge.equals("BELOW"))
 				{
 					salesman.changeAlarmDegree(Data.getAlarmPrice().subtract(
 							totalProfit));
 				}
-				ioPak.printf(
-						"\nYour total selling amount:\t\t%.2f\n"
-								+ "The profit you made:\t\t\t%.2f\n"
-								+ "The degree you have gone below the alarm price:\t%.2f\n"
-								+ "The remaining amount of the product:\t\t%d\n",
-						salesman.getSale(), salesman.getSaleProfit(),
-						salesman.getAlarmDegree(),
-						Data.getStorageAmount(productChoice));
-
+				ioPak.printTable(40,
+						"Total sales amount:%.2f"
+				+ "The profit you made:%.2f"
+								+"Alarming sales made:%.2f"
+				+"Products remained:%d",salesman.getSale()
+				,salesman.getSaleProfit()
+				,salesman.getAlarmDegree()
+				,Data.getStorageAmount(productChoice));
 				break;
 			}
 			if (confirm.contains("no"))
 			{
-				ioPak.println("\nNo deal accomplished.\n"
+				ioPak.println("No deal accomplished.\n"
 						+ "Maybe you are right! Think twice before doing!");
 				break;
 			}
