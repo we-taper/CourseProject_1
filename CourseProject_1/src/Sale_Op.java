@@ -76,7 +76,7 @@ public class Sale_Op
 
 		calProduct = ioPak.getInt("Your choice:", 1, 6);
 
-		ioPak.println("\nGood job!How much will you sell it?");
+		ioPak.println("Good job!How much will you sell it?");
 		BigDecimal calPrice;
 		calPrice = ioPak.getBD("Please enter the price:", 0);
 
@@ -86,7 +86,7 @@ public class Sale_Op
 		calNum = ioPak.getInt("Please enter an integer:", 0,
 				Data.getStorageAmount(calProduct));
 
-		ioPak.println("\nDo you want to calculate the\n1.PRICE\n2.PROFIT\n");
+		ioPak.println("Do you want to calculate the\n1.PRICE\n2.PROFIT\n");
 
 		// Choice One(Calculator) has two functions!Here are two!
 		while (true)
@@ -103,7 +103,7 @@ public class Sale_Op
 			{// For Profit
 				BigDecimal profit = Data.getBasePrice(calProduct).multiply(
 						new BigDecimal("" + calNum));
-				ioPak.printf("\nThe total profit is %.2f\n", profit);
+				ioPak.printf("The total profit is %.2f\n", profit);
 				if (Data.getAlarmPrice().compareTo(profit) == -1)
 				{
 					ioPak.println("\nThe profit is too low!\n"
@@ -133,6 +133,7 @@ public class Sale_Op
 	public static Salesman MakeDeal(Salesman salesman)
 
 	{
+		
 		String space =" ";
 		Scanner input = new Scanner(System.in);
 		ioPak.printf(80,1,1,
