@@ -57,11 +57,11 @@ public class Main_Interface {
 			// Help user log into their accounts.
 			ioPak.printf(""
 					+ "Please enter your choice:\n"
-					+ "1: !!Administrator login.\n" 
-					+ "2: !!Salesman login.\n"
-					+ "3: !!Register a new salesman account.\n" 
-					+ "4: !!Quit.\n"
-					+ "5: !!Display accounts!\n"// TODO delete this display.
+					+ "1: Administrator login.\n" 
+					+ "2: Salesman login.\n"
+					+ "3: Register a new salesman account.\n" 
+					+ "4: Quit.\n"
+					+ "5: Display accounts!\n"// TODO delete this display.
 					+ "");
 			choice = ioPak.getInt("Your choice:",1,5);
 			if (choice == 1) {
