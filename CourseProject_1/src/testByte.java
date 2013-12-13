@@ -1,10 +1,12 @@
+import java.math.BigDecimal;
+
 
 
 public class testByte {
 
 	public static void main(String[] args) {
-		
-		System.out.printf("Your username is %s.", ioPak.setUserName());
-	}
+		BigDecimal bd;
+		System.out.printf("The bd is: %s.", ioPak.getBD("BD:", 0));
 
+	}
 }

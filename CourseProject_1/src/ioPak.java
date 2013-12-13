@@ -7,6 +7,8 @@ public class ioPak
 {
 	private static final Scanner input = new Scanner(System.in);
 
+
+
 	public static String setUserName()
 	{
 		String name;
@@ -20,7 +22,7 @@ public class ioPak
 			if (!name.matches("[a-zA-Z0-9-_]*"))
 			{
 				printf('-', '!',
-						"Your name shoule only contains English characters,\n"
+						"Your name should only contains English characters,\n"
 								+ "numbers, hyphens or underlines.");
 			}
 			else
@@ -181,23 +183,36 @@ public class ioPak
 			{
 				s = input.nextLine();
 				num = Double.parseDouble(s);
-				if (num < min)
+				if (s.contains("e") || s.contains("d"))
+				{// Deal with the 2e3 = 2*10^-3 and 2d
+					ioPak.printf(false, false, 0,
+							"Error input. The content you type is not an "
+									+ "double.\n");
+				}
+				else if (num < min)
 				{
-					ioPak.printf("Sorry, The number is too small."
-							+ "The number should be higher than %.2f.\n", min);
+					ioPak.printf(
+							false,
+							false,
+							0,
+							"Sorry, The number is too small."
+									+ "The number should be higher than %.2f.\n",
+							min);
 				}
 				else
 				{
+					b = new BigDecimal(num);
+					b = b.setScale(2, BigDecimal.ROUND_HALF_EVEN);
 					break;
 				}
 			} catch (NumberFormatException e)
 			{
 				ioPak.printf(false, false, 0,
-						"Error input, please type an double.\n");
+						"Error input. Either the content you type is too big or"
+						+ " it is not an double.\n");
 			}
 		} while (true);
-		b = new BigDecimal(num);
-		b = b.setScale(2, BigDecimal.ROUND_HALF_EVEN);
+
 		return b;
 	}
 
