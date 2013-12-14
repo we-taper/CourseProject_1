@@ -4,10 +4,14 @@ import java.util.Scanner;
 /*
  * 1. Support to temporarily store last time data.
  * 2. Pass Money as an object to avoid duplicate methods.// Cann't do it.
- * 3. Support block certain employee from login in.
+ * 3. Support block certain employee from login in.// DONE
  * 4. Add asc2 pictures to each sub methods.
  * 5. Add password tip.
  * 6. Deal with C-Z error.
+ * 7. Add thank-you info.
+ * 8. Add quit option to all things.
+ * 9. Enable clear screen for all accounts.
+ * 10.Test all data.
  */
 public class Main_Interface {
 	private final static Scanner input = new Scanner(System.in);
@@ -23,6 +27,7 @@ public class Main_Interface {
 		if (Data.firstTime()) {
 			initiateAccessCode();
 			initiateAdmin();
+			ioPak.cls();
 			ioPak.printf("Program has been initiated, now let's get it working!!\n");
 		}
 		judgeAccessCode();
@@ -76,7 +81,6 @@ public class Main_Interface {
 			if (choice == 1)
 			{
 				adminLogin();
-				ioPak.cls();
 				ioPak.printf("Welcome back!!\n");
 			}
 			else if (choice == 2)
@@ -90,13 +94,11 @@ public class Main_Interface {
 				{
 
 					testSMPD();
-					ioPak.cls();
 					ioPak.printf("Welcome back!!\n");
 				}
 			} else if (choice == 3) {
 				register();
 				login(CurrentUserID);
-				ioPak.cls();
 				ioPak.printf("Welcome back!!\n");
 			} else if (choice == 4) {
 				break;
@@ -116,11 +118,19 @@ public class Main_Interface {
 				System.out.printf("Please enter your ID: ");
 				CurrentUserID = input.nextInt();
 				input.nextLine();// Clear away the subtle errors.
+				if (Data.getSalesman(CurrentUserID).isDisabled())
+				{
+					ioPak.printf(
+							"Sorry, the account \"%s\"(ID:%d) was disabled by administrator.\n"
+									+ "Please ask your administrator to enable you account.\n",
+							Data.getSalesman(CurrentUserID).getName(),
+							CurrentUserID);
+				}
 				System.out.printf(
 						"Please enter your passowrd for user \"%s\"\nInput: ",
 						Data.getSalesman(CurrentUserID).getName());
 				pd = ioPak.getConPD();
-				for (int i = 2; i > 0; i--)
+				for (int i = 2; i > 0; i--)// Count down to eliminate try-chances.
 				{
 					if (pd.equals(Data.getSalesman(CurrentUserID).getPassword()))
 					{
@@ -154,10 +164,12 @@ public class Main_Interface {
 	public static void login(int ID) {
 		if (ID == ADMIN_ID) {
 			admin = Admin_op.main(Data.getAdmin());
+			ioPak.cls();// clear screen.
 			// Then write admin into Data
 			Data.setAdmin(admin);
 		} else {
 			salesman = Sale_Op.main(Data.getSalesman(CurrentUserID));
+			ioPak.cls();// clear screen.
 			// Then write salesman into Data
 			Data.setSalesman(CurrentUserID, salesman);
 		}
@@ -176,7 +188,7 @@ public class Main_Interface {
 		{
 			if (pd.equals(admin.getPassword())){
 				login(ADMIN_ID);
-				break;
+				return;
 			}
 			else
 			{
@@ -187,8 +199,8 @@ public class Main_Interface {
 			System.out.printf("Password: ");
 			pd = ioPak.getConPD();
 			}
-			ioPak.printf("Sorry, program will now exit.");
 		}
+		ioPak.printf("Out of chances. Sorry~~.");
 	}
 
 	public static void register() {
@@ -243,7 +255,7 @@ public class Main_Interface {
 
 	public static void initiateAdmin() {
 		admin = Data.getAdmin();
-		ioPak.printf(false, false, 0,"And, please set your password for Administrator.\n");
+		ioPak.printf("And then, please set your password for Administrator.\n");
 		admin.setPassword(ioPak.setConPD("password"));
 		
 	}

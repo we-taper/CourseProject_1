@@ -1,23 +1,25 @@
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 // I/O package used to simplify programming.
 public class ioPak
 {
-	private static final Scanner input = new Scanner(System.in);
+	private static Scanner input = new Scanner(System.in);
 
 	public static String setUserName()
 	{
 		String name;
 		System.out
 				.printf("Please set your name(only English characters, numbers, hyphens "
-						+ "\nor underlines are allowed).\n");
+						+ "\nunderlines or spaces are allowed).\n");
 		while (true)
 		{
 			System.out.printf("Your username:");
-			name = input.nextLine();
-			if (!name.matches("[a-zA-Z0-9-_]*"))
+			name = nextLine();
+			if (!name.matches("[a-zA-Z0-9-_ ]*"))
 			{
 				printf('-', '!',
 						"Your name shoule only contains English characters,\n"
@@ -31,18 +33,18 @@ public class ioPak
 		return name;
 	}
 
-	public static String setConPD(String name_of_password)
+	public static String setConPD(String name_of_account)
 	{
 		String s1 = "", s2 = "";
 		while (true)
 		{
-			System.out.printf(" Please set your %s: ", name_of_password);
+			System.out.printf(" Please set your password: ");
 			s1 = getConPD();
-			System.out.printf(" Please type your %s again:", name_of_password);
+			System.out.printf(" Please type your password again:");
 			s2 = getConPD();
 			if (s1.equals(s2))
 			{
-				ioPak.printf("Successfully set the password for %s!\n", name_of_password);
+				ioPak.printf("Successfully set the password for %s!\n", name_of_account);
 				break;
 			}
 			else
@@ -65,7 +67,7 @@ public class ioPak
 			}
 			else
 			{
-				pd = input.nextLine();
+				pd = nextLine();
 			}
 			if (pd.length() > 16)
 			{
@@ -125,7 +127,7 @@ public class ioPak
 		{
 			flag = true;
 			System.out.printf("%s", ask_phrase);
-			a = input.nextLine();
+			a = nextLine();
 			for (int i = 0; i < a.length(); i++)
 			{
 				if (!Character.isDigit(a.charAt(i)))
@@ -168,6 +170,11 @@ public class ioPak
 		return getInt(ask_phrase, min, "Sorry, the number is too small.", max,
 				"Oh! The number is too big.");
 	}
+	public static int getInt(String ask_phrase, int min)
+	{
+		return getInt(ask_phrase, min, "Sorry, the number is too small.", Integer.MAX_VALUE,
+				"Oh! The number is too big.");
+	}
 
 	public static BigDecimal getBD(String ask_phrase, double min)
 	{
@@ -179,16 +186,25 @@ public class ioPak
 			System.out.printf("%s", ask_phrase);
 			try
 			{
-				s = input.nextLine();
-				num = Double.parseDouble(s);
-				if (num < min)
+				s = nextLine();
+				if (s.contains("e") || s.contains("d"))
 				{
-					ioPak.printf("Sorry, The number is too small."
-							+ "The number should be higher than %.2f.\n", min);
+					ioPak.printf(false, false, 0,
+							"Error input, please type an double.\n");
 				}
 				else
 				{
-					break;
+					num = Double.parseDouble(s);
+					if (num < min)
+					{
+						ioPak.printf("Sorry, The number is too small."
+								+ "The number should be higher than %.2f.\n",
+								min);
+					}
+					else
+					{
+						break;
+					}
 				}
 			} catch (NumberFormatException e)
 			{
@@ -199,6 +215,56 @@ public class ioPak
 		b = new BigDecimal(num);
 		b = b.setScale(2, BigDecimal.ROUND_HALF_EVEN);
 		return b;
+	}
+	
+	public static String next(){
+		String str;
+		while(true){
+			try
+			{
+				str = input.next();
+				break;
+			} catch (NoSuchElementException e)
+			{
+				ioPak.printf(false, false, 0,
+						"Come on, don't be naughty, never try to press Ctrl-Z");
+				System.out.printf("Try again:");
+				// Use findWithinHorizon to find EOL and clear it.
+				try
+				{
+					System.out.printf(input.findWithinHorizon(
+							Pattern.compile("[$]"), 10));
+				} catch (NullPointerException ew)
+				{
+				}
+			}
+		}
+		return str;
+	}
+	public static String nextLine(){
+		String str;
+		while (true)
+		{
+			try
+			{
+				str = input.nextLine();
+				break;
+			} catch (NoSuchElementException e)
+			{
+				ioPak.printf(false, false, 0,
+						"Come on, don't be naughty, never try to press Ctrl-Z");
+				System.out.printf("Try again:");
+				// Use findWithinHorizon to find EOL and clear it.
+				try
+				{
+					System.out.printf(input.findWithinHorizon(
+							Pattern.compile("[$]"), 10));
+				} catch (NullPointerException ew)
+				{
+				}
+			}
+		}
+		return str;
 	}
 
 	public static void printf(String content, Object... args)
@@ -241,17 +307,20 @@ public class ioPak
 			int c_length, String SPLIT, String content, Object... args)
 	{
 		/*
-		 * Parameters: h_LINE: Character used to draw horizontal lines. v_LINE:
-		 * Character used to draw vertical lines. HEAD: True if print the
-		 * header. TAIL: True if print the bottom line. slash_m: The width of
-		 * lines. Zero(0) to indicate using the default value, which is the max
-		 * length of strings added with SPACE_AHEAD and SPACE_LAST. SPACE_AHEAD:
-		 * First few spaces to insert. SPACE_LAST: The number of spaces inserted
-		 * last. c_length : In purpose of dealing with \t, we propose a new
-		 * method:"|" c_length is the length of column. Zero if we do not need
-		 * to deal with the troublesome \t. SPLIT: The character or string used
-		 * to identity splitting strings. Be careful that SPLIT must not be a
-		 * regular expression.
+		 * Parameters: 
+		 * h_LINE: Character used to draw horizontal lines. 
+		 * v_LINE: Character used to draw vertical lines. 
+		 * HEAD: True if print the header. 
+		 * TAIL: True if print the bottom line. 
+		 * slash_m: The width of lines. Zero(0) to indicate using the default value,
+		 *  	which is the max length of strings added with SPACE_AHEAD and SPACE_LAST.
+		 * SPACE_AHEAD: First few spaces to insert. 
+		 * SPACE_LAST: The number of spaces inserted last.
+		 * c_length : In purpose of dealing with \t, we propose a new method:"|" 
+		 * 		c_length is the length of column. Zero if we do not need to deal 
+		 * 		with the troublesome \t. 
+		 * SPLIT: The character or string used to identity splitting strings. 
+		 * 		Be careful that SPLIT must not be a regular expression.
 		 */
 		// Turn the contents into entirely and only pure strings.
 		content = String.format(content, args);
@@ -292,7 +361,7 @@ public class ioPak
 			int spaceToFill;
 			for (int i = 0; i < string.length; i++)
 			{// Scan strings
-				temp_sa = string[i].split(SPLIT);// TODO illegal name "|"
+				temp_sa = string[i].split(SPLIT);
 				temp_s = "";
 				for (int j = 0; j < temp_sa.length; j++)
 				{// Scan temp_sa

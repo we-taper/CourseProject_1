@@ -8,7 +8,7 @@ public class Salesman implements Serializable {
 	private BigDecimal saleProfit = new BigDecimal("0");
 	private String name = "Tom";
 	private BigDecimal alarmDegree = new BigDecimal("0");
-
+	private boolean disabled = false;
 	// constructors~~!
 
 	public Salesman(int accountID, String name, String password,
@@ -26,6 +26,7 @@ public class Salesman implements Serializable {
 		password = "0";
 		name = "Tom";
 		saleAmount = new BigDecimal("0");
+		disabled = false;
 	}
 
 	// a lot of sets!!!
@@ -53,6 +54,15 @@ public class Salesman implements Serializable {
 		this.saleProfit = saleProfit;
 	}
 
+	public void setDisable()
+	{
+		disabled = true;
+	}
+	public void setEnable()
+	{
+		disabled = false;
+	}
+
 	// end sets!!
 	// a lot of gets!!
 	public BigDecimal getAlarmDegree() {
@@ -78,7 +88,9 @@ public class Salesman implements Serializable {
 	public BigDecimal getSaleProfit() {
 		return saleProfit;
 	}
-
+	public boolean isDisabled(){
+		return disabled;
+	}
 	// Wow,gets end!!
 
 	// We CHANGE things after our salesmen really make a deal!
@@ -97,7 +109,11 @@ public class Salesman implements Serializable {
 	@Override
 	public String toString()
 	{
+		if(isDisabled()){
+			return "";
+		}else{
 		return String.format("User name:%s, ID:%d, Salesamount: %s\n",
 				this.name,this.accountID,this.saleAmount);
+		}
 	}
 }

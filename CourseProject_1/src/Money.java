@@ -16,7 +16,7 @@ public class Money implements Serializable
 	private int[] storageAmount = new int[6];
 	private BigDecimal[] 
 			basePrice= new BigDecimal[6], 
-			minPrice = new BigDecimal[6], 
+//			minPrice = new BigDecimal[6], 
 			sugPrice = new BigDecimal[6]; 
 	private BigDecimal alarmPrice;
 	private BigDecimal currentFunds;
@@ -33,8 +33,8 @@ public class Money implements Serializable
 			currentFunds = new BigDecimal("200000.00");
 			for (int i = IPAD2; i <= IPHONE5S; i++)
 			{
-				minPrice[i+SHIFT] = basePrice[i+SHIFT];
-				sugPrice[i+SHIFT] = minPrice[i+SHIFT];
+				//minPrice[i+SHIFT] = basePrice[i+SHIFT];
+				sugPrice[i+SHIFT] = basePrice[i+SHIFT];
 			}
 			for (int count = IPAD2; count <= IPHONE5S; count++)
 			{
@@ -55,10 +55,19 @@ public class Money implements Serializable
 		basePrice[IPHONE5 + SHIFT] = new BigDecimal("6000");
 		basePrice[IPHONE5S + SHIFT] = new BigDecimal("7000");
 	}
+	/*public void initiateMinPrice()
+	{
+		minPrice[IPAD2 + SHIFT] = basePrice[IPAD2 + SHIFT].multiply(alarmPrice)new BigDecimal("3000");
+		minPrice[IPAD3 + SHIFT] = new BigDecimal("3999");
+		minPrice[IPHONE4 + SHIFT] = new BigDecimal("3000");
+		minPrice[IPHONE4S + SHIFT] = new BigDecimal("4005");
+		minPrice[IPHONE5 + SHIFT] = new BigDecimal("6000");
+		minPrice[IPHONE5S + SHIFT] = new BigDecimal("7000");
+	}*/
 	public void iniAllScale(){
 		for(int i = 0; i < 6; i++){
 			basePrice[i] = basePrice[i].setScale(2, BigDecimal.ROUND_HALF_EVEN);
-			minPrice[i] = minPrice[i].setScale(2, BigDecimal.ROUND_HALF_EVEN);
+			//minPrice[i] = minPrice[i].setScale(2, BigDecimal.ROUND_HALF_EVEN);
 			sugPrice[i] = sugPrice[i].setScale(2, BigDecimal.ROUND_HALF_EVEN);
 		}
 		alarmPrice = alarmPrice.setScale(2, BigDecimal.ROUND_HALF_EVEN);
@@ -73,10 +82,26 @@ public class Money implements Serializable
 	public void changeStorageAmount(int goodsID, int amount)
 	{
 		/*
-		 * Add the storage amount for product whose name is goodsID. Receive
+		 * Change the storage amount for product whose name is goodsID. Receive
 		 * goodsID and the amount as parameter.
+		 * If amount > 0
+		 * 		moneyCost > 0
+		 * 		amount++
+		 * 		CurrentFunds--
+		 * If amount < 0
+		 * 		moneyCost < 0
+		 * 		amount--
+		 * 		CurrentFunds++
 		 */
-		storageAmount[goodsID + SHIFT] += amount;
+		BigDecimal moneyCost = new BigDecimal("0");
+		moneyCost = getBasePrice(goodsID).multiply(new BigDecimal(amount));
+		if( stillMoneyLeft(moneyCost)){
+			storageAmount[goodsID + SHIFT] += amount;
+			changeCurrentFunds(getCurrentFunds().subtract(moneyCost).negate());
+		}else{
+			ioPak.printf(false, false, 0, "Sorry, not enough money left\n");
+		}
+		
 	}
 
 	public int getStorageAmount(int goodsID)
@@ -86,6 +111,15 @@ public class Money implements Serializable
 		 * goodsID as parameter. Return the storage amount for this product.
 		 */
 		return storageAmount[goodsID + SHIFT];
+	}
+	private boolean stillMoneyLeft(BigDecimal m)
+	{
+		BigDecimal x = getCurrentFunds().subtract(m); 
+		if( x.compareTo(new BigDecimal("0")) == -1){
+			return false;
+		}else{
+			return true;
+		}
 	}
 
 	public BigDecimal getBasePrice(int goodsID)
@@ -97,22 +131,6 @@ public class Money implements Serializable
 		return basePrice[goodsID + SHIFT];
 	}
 
-	public BigDecimal getMinPrice(int goodsID)
-	{
-		return minPrice[goodsID + SHIFT];
-	}
-
-	public void setMinPrice(int goodsID, BigDecimal price)
-	{
-		if (price.compareTo(basePrice[goodsID]) == -1)
-		{
-			System.out.printf("Sorry, the minimum price is too low\n");
-		}
-		else
-		{
-			minPrice[goodsID + SHIFT] = price;
-		}
-	}
 
 	public BigDecimal getSugPrice(int goodsID)
 	{
@@ -121,7 +139,7 @@ public class Money implements Serializable
 
 	public void setSugPrice(int goodsID, BigDecimal price)
 	{
-		if (price.compareTo(minPrice[goodsID]) == -1)
+		if (price.compareTo(getAlarmPrice(goodsID)) == -1)
 		{
 			System.out.printf("Sorry, the suggest price is too lower than "
 					+ "the minimum price\n");
@@ -151,9 +169,13 @@ public class Money implements Serializable
 		/*
 		 * Get the ÀûÈó¶î¾¯½äÏß.
 		 */
-		BigDecimal add = alarmPrice.add(new BigDecimal("1"));
-		BigDecimal times = add.multiply(basePrice[goodsID]);
+		BigDecimal add = getAlarmPercent().add(new BigDecimal("1"));
+		BigDecimal times = add.multiply(getBasePrice(goodsID));
 		return times;
+	}
+	public BigDecimal getAlarmPercent()
+	{
+		return alarmPrice;
 	}
 
 	public void setBasePrice(int goodsID, BigDecimal price)

@@ -470,27 +470,23 @@ public class Data
 		return money.getAlarmPrice(goodsID);
 	}
 
-	public BigDecimal getMinPrice(int goodsID)
+	public static BigDecimal getMinPrice(int goodsID)
 	{
-		return money.getMinPrice(goodsID);
+		// MinPrice == AlarmPrice
+		return money.getAlarmPrice(goodsID);
 	}
 
-	public void setMinPrice(int goodsID, BigDecimal price)
-	{
-		money.setMinPrice(goodsID, price);
-	}
-
-	public BigDecimal getSugPrice(int goodsID)
+	public static BigDecimal getSugPrice(int goodsID)
 	{
 		return money.getSugPrice(goodsID);
 	}
 
-	public void setSugPrice(int goodsID, BigDecimal price)
+	public static void setSugPrice(int goodsID, BigDecimal price)
 	{
 		money.setSugPrice(goodsID, price);
 	}
 
-	public void setBasePrice(int goodsID, BigDecimal price)
+	public static void setBasePrice(int goodsID, BigDecimal price)
 	{
 		money.setBasePrice(goodsID, price);
 	}
@@ -506,7 +502,99 @@ public class Data
 		// Add or subtract money to current funds.
 		money.changeCurrentFunds(m);
 	}
+	public static void printInventory()
+	{
+		ioPak.printTable(20, "Inventory List:\n"
+				+ "Name!!Amounts\n"
+				+ "iPad2!!%d\n"
+				+ "iPad3!!%d\n"
+				+ "iPhone 4!!%d\n"
+				+ "iPhone 4S!!%d\n"
+				+ "iPhone 5!!%d\n"
+				+ "iPhone 5S!!%d\n"
+				, Data.getStorageAmount(Money.IPAD2)
+				, Data.getStorageAmount(Money.IPAD3)
+				, Data.getStorageAmount(Money.IPHONE4)
+				, Data.getStorageAmount(Money.IPHONE4S)
+				, Data.getStorageAmount(Money.IPHONE5)
+				, Data.getStorageAmount(Money.IPHONE5S));
+	}
+	public static void printSugPrice()
+	{
+		ioPak.printf("The current Suggesting Prices of Priducts are as follow:\n");
+		ioPak.printTable(15,"Name!!Price\n"
+				+"iPad 2!!%s CNY.\n"
+				+"iPad 3!!%s CNY.\n"
+				+"iPhone 4!!%s CNY.\n"
+				+"iPhone 4S!!%s CNY.\n"
+				+"iPhone 5!!%s CNY.\n"
+				+"iPhone 5S!!%s CNY.\n"
+				, getSugPrice(Money.IPAD2)
+				, getSugPrice(Money.IPAD3)
+				, getSugPrice(Money.IPHONE4)
+				, getSugPrice(Money.IPHONE4S)
+				, getSugPrice(Money.IPHONE5)
+				, getSugPrice(Money.IPHONE5S));
+	}
+	public static void printPurchasePrice()
+	{
+		ioPak.printf("The current Purchase Prices of Priducts are as follow:\n");
+		ioPak.printTable(15,"Name!!Price\n"
+				+"iPad 2!!%s CNY.\n"
+				+"iPad 3!!%s CNY.\n"
+				+"iPhone 4!!%s CNY.\n"
+				+"iPhone 4S!!%s CNY.\n"
+				+"iPhone 5!!%s CNY.\n"
+				+"iPhone 5S!!%s CNY.\n"
+				, getBasePrice(Money.IPAD2)
+				, getBasePrice(Money.IPAD3)
+				, getBasePrice(Money.IPHONE4)
+				, getBasePrice(Money.IPHONE4S)
+				, getBasePrice(Money.IPHONE5)
+				, getBasePrice(Money.IPHONE5S));
+	}
+	public static void printMinPrice()
+	{
+		ioPak.printf("The current Minimum Prices of Priducts are as follow:\n");
+		ioPak.printTable(20,"Name!!Price\n"
+				+"iPad 2!!%s CNY.\n"
+				+"iPad 3!!%s CNY.\n"
+				+"iPhone 4!!%s CNY.\n"
+				+"iPhone 4S!!%s CNY.\n"
+				+"iPhone 5!!%s CNY.\n"
+				+"iPhone 5S!!%s CNY.\n"
+				, getMinPrice(Money.IPAD2)
+				, getMinPrice(Money.IPAD3)
+				, getMinPrice(Money.IPHONE4)
+				, getMinPrice(Money.IPHONE4S)
+				, getMinPrice(Money.IPHONE5)
+				, getMinPrice(Money.IPHONE5S));
+	}
+	
+	public static void printAlarmPrice()
+	{
+		// AlarmPrice == MinPrice
+		ioPak.printf("The current Alarm Prices of Priducts are as follow:\n");
+		ioPak.printf(false, false, 0, "Warning Percent: %s.", money.getAlarmPercent());
+		ioPak.printTable(20,"Name!!Price\n"
+				+"iPad 2!!%s CNY.\n"
+				+"iPad 3!!%s CNY.\n"
+				+"iPhone 4!!%s CNY.\n"
+				+"iPhone 4S!!%s CNY.\n"
+				+"iPhone 5!!%s CNY.\n"
+				+"iPhone 5S!!%s CNY.\n"
+				, getMinPrice(Money.IPAD2)
+				, getMinPrice(Money.IPAD3)
+				, getMinPrice(Money.IPHONE4)
+				, getMinPrice(Money.IPHONE4S)
+				, getMinPrice(Money.IPHONE5)
+				, getMinPrice(Money.IPHONE5S));
+	}
 
+	public static void printCurFunds(){
+		ioPak.printf("The current funds is %s Yuan.\n",
+				getCurrentFunds());
+	}
 	public static byte[] getHashAccessCode()
 	{
 		File file = new File(ACCESS_CODE_FILE);
@@ -551,10 +639,16 @@ public class Data
 
 	public static void displayAccount()
 	{
-		for (Salesman sla : salesman)
+		if (Data.getSalesmanCount() == 0)
 		{
-			ioPak.printf("%s", sla);
+			ioPak.printf("Sorry, no account exits!");
+		}
+		else
+		{
+			for (Salesman sla : salesman)
+			{
+				ioPak.printf("%s", sla);
+			}
 		}
 	}
-
 }
