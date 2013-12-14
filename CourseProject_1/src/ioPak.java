@@ -128,6 +128,10 @@ public class ioPak
 			flag = true;
 			System.out.printf("%s", ask_phrase);
 			a = nextLine();
+			if(a.length() == 0)
+			{
+				flag = false;
+			}
 			for (int i = 0; i < a.length(); i++)
 			{
 				if (!Character.isDigit(a.charAt(i)))
@@ -219,13 +223,17 @@ public class ioPak
 	
 	public static String next(){
 		String str = "";
+		for(int i = 10; i>0; i--){
 			try
 			{
 				str = input.next();
 			} catch (NoSuchElementException e)
 			{
 				ioPak.printf(false, false, 0,
-						"Come on, don't be naughty, never try to press Ctrl-Z");
+						"Come on, don't be naughty, never try to press Ctrl-Z\n"
+						+ "Again.This forces System to quit.");
+				Data.storeData(Main_Interface.getAccessCode());
+				System.exit(1);
 			/*	System.out.printf("Try again:");
 				// Use findWithinHorizon to find EOL and clear it.
 				try
@@ -236,6 +244,7 @@ public class ioPak
 				{
 				}*/
 			}
+		}
 		return str;
 	}
 	public static String nextLine(){
@@ -246,16 +255,10 @@ public class ioPak
 			} catch (NoSuchElementException e)
 			{
 				ioPak.printf(false, false, 0,
-						"Come on, don't be naughty, never try to press Ctrl-Z");
-			/*	System.out.printf("Try again:");
-				// Use findWithinHorizon to find EOL and clear it.
-				try
-				{
-					System.out.printf(input.findWithinHorizon(
-							Pattern.compile("[$]"), 10));
-				} catch (NullPointerException ew)
-				{
-				}*/
+						"Come on, don't be naughty, never try to press Ctrl-Z\n"
+						+ "Again.This forces System to quit.");
+				Data.storeData(Main_Interface.getAccessCode());
+				System.exit(1);
 			}
 		return str;
 	}

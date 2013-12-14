@@ -1,5 +1,4 @@
 import java.math.BigDecimal;
-import java.util.Scanner;
 
 public class Sale_Op
 {
@@ -131,7 +130,6 @@ public class Sale_Op
 
 	{
 		
-		Scanner input = new Scanner(System.in);
 		System.out.print(
 				"You are now ready to sell something!\n"
 						+ "Here is our products and their amount left in our store:\n");
@@ -187,9 +185,9 @@ public class Sale_Op
 
 		ioPak.println("Now,please enter these information from the customer:");
 		System.out.println("What about the address?\n"+"Please enter here:");
-		String address = input.nextLine();
+		String address = ioPak.nextLine();
 		System.out.println("Then the telephone number.\nPlease enter it here:");
-		String tele = input.nextLine();
+		String tele = ioPak.nextLine();
 		// Now that we get all the information,let's print it out!
 		while (true)
 		{System.out.print("\nSale confirmation:\n");
@@ -206,7 +204,7 @@ public class Sale_Op
 
 			ioPak.println("Confirm this order?");
 			System.out.println("Please enter yes or no here:");
-			String confirm = input.nextLine();
+			String confirm = ioPak.nextLine();
 			if (confirm.contains("yes"))
 			{
 				ioPak.println("Deal accomplished!");
@@ -240,7 +238,6 @@ public class Sale_Op
 				ioPak.println("Error.Let's see the order again!");
 			}
 		}
-		input.close();
 		return salesman;
 	}
 

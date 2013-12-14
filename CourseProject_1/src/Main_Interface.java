@@ -1,5 +1,3 @@
-import java.util.InputMismatchException;
-import java.util.Scanner;
 // TODO:
 /*
  * 1. Support to temporarily store last time data.
@@ -7,14 +5,13 @@ import java.util.Scanner;
  * 3. Support block certain employee from login in.// DONE
  * 4. Add asc2 pictures to each sub methods.
  * 5. Add password tip.
- * 6. Deal with C-Z error.
+ * 6. Deal with C-Z error.// DONE
  * 7. Add thank-you info.
  * 8. Add quit option to all things.
  * 9. Enable clear screen for all accounts.
  * 10.Test all data.
  */
 public class Main_Interface {
-	private final static Scanner input = new Scanner(System.in);
 	private static int CurrentUserID = 0;
 	private static int ADMIN_ID = -1;
 	private static Salesman salesman = new Salesman();
@@ -108,16 +105,15 @@ public class Main_Interface {
 		}// end while(true)
 	}
 
-	public static void testSMPD() {
+	private static void testSMPD() {
 		String pd;
 
 
 		while (true)//Get User ID
 			{
 			try {
-				System.out.printf("Please enter your ID: ");
-				CurrentUserID = input.nextInt();
-				input.nextLine();// Clear away the subtle errors.
+				CurrentUserID = ioPak.getInt("Please enter your ID: ", 1,
+						Data.getSalesmanCount());
 				if (Data.getSalesman(CurrentUserID).isDisabled())
 				{
 					ioPak.printf(
@@ -150,10 +146,6 @@ public class Main_Interface {
 					ioPak.printf("Sorry, program will now exit.");
 				}// end for
 				break;
-			} catch (InputMismatchException inputMismmatchExcpetion) {
-				System.out
-						.printf("Come on, try again and type something right.\n");
-				input.nextLine();// Clear input line.
 			} catch (IndexOutOfBoundsException e)
 			{
 				System.out.printf("No such account exists, please try again.\n");
@@ -161,7 +153,7 @@ public class Main_Interface {
 		}// end while
 
 	}// end of login
-	public static void login(int ID) {
+	private static void login(int ID) {
 		if (ID == ADMIN_ID) {
 			admin = Admin_op.main(Data.getAdmin());
 			ioPak.cls();// clear screen.
@@ -175,11 +167,11 @@ public class Main_Interface {
 		}
 	}// end of login
 
-	public static void adminLogin() {
+	private static void adminLogin() {
 		testAdminPD();
 	}
 
-	public static void testAdminPD(){
+	private static void testAdminPD(){
 		admin = Data.getAdmin();
 		ioPak.println("Please Input Password For Administrator!");
 		System.out.printf("Password: ");
@@ -203,7 +195,7 @@ public class Main_Interface {
 		ioPak.printf("Out of chances. Sorry~~.");
 	}
 
-	public static void register() {
+	private static void register() {
 		// Retrieve data from user.
 		//System.out.printf("Please Enter your name:");
 		salesman.setName(ioPak.setUserName());
@@ -226,7 +218,7 @@ public class Main_Interface {
 		salesman = null;
 	}// end of register
 
-	public static void judgeAccessCode() {
+	private static void judgeAccessCode() {
 		byte[] dataUser, dataFile;
 		boolean equal = true;
 		System.out.printf("Please enter the access code:");
@@ -246,17 +238,24 @@ public class Main_Interface {
 		}
 	}
 
-	public static void initiateAccessCode() {
+	private static void initiateAccessCode() {
 		ioPak.printf("It's your first time running this program, please "
 				+ "set your Access Code.\n");
 		accessCode = ioPak.setConPD("original access code");
 		Data.setAccessCode(accessCode);
 	}
 
-	public static void initiateAdmin() {
+	private static void initiateAdmin() {
 		admin = Data.getAdmin();
 		ioPak.printf("And then, please set your password for Administrator.\n");
 		admin.setPassword(ioPak.setConPD("password"));
 		
+	}
+	
+	public static String getAccessCode(){
+		/**
+		 *  This method should work only of the ioPak!!
+		 */
+		return accessCode;
 	}
 }// end of class Main_Interface
