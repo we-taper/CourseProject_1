@@ -218,17 +218,15 @@ public class ioPak
 	}
 	
 	public static String next(){
-		String str;
-		while(true){
+		String str = "";
 			try
 			{
 				str = input.next();
-				break;
 			} catch (NoSuchElementException e)
 			{
 				ioPak.printf(false, false, 0,
 						"Come on, don't be naughty, never try to press Ctrl-Z");
-				System.out.printf("Try again:");
+			/*	System.out.printf("Try again:");
 				// Use findWithinHorizon to find EOL and clear it.
 				try
 				{
@@ -236,24 +234,20 @@ public class ioPak
 							Pattern.compile("[$]"), 10));
 				} catch (NullPointerException ew)
 				{
-				}
+				}*/
 			}
-		}
 		return str;
 	}
 	public static String nextLine(){
-		String str;
-		while (true)
-		{
+		String str = "";
 			try
 			{
 				str = input.nextLine();
-				break;
 			} catch (NoSuchElementException e)
 			{
 				ioPak.printf(false, false, 0,
 						"Come on, don't be naughty, never try to press Ctrl-Z");
-				System.out.printf("Try again:");
+			/*	System.out.printf("Try again:");
 				// Use findWithinHorizon to find EOL and clear it.
 				try
 				{
@@ -261,9 +255,8 @@ public class ioPak
 							Pattern.compile("[$]"), 10));
 				} catch (NullPointerException ew)
 				{
-				}
+				}*/
 			}
-		}
 		return str;
 	}
 
