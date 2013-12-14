@@ -1,6 +1,7 @@
 import java.io.Serializable;
 import java.math.BigDecimal;
 
+@SuppressWarnings("serial")
 public class Salesman implements Serializable {
 	private int accountID = 1;
 	private String password = "0";

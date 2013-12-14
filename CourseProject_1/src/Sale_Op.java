@@ -1,5 +1,3 @@
-
-
 import java.math.BigDecimal;
 import java.util.Scanner;
 
@@ -242,6 +240,7 @@ public class Sale_Op
 				ioPak.println("Error.Let's see the order again!");
 			}
 		}
+		input.close();
 		return salesman;
 	}
 

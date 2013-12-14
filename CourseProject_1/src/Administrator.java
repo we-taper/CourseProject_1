@@ -1,4 +1,3 @@
-import java.math.BigDecimal;
 import java.io.Serializable;
 
 @SuppressWarnings("serial")

@@ -36,5 +36,6 @@ public class testData {
 	    p.destroy();  
 	    bw.close();  
 	    br.close();  
+	    sc.close();
 	}
 }

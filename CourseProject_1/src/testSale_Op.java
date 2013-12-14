@@ -1,6 +1,3 @@
-import java.math.BigDecimal;
-
-
 public class testSale_Op {
 
 	public static void main(String[] args) {
