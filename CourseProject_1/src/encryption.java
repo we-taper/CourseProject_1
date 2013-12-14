@@ -148,28 +148,8 @@ public class encryption {
 			dout.flush();
 			dout.close();
 
-		} catch (InvalidKeySpecException e) {
-			System.err.println(e);
-		} catch (InvalidKeyException e) {
-			System.err.println(e);
-		} catch (NoSuchAlgorithmException e) {
-			System.err.println(e);
-		} catch (NoSuchPaddingException e) {
-			System.err.println(e);
-		} catch (BadPaddingException e) {
-			System.err.println(e);
-		} catch (IllegalBlockSizeException e) {
-			System.err.println(e);
-		} catch (IOException e) {
+		} catch (Exception e) {
 			System.err.println(e);
 		}
-	}
-
-	public static void main(String[] args){
-		byte[] data = Str2SHA256("happy");
-        byte[] byteArray = new byte[] {87, 79, 87, 46, 46, 46};
-        System.out.println(fromByte2Str(data));
-        System.out.println(fromByte2Str(byteArray));
-
 	}
 }
