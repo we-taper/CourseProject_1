@@ -122,7 +122,7 @@ public class Data
 		{
 			// Initiate all the data in money, but not the accounts(cause they
 			// have
-			// nothing to initiate). TODO In main_interface, initiate the admin.
+			// nothing to initiate). 
 			Data.money.initiateData();
 		}
 		else
@@ -143,7 +143,7 @@ public class Data
 		writeMoney();
 		writeAccount();
 		encryption.encryptFile(MONEY_FILE, accessCode);
-		encryption.encryptFile(ACCOUNT_FILE, accessCode); 
+		encryption.encryptFile(ACCOUNT_FILE, accessCode);
 		// Record this run time in RECORD_FILE
 		recordRunTime();
 		clearFiles();
@@ -469,14 +469,17 @@ public class Data
 		 */
 		return money.getAlarmPrice(goodsID);
 	}
+
 	public BigDecimal getMinPrice(int goodsID)
 	{
 		return money.getMinPrice(goodsID);
 	}
+
 	public void setMinPrice(int goodsID, BigDecimal price)
 	{
 		money.setMinPrice(goodsID, price);
 	}
+
 	public BigDecimal getSugPrice(int goodsID)
 	{
 		return money.getSugPrice(goodsID);
@@ -484,11 +487,12 @@ public class Data
 
 	public void setSugPrice(int goodsID, BigDecimal price)
 	{
-		money.setSugPrice(goodsID,price);
+		money.setSugPrice(goodsID, price);
 	}
+
 	public void setBasePrice(int goodsID, BigDecimal price)
 	{
-			money.setBasePrice(goodsID, price);
+		money.setBasePrice(goodsID, price);
 	}
 
 	public static BigDecimal getCurrentFunds()
@@ -546,10 +550,11 @@ public class Data
 	}
 
 	public static void displayAccount()
-	{  
+	{
 		for (Salesman sla : salesman)
-		{ 
+		{
 			ioPak.printf("%s", sla);
 		}
 	}
+
 }

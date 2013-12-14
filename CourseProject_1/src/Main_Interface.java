@@ -3,9 +3,11 @@ import java.util.Scanner;
 // TODO:
 /*
  * 1. Support to temporarily store last time data.
- * 2. Pass Money as an object to avoid duplicate methods.
+ * 2. Pass Money as an object to avoid duplicate methods.// Cann't do it.
  * 3. Support block certain employee from login in.
  * 4. Add asc2 pictures to each sub methods.
+ * 5. Add password tip.
+ * 6. Deal with C-Z error.
  */
 public class Main_Interface {
 	private final static Scanner input = new Scanner(System.in);
@@ -19,17 +21,18 @@ public class Main_Interface {
 		// if first time, initialize admin account.
 		ioPak.printf(78, 20, 20, "Welcome to Storage Management System\n");
 		if (Data.firstTime()) {
-			ioPak.printf("It's your first time running this program, please "
-					+ "set your Access Code.\n");
 			initiateAccessCode();
 			initiateAdmin();
+			ioPak.printf("Program has been initiated, now let's get it working!!\n");
 		}
 		judgeAccessCode();
 		Data.initiateData(accessCode);
-		// Since last time we use access code, clear it afterwards.
+		ioPak.cls();
 		mainMenu();
 		// After login. Write all data to file.
 		Data.storeData(accessCode);
+		// Since last time we use access code, clear it afterwards.
+		accessCode = "";
 	}// end of main
 
 	private static void mainMenu() {
@@ -82,11 +85,11 @@ public class Main_Interface {
 				{
 					System.out
 							.printf("No account exists yet, please register one.\n");
-					return;
 				}
 				else
 				{
-					testPD();
+
+					testSMPD();
 					ioPak.cls();
 					ioPak.printf("Welcome back!!\n");
 				}
@@ -103,9 +106,9 @@ public class Main_Interface {
 		}// end while(true)
 	}
 
-	public static void testPD() {
-		int count = 0;
-		String password;
+	public static void testSMPD() {
+		String pd;
+
 
 		while (true)//Get User ID
 			{
@@ -113,73 +116,79 @@ public class Main_Interface {
 				System.out.printf("Please enter your ID: ");
 				CurrentUserID = input.nextInt();
 				input.nextLine();// Clear away the subtle errors.
+				System.out.printf(
+						"Please enter your passowrd for user \"%s\"\nInput: ",
+						Data.getSalesman(CurrentUserID).getName());
+				pd = ioPak.getConPD();
+				for (int i = 2; i > 0; i--)
+				{
+					if (pd.equals(Data.getSalesman(CurrentUserID).getPassword()))
+					{
+						login(CurrentUserID);
+						break;
+					}
+					else
+					{
+
+						ioPak.printf(false, false, 0,
+								"Sorry, wrong Password! Please check.\n"
+										+ "(You still have " + i
+										+ " chances to input!)\n");
+						System.out.printf("Password: ");
+						pd = ioPak.getConPD();
+					}
+					ioPak.printf("Sorry, program will now exit.");
+				}// end for
 				break;
 			} catch (InputMismatchException inputMismmatchExcpetion) {
 				System.out
 						.printf("Come on, try again and type something right.\n");
 				input.nextLine();// Clear input line.
-			}
-		}// end while
-		try
-		{
-			while (true) // get password
+			} catch (IndexOutOfBoundsException e)
 			{
-				System.out.printf(
-						"Please enter your passowrd for user \"%s\"\nInput: ",
-						Data.getSalesman(CurrentUserID).getName());
-				count++;// Use count so that user can only make no more than three
-				// mistakes.(Anti-force-break)
-				password = ioPak.getConPD();
-				if (password.equals(Data.getSalesman(CurrentUserID)
-						.getPassword()))
-				{
-					ioPak.printf("Successfully logged in.\n");
-					login(CurrentUserID);
-					break;
-				}
-				else
-				{
-					System.out.printf("Wrong password or wrong UserID. ");
-					switch (count)
-					{
-					case 1:
-						System.out
-								.printf("Please try again(two chances left). :)\n");
-						break;
-					case 2:
-						System.out
-								.printf("Please try again(one chance left). :)\n");
-						break;
-					default:
-						ioPak.printf("Sorry, program will now exit.");
-						System.exit(0);
-					}
-				}// end of if
-			}// end while
-		} catch (IndexOutOfBoundsException e)
-		{
-			System.out.printf("No such account exists, please try again.\n");
-		}// end try-catch
+				System.out.printf("No such account exists, please try again.\n");
+			}// try-catch
+		}// end while
 
 	}// end of login
-
 	public static void login(int ID) {
 		if (ID == ADMIN_ID) {
-			admin = Data.getAdmin();
-			// process TODO ......
+			admin = Admin_op.main(Data.getAdmin());
 			// Then write admin into Data
 			Data.setAdmin(admin);
 		} else {
-			salesman = Data.getSalesman(CurrentUserID);
-			salesman = Sale_Op.main(salesman);
+			salesman = Sale_Op.main(Data.getSalesman(CurrentUserID));
 			// Then write salesman into Data
 			Data.setSalesman(CurrentUserID, salesman);
 		}
 	}// end of login
 
 	public static void adminLogin() {
-		System.out.printf("Please input password for administrator:");
-		// TODO complete this.
+		testAdminPD();
+	}
+
+	public static void testAdminPD(){
+		admin = Data.getAdmin();
+		ioPak.println("Please Input Password For Administrator!");
+		System.out.printf("Password: ");
+		String pd = ioPak.getConPD();
+		for (int i = 2; i > 0; i--)
+		{
+			if (pd.equals(admin.getPassword())){
+				login(ADMIN_ID);
+				break;
+			}
+			else
+			{
+			ioPak.printf(false, false, 0,
+					"Sorry, wrong Password! Please check.\n"
+							+ "(You still have " + i
+							+ " chances to input!)\n");
+			System.out.printf("Password: ");
+			pd = ioPak.getConPD();
+			}
+			ioPak.printf("Sorry, program will now exit.");
+		}
 	}
 
 	public static void register() {
@@ -225,12 +234,17 @@ public class Main_Interface {
 		}
 	}
 
-	public static void initiateAdmin() {
-
-	}// TODO initiate this.
-
 	public static void initiateAccessCode() {
+		ioPak.printf("It's your first time running this program, please "
+				+ "set your Access Code.\n");
 		accessCode = ioPak.setConPD("original access code");
 		Data.setAccessCode(accessCode);
+	}
+
+	public static void initiateAdmin() {
+		admin = Data.getAdmin();
+		ioPak.printf(false, false, 0,"And, please set your password for Administrator.\n");
+		admin.setPassword(ioPak.setConPD("password"));
+		
 	}
 }// end of class Main_Interface

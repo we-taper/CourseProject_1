@@ -102,7 +102,7 @@ public class Sale_Op
 				BigDecimal profit = Data.getBasePrice(calProduct).multiply(
 						new BigDecimal("" + calNum));
 				ioPak.printf("The total profit is %.2f\n", profit);
-				if (Data.getAlarmPrice().compareTo(profit) == -1)
+				if (Data.getAlarmPrice(calProduct).compareTo(profit) == -1)
 				{
 					ioPak.println("The profit is too low!\n"
 							+ "Please consider it carefully!");
@@ -172,7 +172,7 @@ public class Sale_Op
 		BigDecimal totalProfit = totalPrice.subtract((Data.getBasePrice(
 				productChoice)).multiply(new BigDecimal("" + productNum)));
 		String judge = "above";
-		switch (totalProfit.compareTo(Data.getAlarmPrice()))
+		switch (totalProfit.compareTo(Data.getAlarmPrice(productChoice)))
 		{
 		case 1:
 			judge = "ABOVE";
@@ -218,7 +218,7 @@ public class Sale_Op
 				salesman.changeSaleProfit(totalProfit);
 				if (judge.equals("BELOW"))
 				{
-					salesman.changeAlarmDegree(Data.getAlarmPrice().subtract(
+					salesman.changeAlarmDegree(Data.getAlarmPrice(productChoice).subtract(
 							totalProfit));
 				}
 				ioPak.printTable(40,

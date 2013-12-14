@@ -1,7 +1,11 @@
 import java.util.Scanner;
 public class Admin_op
 {
-	public Admin_op(){}
+	public static Administrator main (Administrator admin){
+		
+		
+		return admin;
+	}
 /*	public static void main(String[] args)
 	{
 		@SuppressWarnings("resource")
@@ -66,7 +70,7 @@ public class Admin_op
 		String a = null;
 		String A=null;
 		boolean MainYESorNO=true;
-		while (MainYESorNO==true){
+		while (MainYESorNO==true){ //TODO login
 			System.out.println("Welcome to the SMS, the SALES MANAGEMENT SYSTEM.");
 			System.out.println("Press 1 for Login as Administrator.");
 			System.out.println("Press 2 for Login as Salesman.");
@@ -74,7 +78,7 @@ public class Admin_op
 			int MainChoice=input.nextInt();
 			switch (MainChoice) {
 			case 1:
-				//Enter Administrator Account.(GET)
+				//Enter Administrator Account.(GET) TODO admin
 				i=4;
 				System.out.println("Please Input Password For Administrator!");
 				for(i=4;i>0;i--){
@@ -2814,4 +2818,6 @@ public class Admin_op
 
 		}
 	}*/
+
+
 }
