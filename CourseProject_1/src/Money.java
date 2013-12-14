@@ -146,14 +146,24 @@ public class Money implements Serializable
 		alarmPrice = price;
 	}
 
-	public BigDecimal getAlarmPrice()
+	public BigDecimal getAlarmPrice(int goodsID)
 	{
 		/*
 		 * Get the ÀûÈó¶î¾¯½äÏß.
 		 */
-		return alarmPrice;
+		BigDecimal add = alarmPrice.add(new BigDecimal("1"));
+		BigDecimal times = add.multiply(basePrice[goodsID]);
+		return times;
 	}
 
+	public void setBasePrice(int goodsID, BigDecimal price)
+	{
+		if(price.compareTo(new BigDecimal("0")) == -1){
+			ioPak.printf(false, false, 0, "Oh no, base price can't below zero!!");
+		}else{
+			basePrice[goodsID] = price;
+		}
+	}
 	public BigDecimal getCurrentFunds()
 	{
 		// Get current funds as Decimal

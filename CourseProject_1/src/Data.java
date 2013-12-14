@@ -462,12 +462,33 @@ public class Data
 		money.setAlarmPrice(price);
 	}
 
-	public static BigDecimal getAlarmPrice()
+	public static BigDecimal getAlarmPrice(int goodsID)
 	{
 		/*
 		 * Get the ÀûÈó¶î¾¯½äÏß.
 		 */
-		return money.getAlarmPrice();
+		return money.getAlarmPrice(goodsID);
+	}
+	public BigDecimal getMinPrice(int goodsID)
+	{
+		return money.getMinPrice(goodsID);
+	}
+	public void setMinPrice(int goodsID, BigDecimal price)
+	{
+		money.setMinPrice(goodsID, price);
+	}
+	public BigDecimal getSugPrice(int goodsID)
+	{
+		return money.getSugPrice(goodsID);
+	}
+
+	public void setSugPrice(int goodsID, BigDecimal price)
+	{
+		money.setSugPrice(goodsID,price);
+	}
+	public void setBasePrice(int goodsID, BigDecimal price)
+	{
+			money.setBasePrice(goodsID, price);
 	}
 
 	public static BigDecimal getCurrentFunds()

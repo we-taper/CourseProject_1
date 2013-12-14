@@ -3,6 +3,9 @@ import java.util.Scanner;
 // TODO:
 /*
  * 1. Support to temporarily store last time data.
+ * 2. Pass Money as an object to avoid duplicate methods.
+ * 3. Support block certain employee from login in.
+ * 4. Add asc2 pictures to each sub methods.
  */
 public class Main_Interface {
 	private final static Scanner input = new Scanner(System.in);
@@ -67,14 +70,26 @@ public class Main_Interface {
 					+ "5: Display accounts!\n"// TODO delete this display.
 					+ "");
 			choice = ioPak.getInt("Your choice:",1,5);
-			if (choice == 1) {
+			if (choice == 1)
+			{
 				adminLogin();
 				ioPak.cls();
 				ioPak.printf("Welcome back!!\n");
-			} else if (choice == 2) {
-				testPD();
-				ioPak.cls();
-				ioPak.printf("Welcome back!!\n");
+			}
+			else if (choice == 2)
+			{
+				if (Data.getSalesmanCount() == 0)
+				{
+					System.out
+							.printf("No account exists yet, please register one.\n");
+					return;
+				}
+				else
+				{
+					testPD();
+					ioPak.cls();
+					ioPak.printf("Welcome back!!\n");
+				}
 			} else if (choice == 3) {
 				register();
 				login(CurrentUserID);
@@ -91,10 +106,7 @@ public class Main_Interface {
 	public static void testPD() {
 		int count = 0;
 		String password;
-		if(Data.getSalesmanCount() == 0){
-			System.out.printf("No account exists yet, please register one.\n");
-			return;
-		}
+
 		while (true)//Get User ID
 			{
 			try {
