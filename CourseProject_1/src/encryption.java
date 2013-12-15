@@ -107,7 +107,7 @@ public class encryption {
 		} catch (GeneralSecurityException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
-			System.err.println(e);
+			e.printStackTrace();
 		}
 	}
 	public static void encryptFile(String filename, String password) {
@@ -149,7 +149,7 @@ public class encryption {
 			dout.close();
 
 		} catch (Exception e) {
-			System.err.println(e);
+			e.printStackTrace();
 		}
 	}
 }

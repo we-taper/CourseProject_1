@@ -98,6 +98,7 @@ public class Main_Interface {
 				login(CurrentUserID);
 				ioPak.printf("Welcome back!!\n");
 			} else if (choice == 4) {
+				ioPak.println("Auf Wiedersehen~~\nPress anykey to exit.");
 				break;
 			} else if (choice == 5) {
 				Data.displayAccount();// TODO delete this.
@@ -221,21 +222,29 @@ public class Main_Interface {
 	private static void judgeAccessCode() {
 		byte[] dataUser, dataFile;
 		boolean equal = true;
-		System.out.printf("Please enter the access code:");
-		accessCode = ioPak.getConPD();
-		dataUser = encryption.byte2MD5(encryption.Str2SHA256(accessCode));
-		dataFile = Data.getHashAccessCode();
-		for (int i = 0; i < dataUser.length; i++) {
-			if (dataUser[i] != dataFile[i]) {
-				equal = false;
-				break;
+		String ac;// Use a temporary String ac so that accessCode remain either valid or empty.
+		for (int i = 3; i > 0; i--)
+		{
+			System.out.printf("Please enter the access code:");
+			ac = ioPak.getConPD();
+			dataUser = encryption.byte2MD5(encryption.Str2SHA256(ac));
+			dataFile = Data.getHashAccessCode();
+			for (int j = 0; j < dataUser.length; j++) {
+				if (dataUser[j] != dataFile[j]) {
+					equal = false;
+					break;
+				}
+			}
+			if (!equal) {
+				ioPak.printf("Wrong Access Code. Program will now exit.\n"
+						+ "Still %d chance(s) left.\n", i);
+			}else{
+				accessCode = ac;
+				return;
 			}
 		}
-		if (!equal) {
-			ioPak.printf("Wrong Access Code. Program will now exit.\n"
-					+ "Type any key to exit.");
-			System.exit(1);
-		}
+		ioPak.println("Out of chance, sorry~~\nSytem will now exit!");
+		System.exit(1);
 	}
 
 	private static void initiateAccessCode() {

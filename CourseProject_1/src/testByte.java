@@ -6,5 +6,6 @@ public class testByte {
 		//i.nextLine();
 		int a = ioPak.getInt("hah", 0);
 		BigDecimal bd = ioPak.getBD("e:", 0);
+		ioPak.println(""+bd);
 	}
 }

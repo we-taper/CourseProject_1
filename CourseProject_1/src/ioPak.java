@@ -49,7 +49,7 @@ public class ioPak
 			}
 			else
 			{
-				ioPak.printf(true, false, 0,
+				ioPak.printf(false, false, 0,
 						" Mismatch input, please try again.\n");
 			}
 		}
@@ -61,29 +61,46 @@ public class ioPak
 		String pd = "";
 		while (true)
 		{
-			if (System.console() != null)
-			{
-				pd = new String(System.console().readPassword());
-			}
-			else
-			{
-				pd = nextLine();
-			}
-			if (pd.length() > 16)
+			try{
+				// First, read password
+				if (System.console() != null)
+				{
+					pd = new String(System.console().readPassword());
+					/*
+					 *  Here throw NullPointerException, which will be caught later
+					 *  Throw NullPointerException if user press Ctrl-Z or else like.
+					 */
+				}
+				else
+				{
+					pd = nextLine();
+				}
+				// Then judge password
+				if (pd.length() > 16)
+				{
+					ioPak.printf(false, false, 0,
+							"Sorry, password should be no more than 16 letters.\n");
+					System.out.printf("Please try again:");
+				}
+				else if (pd.length() < 8)
+				{
+					ioPak.printf(false, false, 0,
+							"Sorry, password should be no less than 8 letters.\n");
+					System.out.printf("Please try again:");
+				}
+				else
+				{
+					break;
+				}
+			} catch (NullPointerException e)
 			{
 				ioPak.printf(false, false, 0,
-						"Sorry, password should be no more than 16 letters.\n");
+						"Come on, don't be naughty, never try to press Ctrl-Z or whatever else.\n");
+				/*
+				 * If program reaches here, it must be inside a cmd Console, then
+				 * System could automatically clear the Ctrl-Z character.
+				 */
 				System.out.printf("Please try again:");
-			}
-			else if (pd.length() < 8)
-			{
-				ioPak.printf(false, false, 0,
-						"Sorry, password should be no less than 8 letters.\n");
-				System.out.printf("Please try again:");
-			}
-			else
-			{
-				break;
 			}
 		}// end while
 		return pd;
@@ -216,50 +233,52 @@ public class ioPak
 						"Error input, please type an double.\n");
 			}
 		} while (true);
-		b = new BigDecimal(num);
+		b = new BigDecimal(s);
 		b = b.setScale(2, BigDecimal.ROUND_HALF_EVEN);
 		return b;
 	}
-	
-	public static String next(){
-		String str = "";
-		for(int i = 10; i>0; i--){
-			try
-			{
-				str = input.next();
-			} catch (NoSuchElementException e)
-			{
-				ioPak.printf(false, false, 0,
-						"Come on, don't be naughty, never try to press Ctrl-Z\n"
-						+ "Again.This forces System to quit.");
-				Data.storeData(Main_Interface.getAccessCode());
-				System.exit(1);
-			/*	System.out.printf("Try again:");
-				// Use findWithinHorizon to find EOL and clear it.
-				try
-				{
-					System.out.printf(input.findWithinHorizon(
-							Pattern.compile("[$]"), 10));
-				} catch (NullPointerException ew)
-				{
-				}*/
-			}
-		}
-		return str;
-	}
 	public static String nextLine(){
 		String str = "";
+		while(true){
 			try
 			{
-				str = input.nextLine();
+				if(System.console() == null){
+					str = input.nextLine();
+					break;
+				}else{
+					str = System.console().readLine();
+					if(str == null){
+						/*
+						 * str == null because console reads a Ctra-Z
+						 * If program reaches here, it must be inside a cmd Console, then
+						 * System could automatically clear the Ctrl-Z character.
+						 */
+						ioPak.printf(false, false, 0,
+								"Come on, don't be naughty, never try to press Ctrl-Z or whatever else\n"
+								+ "again.\n");
+						System.out.printf("Try again:");
+					}else{
+						break;
+					}
+				}// end if System.console()			
 			} catch (NoSuchElementException e)
 			{
 				ioPak.printf(false, false, 0,
-						"Come on, don't be naughty, never try to press Ctrl-Z\n"
-						+ "Again.This forces System to quit.");
-				Data.storeData(Main_Interface.getAccessCode());
-				System.exit(1);
-			}
+						"Come on, don't be naughty, never try to press Ctrl-Z or whatever else\n"
+						+ "again.This forces System to quit.\n");
+				if (System.console() != null)
+				{
+					System.out.printf("Try again:");
+				}else{
+					String ac = Main_Interface.getAccessCode();
+					if (ac.length() != 0)
+					{
+						Data.storeData(ac);
+					}
+					System.exit(1);
+				}
+			}//end catch
+		}// end while
 		return str;
 	}
 
