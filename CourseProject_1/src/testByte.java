@@ -1,11 +1,10 @@
 import java.math.BigDecimal;
 
 public class testByte {
-	@SuppressWarnings("unused")
 	public static void main(String[] args) {
 		//i.nextLine();
-		int a = ioPak.getInt("hah", 0);
-		BigDecimal bd = ioPak.getBD("e:", 0);
-		ioPak.println(""+bd);
+		ioPak.printArrow(20, 10);
+		ioPak.printf(20, "This\n");
+		ioPak.getInt(20, "Your choice:", 0);
 	}
 }

@@ -10,6 +10,10 @@
  * 8. Add quit option to all things.
  * 9. Enable clear screen for all accounts.
  * 10.Test all data.
+ * 11.业绩，数据分析
+ * 12.管理员 ranking
+ * 13.订单记录
+ * 14.销售员 记录老客户
  */
 public class Main_Interface {
 	private static int CurrentUserID = 0;
