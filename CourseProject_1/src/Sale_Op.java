@@ -1,3 +1,5 @@
+
+
 import java.math.BigDecimal;
 
 public class Sale_Op
@@ -43,7 +45,7 @@ public class Sale_Op
 			}
 			System.out
 					.println("Would you like to:\n1.Return to My Account Menu"
-							+ "\n2.Exit the programme");
+							+ "\n2.Log out!");
 			if (ioPak.getInt("Please enter your choice here:", 1, 2) == 2)
 			{
 				break;
@@ -116,7 +118,7 @@ public class Sale_Op
 
 	public static Salesman ShowAccount(Salesman salesman)
 	{System.out.println("You are now viewing your account.\n"
-	+"Have you work well these days?Check!\n");
+	+"Have you work well these days?Check!");
 		ioPak.printTable(20, "!!","Account ID:!!%d\n"
 	+"Name:!!%s\n"+ "Sales Amount:!!%.2f\n"+ 
 				"Sales Profit:!!%.2f\n"
@@ -243,7 +245,7 @@ public class Sale_Op
 
 	public static void setPasswordInMain()
 	{
-		ioPak.println("\nNow you are setting the password!");
+		ioPak.println("Now you are setting the password!");
 		ioPak.setConPD("account password");
 	}
 }// end class
