@@ -2,7 +2,6 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
-import java.util.regex.Pattern;
 
 // I/O package used to simplify programming.
 public class ioPak

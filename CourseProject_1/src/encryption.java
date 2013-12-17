@@ -148,8 +148,20 @@ public class encryption {
 			dout.flush();
 			dout.close();
 
-		} catch (Exception e) {
-			e.printStackTrace();
+		} catch (InvalidKeySpecException e) {
+			System.err.println(e);
+		} catch (InvalidKeyException e) {
+			System.err.println(e);
+		} catch (NoSuchAlgorithmException e) {
+			System.err.println(e);
+		} catch (NoSuchPaddingException e) {
+			System.err.println(e);
+		} catch (BadPaddingException e) {
+			System.err.println(e);
+		} catch (IllegalBlockSizeException e) {
+			System.err.println(e);
+		} catch (IOException e) {
+			System.err.println(e);
 		}
 	}
 }

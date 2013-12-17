@@ -205,7 +205,7 @@ public class Main_Interface {
 		// Retrieve data from user.
 		//System.out.printf("Please Enter your name:");
 		salesman.setName(ioPak.setUserName());
-		salesman.setPassword(ioPak.setConPD("password"));
+		salesman.setPassword(ioPak.setConPD("Salesman "+salesman.getName()));
 		CurrentUserID = Data.getSalesmanCount() + 1;
 		salesman.setAccountID(CurrentUserID);
 		CurrentUserID = Data.addSalesman(salesman, CurrentUserID);
@@ -262,7 +262,7 @@ public class Main_Interface {
 	private static void initiateAdmin() {
 		admin = Data.getAdmin();
 		ioPak.printf("And then, please set your password for Administrator.\n");
-		admin.setPassword(ioPak.setConPD("password"));
+		admin.setPassword(ioPak.setConPD("Administrator"));
 		
 	}
 	

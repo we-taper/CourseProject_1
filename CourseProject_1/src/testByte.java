@@ -6,6 +6,7 @@ public class testByte {
 		ioPak.printf(20, "This\n");
 		ioPak.getInt(20, "Your choice:", 0);
 		ioPak.printArrow(20, 100, ioPak.LEFT_ARROW);
+		testZAO.Delaytype(2000);
 		ioPak.printf("Back!");
 	}
 }
