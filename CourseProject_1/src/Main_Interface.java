@@ -11,10 +11,10 @@
  * 8. Add quit option to all things.
  * 9. Enable clear screen for all accounts.
  * 10.Test all data.
- * 11.Òµ¼¨£¬Êı¾İ·ÖÎö
- * 12.¹ÜÀíÔ± ranking
- * 13.¶©µ¥¼ÇÂ¼
- * 14.ÏúÊÛÔ± ¼ÇÂ¼ÀÏ¿Í»§
+ * 11.ä¸šç»©ï¼Œæ•°æ®åˆ†æ
+ * 12.ç®¡ç†å‘˜ ranking
+ * 13.è®¢å•è®°å½•
+ * 14.é”€å”®å‘˜ è®°å½•è€å®¢æˆ·
  */
 public class Main_Interface {
 	private static int CurrentUserID = 0;

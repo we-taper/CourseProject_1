@@ -125,7 +125,7 @@ public class Money implements Serializable
 	public BigDecimal getBasePrice(int goodsID)
 	{
 		/*
-		 * Get the base price£¨½ø¼Û£© for product whose name is goodsID. Receive
+		 * Get the base priceï¼ˆè¿›ä»·ï¼‰ for product whose name is goodsID. Receive
 		 * goodsID as parameter. Return the base price for this product.
 		 */
 		return basePrice[goodsID + SHIFT];
@@ -153,7 +153,7 @@ public class Money implements Serializable
 	public void setAlarmPrice(BigDecimal price)
 	{
 		/*
-		 * Set the ÀûÈó¶î¾¯½äÏß.
+		 * Set the åˆ©æ¶¦é¢è­¦æˆ’çº¿.
 		 */
 		if (price.compareTo(new BigDecimal("0")) == -1)
 		{
@@ -167,7 +167,7 @@ public class Money implements Serializable
 	public BigDecimal getAlarmPrice(int goodsID)
 	{
 		/*
-		 * Get the ÀûÈó¶î¾¯½äÏß.
+		 * Get the åˆ©æ¶¦é¢è­¦æˆ’çº¿.
 		 */
 		BigDecimal add = getAlarmPercent().add(new BigDecimal("1"));
 		BigDecimal times = add.multiply(getBasePrice(goodsID));
