@@ -219,11 +219,11 @@ public class Sale_Op
 					salesman.changeAlarmDegree(Data.getAlarmPrice(productChoice).subtract(
 							totalProfit));
 				}
-				ioPak.printTable(40,
-						"Total sales amount:%.2f"
-				+ "The profit you made:%.2f"
-								+"Alarming sales made:%.2f"
-				+"Products remained:%d",salesman.getSale()
+				ioPak.printTable(25,"!!",
+						"Total sales amount:!!%.2f\n"
+				+ "The profit you made:!!%.2f\n"
+								+"Alarming sales made:!!%.2f\n"
+				+"Products remained:!!%d",salesman.getSale()
 				,salesman.getSaleProfit()
 				,salesman.getAlarmDegree()
 				,Data.getStorageAmount(productChoice));
