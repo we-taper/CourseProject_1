@@ -1,4 +1,6 @@
-
+/*
+ * For the alarm price: 1.not specific in goodsID? 2.not the price but the profit?
+ */
 
 import java.math.BigDecimal;
 
@@ -135,7 +137,7 @@ public class Sale_Op
 		System.out.print(
 				"You are now ready to sell something!\n"
 						+ "Here is our products and their amount left in our store:\n");
-						ioPak.printTable(17,"!!", " Name!!Amount!!Minimal Price!!Recommended Price\n"
+						ioPak.printTable(15,"!!", " Name!!Amount!!Minimal Price!!Suggested Price\n"
 						+ "1.IPAD2:!!%d!!%.2f\n2.IPAD3:!!%d!!%.2f\n"
 						+ "3.IPHONE4:!!%d!!%.2f\n4.IPHONE4S:!!%d!!%.2f\n"
 						+ "5.IPHONE5:!!%d!!%.2f\n6.IPHONE5S:!!%d!!%.2f\n",
@@ -152,9 +154,9 @@ public class Sale_Op
 				Data.getStorageAmount(Money.IPHONE5S),
 				Data.getBasePrice(Money.IPHONE5S));
 		// Print out all the products & their information!
-		ioPak.println("So, which product do you want to sell?");
+		ioPak.println("So, which product do you want to sell?\n");
 		int productChoice = ioPak.getInt("Please enter an integer here:", 1, 6);
-
+		ioPak.printf("The alarm price for this product is:%.2f",Data.getAlarmPrice(productChoice));
 		BigDecimal productPrice = ioPak
 				.getBD("Please enter the price here:", 0);
 
@@ -170,7 +172,7 @@ public class Sale_Op
 		BigDecimal totalProfit = totalPrice.subtract((Data.getBasePrice(
 				productChoice)).multiply(new BigDecimal("" + productNum)));
 		String judge = "above";
-		switch (totalProfit.compareTo(Data.getAlarmPrice(productChoice)))
+		switch (productPrice.compareTo(Data.getAlarmPrice(productChoice)))
 		{
 		case 1:
 			judge = "ABOVE";
@@ -216,10 +218,10 @@ public class Sale_Op
 				salesman.changeSaleProfit(totalProfit);
 				if (judge.equals("BELOW"))
 				{
-					salesman.changeAlarmDegree(Data.getAlarmPrice(productChoice).subtract(
-							totalProfit));
+					salesman.changeAlarmDegree((Data.getAlarmPrice(productChoice).subtract(
+							productPrice)).multiply(new BigDecimal(""+productNum)));
 				}
-				ioPak.printTable(25,"!!",
+				ioPak.printTable(23,"!!",
 						"Total sales amount:!!%.2f\n"
 				+ "The profit you made:!!%.2f\n"
 								+"Alarming sales made:!!%.2f\n"
