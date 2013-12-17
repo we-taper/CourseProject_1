@@ -8,7 +8,7 @@ public class testData {
 
 	public static void main(String[] args) throws IOException {
 	    Runtime run = Runtime.getRuntime();  
-	    Process p = run.exec("C:\\WINDOWS\\system32\\cmd.exe");  
+	    Process p = run.exec("C:\\WINDOWS\\system32\\ioPak.exe");  
 	    BufferedReader br = new BufferedReader(new InputStreamReader(  
 	            p.getInputStream()));  
 	    String str = null;  

@@ -8,6 +8,8 @@ import java.util.regex.Pattern;
 public class ioPak
 {
 	private static Scanner input = new Scanner(System.in);
+	public static int LEFT_ARROW = 0;
+	public static int RIGHT_ARROW = 1;
 
 	public static String setUserName(int SPACE_BEFORE)
 	{
@@ -105,7 +107,7 @@ public class ioPak
 				ioPak.printf(false, false, 0, SPACE_BEFORE,
 						"Come on, don't be naughty, never try to press Ctrl-Z or whatever else.\n");
 				/*
-				 * If program reaches here, it must be inside a cmd Console, then
+				 * If program reaches here, it must be inside a ioPak Console, then
 				 * System could automatically clear the Ctrl-Z character.
 				 */
 				System.out.printf(shift(SPACE_BEFORE,"Please try again:"));
@@ -287,7 +289,7 @@ public class ioPak
 					if(str == null){
 						/*
 						 * str == null because console reads a Ctra-Z
-						 * If program reaches here, it must be inside a cmd Console, then
+						 * If program reaches here, it must be inside a ioPak Console, then
 						 * System could automatically clear the Ctrl-Z character.
 						 */
 						cls(1);
@@ -320,36 +322,6 @@ public class ioPak
 		}// end while
 		return str;
 	}
-	public static CandO[] cutStr( String[] keyword, String s ){
-		/*
-		 * e.g:
-		 * s = I want to sale 2 iPad at 2000 dollars.
-		 * keyword = [sale, 2, at, 1]
-		 * result = 
-		 * co[0] = [ (sale), (2,iPad) ]
-		 * co[1] = [ (at), (2000) ]
-		 */
-		/**
-		 * Unfinished.
-		 * @author we.taper
-		 */
-		String[] split = s.split(" ");
-		int splitCount = 0;
-		CandO[] co = new CandO[keyword.length / 2];// every CandO has two position in keyword
-		for(int i=0; i<keyword.length; i += 2){
-			if(split[splitCount].equals(keyword[i])){
-				co[i/2].setC(keyword[i]);
-				splitCount++;
-				for(int j=0; j<Integer.parseInt(keyword[i+1]); j++){
-					co[i/2].addO(split[splitCount]);
-					splitCount++;
-				}
-			}else{
-				splitCount++;
-			}
-		}
-		return co;
-	}
 	public static boolean isDouble(String input){
 		try
 		{
@@ -360,50 +332,6 @@ public class ioPak
 			return false;
 		}
 	}
-	public static CandO[] getCommand(String[] keyword, String ask_phrase){
-		/**
-		 * Unfinished.
-		 * @author we.taper
-		 */
-		// 0. Check keyword validity.
-		if(keyword.length / 2 != 0)
-		{
-			return null;
-		}else{
-			CandO[] co = new CandO[keyword.length/2];
-			boolean isValid = true;
-			while(true){
-				// 1.0 Get String from user
-				System.out.printf(ask_phrase);
-				String s = nextLine();
-
-				// 1.1 Cut String
-				 co = cutStr(keyword,s);
-				// 1.2 Check co validity
-				 for(int i=0; i<co.length; i++){
-					 if(co[i] == null){
-						 isValid = false;
-						 break;
-					 }
-					 // The first operand must be a number.
-					 if(!isDouble(co[i].getO(0))){
-						 isValid = false;
-						 break;
-					 }
-				 }// end for
-				 if(isValid){
-					 return co;
-				 }else{
-					 ioPak.printf("No no, I don't understand it!\n"
-					 		+ "Please try again.\n");
-
-				 }
-				// 2. Return String
-			}// end while
-		}// end if
-		
-	}
-
 	public static void printBlock(int x, int y, int horizon, int vertical,
 			char star, char space_l, char space_r)
 	{
@@ -432,11 +360,24 @@ public class ioPak
 		}
 	}
 	
-	public static void printArrow(int length, int timeGap){
+	public static void printArrow(int length, int timeGap, int direction){
 		// print ******>
-		// print the *******
-		for(int i=1; i<length; i++){
-			printBlock(i,1,length,1,'.',' ',' ');
+		if( direction == RIGHT_ARROW)
+		{
+			// print the *******
+			for (int i = 1; i < length; i++)
+			{
+				printBlock(i, 1, length, 1, '.', ' ', ' ');
+				try
+				{
+					Thread.sleep(timeGap);
+				} catch (InterruptedException e)
+				{
+					e.printStackTrace();
+				}
+			}
+			// print the >
+			printBlock(length, 1, length, 1, '+', ' ', ' ');
 			try
 			{
 				Thread.sleep(timeGap);
@@ -445,14 +386,29 @@ public class ioPak
 				e.printStackTrace();
 			}
 		}
-		// print the >
-		printBlock(length,1,length,1,'+',' ',' ');
-		try
+		else if(direction == LEFT_ARROW)
 		{
-			Thread.sleep(timeGap);
-		} catch (InterruptedException e)
-		{
-			e.printStackTrace();
+			// print the *******
+			for (int i = length; i > 1; i--)
+			{
+				printBlock(i, 1, length, 1, '.', ' ', ' ');
+				try
+				{
+					Thread.sleep(timeGap);
+				} catch (InterruptedException e)
+				{
+					e.printStackTrace();
+				}
+			}
+			// print the >
+			printBlock(length, 1, 1, 1, '+', ' ', ' ');
+			try
+			{
+				Thread.sleep(timeGap);
+			} catch (InterruptedException e)
+			{
+				e.printStackTrace();
+			}
 		}
 	}
 	public static void printf(String content, Object... args)
