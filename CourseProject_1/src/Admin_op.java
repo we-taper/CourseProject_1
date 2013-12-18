@@ -107,7 +107,7 @@ public class Admin_op
 			case 4:
 			{
 				if(Data.getSalesmanCount() == 0){
-					ioPak.printf("Sorry, no accounts exits!\n");
+					ioPak.printf("Sorry, no accounts exits!");
 					break;
 				}
 				int accID = ioPak.getInt("Please Enter the accountID that you want to enable:", 
@@ -118,7 +118,7 @@ public class Admin_op
 				{
 					sa.setEnable();
 					ioPak.printf(
-							"Successfully enable account \"%s\" (ID:%d)\n",
+							"Successfully enable account \"%s\" (ID:%d)",
 							sa.getName(), sa.getAccountID());
 					Data.setSalesman(accID, sa);
 				}
@@ -133,7 +133,7 @@ public class Admin_op
 			case 5:
 			{
 				if(Data.getSalesmanCount() == 0){
-					ioPak.printf("Sorry, no accounts exits!\n");
+					ioPak.printf("Sorry, no accounts exits!");
 					break;
 				}
 				int accID = ioPak.getInt("Please Enter the accountID that you want to disable:", 
@@ -144,7 +144,7 @@ public class Admin_op
 				{
 					sa.setDisable();
 					ioPak.printf(
-							"Successfully disable account \"%s\" (ID:%d)\n",
+							"Successfully disable account \"%s\" (ID:%d)",
 							sa.getName(), sa.getAccountID());
 					Data.setSalesman(accID, sa);
 				}
@@ -200,7 +200,7 @@ public class Admin_op
 					ioPak.printf("Present in-stock amount of iPad 2 is: %d.",
 							Data.getStorageAmount(Money.IPAD2));
 					ioPak.printf(false, false, 0,
-							"Please type the amount added to stock\n");
+							"Please type the amount added to stock");
 					int temp = ioPak.getInt("Amount:", 0);
 					Data.changeStorageAmount(Money.IPAD2, temp);
 					ioPak.printf("Successfully changed!");
@@ -212,7 +212,7 @@ public class Admin_op
 					ioPak.printf("Present in-stock amount of iPad 3 is: %d.",
 							Data.getStorageAmount(Money.IPAD3));
 					ioPak.printf(false, false, 0,
-							"Please type the amount added to stock\n");
+							"Please type the amount added to stock");
 					int temp = ioPak.getInt("Amount:", 0);
 					Data.changeStorageAmount(Money.IPAD3, temp);
 					ioPak.printf("Successfully changed!");
@@ -224,7 +224,7 @@ public class Admin_op
 					ioPak.printf("Present in-stock amount of iPhone 4 is: %d.",
 							Data.getStorageAmount(Money.IPHONE4));
 					ioPak.printf(false, false, 0,
-							"Please type the amount added to stock\n");
+							"Please type the amount added to stock");
 					int temp = ioPak.getInt("Amount:", 0);
 					Data.changeStorageAmount(Money.IPHONE4, temp);
 					ioPak.printf("Successfully changed!");
@@ -236,7 +236,7 @@ public class Admin_op
 					ioPak.printf("Present in-stock amount of iPhone 4S is: %d.",
 							Data.getStorageAmount(Money.IPHONE4S));
 					ioPak.printf(false, false, 0,
-							"Please type the amount added to stock\n");
+							"Please type the amount added to stock");
 					int temp = ioPak.getInt("Amount:", 0);
 					Data.changeStorageAmount(Money.IPHONE4S, temp);
 					ioPak.printf("Successfully changed!");
@@ -248,7 +248,7 @@ public class Admin_op
 					ioPak.printf("Present in-stock amount of iPhone 5S is: %d.",
 							Data.getStorageAmount(Money.IPHONE5));
 					ioPak.printf(false, false, 0,
-							"Please type the amount added to stock\n");
+							"Please type the amount added to stock");
 					int temp = ioPak.getInt("Amount:", 0);
 					Data.changeStorageAmount(Money.IPHONE5, temp);
 					ioPak.printf("Successfully changed!");
@@ -260,7 +260,7 @@ public class Admin_op
 					ioPak.printf("Present in-stock amount of iPhone 5S is: %d.",
 							Data.getStorageAmount(Money.IPHONE5S));
 					ioPak.printf(false, false, 0,
-							"Please type the amount added to stock\n");
+							"Please type the amount added to stock");
 					int temp = ioPak.getInt("Amount:", 0);
 					Data.changeStorageAmount(Money.IPHONE5S, temp);
 					ioPak.printf("Successfully changed!");

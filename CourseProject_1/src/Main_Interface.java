@@ -78,7 +78,7 @@ public class Main_Interface {
 					+ "1: Administrator login.\n" 
 					+ "2: Salesman login.\n"
 					+ "3: Register a new salesman account.\n" 
-					+ "4: Quit.\n"
+					+ "4: Quit."
 					+ "");
 			choice = ioPak.getInt("Your choice:",1,4);
 			if (choice == 1)

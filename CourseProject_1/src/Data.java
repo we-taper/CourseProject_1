@@ -536,7 +536,7 @@ public class Data
 				+"iPhone 4!!%s CNY.\n"
 				+"iPhone 4S!!%s CNY.\n"
 				+"iPhone 5!!%s CNY.\n"
-				+"iPhone 5S!!%s CNY.\n"
+				+"iPhone 5S!!%s CNY."
 				, getSugPrice(Money.IPAD2)
 				, getSugPrice(Money.IPAD3)
 				, getSugPrice(Money.IPHONE4)
@@ -553,7 +553,7 @@ public class Data
 				+"iPhone 4!!%s CNY.\n"
 				+"iPhone 4S!!%s CNY.\n"
 				+"iPhone 5!!%s CNY.\n"
-				+"iPhone 5S!!%s CNY.\n"
+				+"iPhone 5S!!%s CNY."
 				, getBasePrice(Money.IPAD2)
 				, getBasePrice(Money.IPAD3)
 				, getBasePrice(Money.IPHONE4)
@@ -570,7 +570,7 @@ public class Data
 				+"iPhone 4!!%s CNY.\n"
 				+"iPhone 4S!!%s CNY.\n"
 				+"iPhone 5!!%s CNY.\n"
-				+"iPhone 5S!!%s CNY.\n"
+				+"iPhone 5S!!%s CNY."
 				, getMinPrice(Money.IPAD2)
 				, getMinPrice(Money.IPAD3)
 				, getMinPrice(Money.IPHONE4)
@@ -590,7 +590,7 @@ public class Data
 				+"iPhone 4!!%s CNY.\n"
 				+"iPhone 4S!!%s CNY.\n"
 				+"iPhone 5!!%s CNY.\n"
-				+"iPhone 5S!!%s CNY.\n"
+				+"iPhone 5S!!%s CNY."
 				, getMinPrice(Money.IPAD2)
 				, getMinPrice(Money.IPAD3)
 				, getMinPrice(Money.IPHONE4)
@@ -600,7 +600,7 @@ public class Data
 	}
 
 	public static void printCurFunds(){
-		ioPak.printf("The current funds is %s Yuan.\n",
+		ioPak.printf("The current funds is %s Yuan.",
 				getCurrentFunds());
 	}
 	public static byte[] getHashAccessCode()

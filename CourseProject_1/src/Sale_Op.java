@@ -121,7 +121,7 @@ public class Sale_Op
 		calNum = ioPak.getInt("Please enter an integer:", 0,
 				Data.getStorageAmount(calProduct));
 
-		ioPak.printf("Do you want to calculate the\n1.PRICE\n2.PROFIT\n");
+		ioPak.printf("Do you want to calculate the\n1.PRICE\n2.PROFIT");
 
 		// Choice One(Calculator) has two functions!Here are two!
 		while (true)
@@ -138,7 +138,7 @@ public class Sale_Op
 			{// For Profit
 				BigDecimal profit = Data.getMinPrice(calProduct).multiply(
 						new BigDecimal("" + calNum));
-				ioPak.printf("The total profit is %.2f\n", profit);
+				ioPak.printf("The total profit is %.2f", profit);
 				if (Data.getAlarmPrice(calProduct).compareTo(profit) == -1)
 				{
 					ioPak.printf("The profit is too low!\n"

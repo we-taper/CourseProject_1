@@ -112,7 +112,7 @@ public class Money implements Serializable
 			storageAmount[goodsID + SHIFT] += amount;
 			changeCurrentFunds(getCurrentFunds().subtract(moneyCost).negate());
 		}else{
-			ioPak.printf(false, false, 0, "Sorry, not enough money left\n");
+			ioPak.printf(false, false, 0, "Sorry, not enough money left");
 		}
 		
 	}
