@@ -1,4 +1,37 @@
+//Disable accounts.we should show all accounts! Should add quit!
+/*
+ 
+ * 
+ * Please Enter the accountID that you want to disable:2
+The account does not exits.
+*   The number should be within 1 and 1.   *
+*                                          *
+Please Enter the accountID that you want to disable:0
+.----------------------------------------.
+*   The account does not exits.          *
+*   The number should be within 1 to 1   *
+*                                        *
+*----------------------------------------*
+Please Enter the accountID that you want to disable:
 
+//After disabling the only existing account, i inquire for showing all accounts,and get this:
+*       Press 5 to Disable Accounts.               *
+*       Press 6 for Exit Account Management.       *
+*--------------------------------------------------*
+Your choice:3
+.------.
+*      *
+*------*
+*
+*
+//After disabling the only existing account, the salesman can still log in!!!!
+ * 
+ *
+ //Account "manage" should be changed to "management".
+  * 
+ 
+ //The order in the MAIN MENU: "quit"should be the last.
+ */
 
 import java.math.BigDecimal;
 
@@ -8,7 +41,7 @@ public class Sale_Op
 	{
 		while (true)
 		{
-			ioPak.printf("Welcome %s!\nWhat do you want to do?\n",
+			ioPak.printf("Welcome %s!\nWhat do you want to do?",
 					salesman.getName());
 			ShowChoices();
 
@@ -142,7 +175,7 @@ public class Sale_Op
 						+ "3.IPHONE4:!!%d!!%.2f!!%.2f\n"
 						+ "4.IPHONE4S:!!%d!!%.2f!!%.2f\n"
 						+ "5.IPHONE5:!!%d!!%.2f!!%.2f\n"
-						+ "6.IPHONE5S:!!%d!!%.2f!!%.2f\n",
+						+ "6.IPHONE5S:!!%d!!%.2f!!%.2f",
 				Data.getStorageAmount(Money.IPAD2),
 				Data.getMinPrice(Money.IPAD2),Data.getSugPrice(Money.IPAD2),
 				Data.getStorageAmount(Money.IPAD3),
@@ -186,7 +219,7 @@ public class Sale_Op
 			break;
 		}
 		ioPak.printf("The total price is %.2f"
-				+ "\nThe profit is %.2f,%s the alarm line.\n", totalPrice,totalProfit, judge);
+				+ "\nThe profit is %.2f,%s the alarm line.", totalPrice,totalProfit, judge);
 
 		ioPak.printf("Now,please enter these information from the customer:");
 		System.out.println("What about the address?\n"+"Please enter here:");
@@ -203,7 +236,7 @@ public class Sale_Op
 					+ "Total price:!!%.2f\n"
 					+ "Total profit:!!%.2f\n" + "Address:!!%s\n"
 					+ "Telephone number:!!%s\n"
-					+ "Compared to alarming rate:!!%s\n",
+					+ "Compared to alarming rate:!!%s",
 					salesman.getAccountID(), productChoice, productNum,
 					totalPrice, totalProfit, address, tele, judge);
 
