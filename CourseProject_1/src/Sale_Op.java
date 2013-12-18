@@ -263,7 +263,7 @@ public class Sale_Op
 			System.out.printf("Please try again:");
 			CurrentPassword = ioPak.getConPD();
 		}
-		ioPak.println("Please set new password.");
+		ioPak.printf("Please set new password.");
 		String pd = ioPak.setConPD(salesman.getName());
 		salesman.setPassword(pd);
 	}
