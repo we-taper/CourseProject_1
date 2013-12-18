@@ -2,6 +2,8 @@
  * Too much!! For a single product, there's base price, minimal price, alarm price,suggested price
  * How do we count the profit?
  * How do we count the below-alarmline degree?
+ * warning line "OF" profit??
+ * why of PROFIT?
  */
 
 import java.math.BigDecimal;
@@ -102,7 +104,7 @@ public class Sale_Op
 			}
 			if (calChoice == 2)
 			{// For Profit
-				BigDecimal profit = Data.getBasePrice(calProduct).multiply(
+				BigDecimal profit = Data.getMinPrice(calProduct).multiply(
 						new BigDecimal("" + calNum));
 				ioPak.printf("The total profit is %.2f\n", profit);
 				if (Data.getAlarmPrice(calProduct).compareTo(profit) == -1)
@@ -139,25 +141,25 @@ public class Sale_Op
 		System.out.print(
 				"You are now ready to sell something!\n"
 						+ "Here is our products and their amount left in our store:\n");
-						ioPak.printTable(17,"!!", " Name!!Amount!!Base Price!!Minimal Price!!Suggested Price!!Alarm Price\n"
-						+ "1.IPAD2:!!%d!!%.2f!!%.2f!!%.2f!!%.2f\n"
-						+ "2.IPAD3:!!%d!!%.2f!!%.2f!!%.2f!!%.2f\n"
-						+ "3.IPHONE4:!!%d!!%.2f!!%.2f!!%.2f!!%.2f\n"
-						+ "4.IPHONE4S:!!%d!!%.2f!!%.2f!!%.2f!!%.2f\n"
-						+ "5.IPHONE5:!!%d!!%.2f!!%.2f!!%.2f!!%.2f\n"
-						+ "6.IPHONE5S:!!%d!!%.2f!!%.2f!!%.2f!!%.2f\n",
+						ioPak.printTable(17,"!!", " Name!!Amount!!Minimal Price!!Suggested Price\n"
+						+ "1.IPAD2:!!%d!!%.2f!!%.2f\n"
+						+ "2.IPAD3:!!%d!!%.2f!!%.2f\n"
+						+ "3.IPHONE4:!!%d!!%.2f!!%.2f\n"
+						+ "4.IPHONE4S:!!%d!!%.2f!!%.2f\n"
+						+ "5.IPHONE5:!!%d!!%.2f!!%.2f\n"
+						+ "6.IPHONE5S:!!%d!!%.2f!!%.2f\n",
 				Data.getStorageAmount(Money.IPAD2),
-				Data.getBasePrice(Money.IPAD2),Data.getMinPrice(Money.IPAD2),Data.getSugPrice(Money.IPAD2),Data.getAlarmPrice(Money.IPAD2),
+				Data.getMinPrice(Money.IPAD2),Data.getSugPrice(Money.IPAD2),
 				Data.getStorageAmount(Money.IPAD3),
-				Data.getBasePrice(Money.IPAD3),Data.getMinPrice(Money.IPAD3),Data.getSugPrice(Money.IPAD3),Data.getAlarmPrice(Money.IPAD3),
+				Data.getMinPrice(Money.IPAD3),Data.getSugPrice(Money.IPAD3),
 				Data.getStorageAmount(Money.IPHONE4),
-				Data.getBasePrice(Money.IPHONE4),Data.getMinPrice(Money.IPHONE4),Data.getSugPrice(Money.IPHONE4),Data.getAlarmPrice(Money.IPHONE4),
+				Data.getMinPrice(Money.IPHONE4),Data.getSugPrice(Money.IPHONE4),
 				Data.getStorageAmount(Money.IPHONE4S),
-				Data.getBasePrice(Money.IPHONE4S),Data.getMinPrice(Money.IPHONE4S),Data.getSugPrice(Money.IPHONE4S),Data.getAlarmPrice(Money.IPHONE4S),
+				Data.getMinPrice(Money.IPHONE4S),Data.getSugPrice(Money.IPHONE4S),
 				Data.getStorageAmount(Money.IPHONE5),
-				Data.getBasePrice(Money.IPHONE5),Data.getMinPrice(Money.IPHONE5),Data.getSugPrice(Money.IPHONE5),Data.getAlarmPrice(Money.IPHONE5),
+				Data.getMinPrice(Money.IPHONE5),Data.getSugPrice(Money.IPHONE5),
 				Data.getStorageAmount(Money.IPHONE5S),
-				Data.getBasePrice(Money.IPHONE5S),Data.getMinPrice(Money.IPHONE5S),Data.getSugPrice(Money.IPHONE5S),Data.getAlarmPrice(Money.IPHONE5S));
+				Data.getMinPrice(Money.IPHONE5S),Data.getSugPrice(Money.IPHONE5S));
 		// Print out all the products & their information!
 		ioPak.println("So, which product do you want to sell?\n");
 		int productChoice = ioPak.getInt("Please enter an integer here:", 1, 6);
@@ -173,7 +175,7 @@ public class Sale_Op
 				+ productNum));
 		
 		
-		BigDecimal totalProfit = totalPrice.subtract((Data.getBasePrice(
+		BigDecimal totalProfit = totalPrice.subtract((Data.getMinPrice(
 				productChoice)).multiply(new BigDecimal("" + productNum)));
 		String judge = "above";
 		switch (productPrice.compareTo(Data.getAlarmPrice(productChoice)))
