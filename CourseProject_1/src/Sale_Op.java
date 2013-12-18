@@ -1,10 +1,4 @@
-/*
- * Too much!! For a single product, there's base price, minimal price, alarm price,suggested price
- * How do we count the profit?
- * How do we count the below-alarmline degree?
- * warning line "OF" profit??
- * why of PROFIT?
- */
+
 
 import java.math.BigDecimal;
 
