@@ -16,6 +16,7 @@
  * 13.订单记录
  * 14.销售员 记录老客户
  * 15.Admin knows all the profit // By Zao
+ * 16.Change access code
  */
 public class Main_Interface {
 	private static int CurrentUserID = 0;
@@ -45,7 +46,7 @@ public class Main_Interface {
 
 	private static void mainMenu() {
 		int choice = 0;
-		ioPak.printf("Welcome to Storage Management system.\n");
+		ioPak.printf("Welcome to Storage Management system.");
 		ioPak.printf(""
 					+ ",------------.                ,.--\"\"-._\n"
 					+ "|   Storage   `.           __/         `.\n"
@@ -68,7 +69,7 @@ public class Main_Interface {
 					+ "                 `*--'._ \"-.:     :\n"
 					+ "                      :/\".A` \\    |\n"
 					+ "                      |   |.  `.  :\n"
-					+ "                      ;   |.    `. \\\"\n"
+					+ "                      ;   |.    `. \\\""
 					+ "");
 		while (true) {
 			// Help user log into their accounts.
@@ -78,30 +79,30 @@ public class Main_Interface {
 					+ "2: Salesman login.\n"
 					+ "3: Register a new salesman account.\n" 
 					+ "4: Quit.\n"
-					+ "5: Display accounts!\n"// TODO delete this display.
+					+ "5: Display accounts!"// TODO delete this display.
 					+ "");
 			choice = ioPak.getInt("Your choice:",1,5);
 			if (choice == 1)
 			{
 				adminLogin();
-				ioPak.printf("Welcome back!!\n");
+				ioPak.printf("Welcome back!!");
 			}
 			else if (choice == 2)
 			{
 				if (Data.getSalesmanCount() == 0)
 				{
-					ioPak.printf("No account exists yet, please register one.\n");
+					ioPak.printf("No account exists yet, please register one.");
 				}
 				else
 				{
 
 					testSMPD();
-					ioPak.printf("Welcome back!!\n");
+					ioPak.printf("Welcome back!!");
 				}
 			} else if (choice == 3) {
 				register();
 				login(CurrentUserID);
-				ioPak.printf("Welcome back!!\n");
+				ioPak.printf("Welcome back!!");
 			} else if (choice == 4) {
 				ioPak.println("Auf Wiedersehen~~\nPress anykey to exit.");
 				break;
@@ -122,7 +123,7 @@ public class Main_Interface {
 				{
 					ioPak.printf(
 							"Sorry, the account \"%s\"(ID:%d) was disabled by administrator.\n"
-									+ "Please ask your administrator to enable you account.\n",
+									+ "Please ask your administrator to enable you account.",
 							Data.getSalesman(CurrentUserID).getName(),
 							CurrentUserID);
 				}
@@ -143,7 +144,7 @@ public class Main_Interface {
 						ioPak.printf(false, false, 0,
 								"Sorry, wrong Password! Please check.\n"
 										+ "(You still have " + i
-										+ " chances to input!)\n");
+										+ " chances to input!)");
 						System.out.printf("Password: ");
 						pd = ioPak.getConPD();
 					}
@@ -177,7 +178,7 @@ public class Main_Interface {
 
 	private static void testAdminPD(){
 		admin = Data.getAdmin();
-		ioPak.println("Please Input Password For Administrator!");
+		ioPak.printf("Please Input Password For Administrator!");
 		System.out.printf("Password: ");
 		String pd = ioPak.getConPD();
 		for (int i = 2; i > 0; i--)
@@ -191,7 +192,7 @@ public class Main_Interface {
 			ioPak.printf(false, false, 0,
 					"Sorry, wrong Password! Please check.\n"
 							+ "(You still have " + i
-							+ " chances to input!)\n");
+							+ " chances to input!)");
 			System.out.printf("Password: ");
 			pd = ioPak.getConPD();
 			}
@@ -210,12 +211,12 @@ public class Main_Interface {
 		// accountID if add successfully and return a
 		// Data.CREAT_FAILED if add unsuccessfully
 		if (CurrentUserID == Data.CREAT_FAILED) {
-			ioPak.printf("Failed to creat your account\n");
+			ioPak.printf("Failed to creat your account");
 		} else {// Successfully Created
 			ioPak.printf("Successfully registered."
 					+ "Your account ID is %d.\n"
 					+ "Please remember you accountID, or else you will not \n"
-					+ "be able to login again.\n", CurrentUserID);
+					+ "be able to login again.", CurrentUserID);
 		}
 
 		salesman = null;
@@ -239,26 +240,26 @@ public class Main_Interface {
 			}
 			if (!equal) {
 				ioPak.printf("Wrong Access Code. Program will now exit.\n"
-						+ "Still %d chance(s) left.\n", i);
+						+ "Still %d chance(s) left.", i);
 			}else{
 				accessCode = ac;
 				return;
 			}
 		}
-		ioPak.println("Out of chance, sorry~~\nSytem will now exit!");
+		ioPak.printf("Out of chance, sorry~~\nSytem will now exit!");
 		System.exit(1);
 	}
 
 	private static void initiateAccessCode() {
 		ioPak.printf("It's your first time running this program, please "
-				+ "set your Access Code.\n");
+				+ "set your Access Code.");
 		accessCode = ioPak.setConPD("original access code");
 		Data.setAccessCode(accessCode);
 	}
 
 	private static void initiateAdmin() {
 		admin = Data.getAdmin();
-		ioPak.printf("And then, please set your password for Administrator.\n");
+		ioPak.printf("And then, please set your password for Administrator.");
 		admin.setPassword(ioPak.setConPD("Administrator"));
 		
 	}
