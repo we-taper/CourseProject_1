@@ -659,4 +659,34 @@ public class Data
 			}
 		}
 	}
+	
+	public static int getStarIDForSales()
+	{
+		BigDecimal maxSale=new BigDecimal("0");
+		int maxSaleID=0;
+		for(Salesman s:salesman)
+		{
+			if(s.getSale().compareTo(maxSale)==1)
+			{
+				maxSale=s.getSale();
+				maxSaleID=1+s.getAccountID();
+			}
+		}
+		return maxSaleID;
+	}
+	public static int getStarIDForProfit()
+	{
+		BigDecimal maxProfit=new BigDecimal("0");
+		int maxProfitID=0;
+		for(Salesman s:salesman)
+		{
+			if(s.getSale().compareTo(maxProfit)==1)
+			{
+				maxProfit=s.getSale();
+				maxProfitID=1+s.getAccountID();
+			}
+		}
+		return maxProfitID;
+	}
+	
 }
