@@ -72,24 +72,24 @@ public class Sale_Op
 
 	public static void Calculator()
 	{
-		ioPak.println("You are now using: Calculator"
+		ioPak.printf("You are now using: Calculator"
 				+ "\nCould you tell me the product you want to do the calculations with?\n"
 				+ "1.IPAD2\n2.IPAD3\n3.IPHONE4\n4.IPHONE4S\n5.IPHONE5\n6.IPHONE5S");
 		int calProduct;
 
 		calProduct = ioPak.getInt("Your choice:", 1, 6);
 
-		ioPak.println("Good job!How much will you sell it?");
+		ioPak.printf("Good job!How much will you sell it?");
 		BigDecimal calPrice;
 		calPrice = ioPak.getBD("Please enter the price:", 0);
 
-		ioPak.println("Then,how many of it?");
+		ioPak.printf("Then,how many of it?");
 		int calNum;
 
 		calNum = ioPak.getInt("Please enter an integer:", 0,
 				Data.getStorageAmount(calProduct));
 
-		ioPak.println("Do you want to calculate the\n1.PRICE\n2.PROFIT\n");
+		ioPak.printf("Do you want to calculate the\n1.PRICE\n2.PROFIT\n");
 
 		// Choice One(Calculator) has two functions!Here are two!
 		while (true)
@@ -109,14 +109,14 @@ public class Sale_Op
 				ioPak.printf("The total profit is %.2f\n", profit);
 				if (Data.getAlarmPrice(calProduct).compareTo(profit) == -1)
 				{
-					ioPak.println("The profit is too low!\n"
+					ioPak.printf("The profit is too low!\n"
 							+ "Please consider it carefully!");
 				}
 				break;
 			}
 			else
 			{
-				ioPak.println("Enter 1 (for Price) or 2 (for Profit) please:");
+				ioPak.printf("Enter 1 (for Price) or 2 (for Profit) please:");
 			}
 
 		}
@@ -161,12 +161,12 @@ public class Sale_Op
 				Data.getStorageAmount(Money.IPHONE5S),
 				Data.getMinPrice(Money.IPHONE5S),Data.getSugPrice(Money.IPHONE5S));
 		// Print out all the products & their information!
-		ioPak.println("So, which product do you want to sell?\n");
+		ioPak.printf("So, which product do you want to sell?");
 		int productChoice = ioPak.getInt("Please enter an integer here:", 1, 6);
 		BigDecimal productPrice = ioPak
 				.getBD("Please enter the price here:", 0);
 
-		ioPak.println("How many of it?");
+		ioPak.printf("How many of it?");
 		int productNum;
 		productNum = ioPak.getInt("Please enter the number here:", 0,
 				Data.getStorageAmount(productChoice));
@@ -193,7 +193,7 @@ public class Sale_Op
 		ioPak.printf("The total price is %.2f"
 				+ "\nThe profit is %.2f,%s the alarm line.\n", totalPrice,totalProfit, judge);
 
-		ioPak.println("Now,please enter these information from the customer:");
+		ioPak.printf("Now,please enter these information from the customer:");
 		System.out.println("What about the address?\n"+"Please enter here:");
 		String address = ioPak.nextLine();
 		System.out.println("Then the telephone number.\nPlease enter it here:");
@@ -212,12 +212,12 @@ public class Sale_Op
 					salesman.getAccountID(), productChoice, productNum,
 					totalPrice, totalProfit, address, tele, judge);
 
-			ioPak.println("Confirm this order?");
+			ioPak.printf("Confirm this order?");
 			System.out.println("Please enter yes or no here:");
 			String confirm = ioPak.nextLine();
 			if (confirm.contains("yes"))
 			{
-				ioPak.println("Deal accomplished!");
+				ioPak.printf("Deal accomplished!");
 				Data.changeStorageAmount(productChoice, -productNum);
 				Data.changeCurrentFunds(totalPrice);
 				salesman.changeSaleAmount(totalPrice);
@@ -239,13 +239,13 @@ public class Sale_Op
 			}
 			if (confirm.contains("no"))
 			{
-				ioPak.println("No deal accomplished.\n"
+				ioPak.printf("No deal accomplished.\n"
 						+ "Maybe you are right! Think twice before doing!");
 				break;
 			}
 			else
 			{
-				ioPak.println("Error.Let's see the order again!");
+				ioPak.printf("Error.Let's see the order again!");
 			}
 		}
 		return salesman;
@@ -253,7 +253,7 @@ public class Sale_Op
 
 	public static void setPasswordInMain()
 	{
-		ioPak.println("Now you are setting the password!");
+		ioPak.printf("Now you are setting the password!");
 		ioPak.setConPD("account password");
 	}
 }// end class
