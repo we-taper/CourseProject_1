@@ -165,11 +165,11 @@ public class Sale_Op
 				Data.getMinPrice(Money.IPHONE5S),
 				Data.getSugPrice(Money.IPHONE5S));
 		// Print out all the products & their information!
-		ioPak.printf("So, which product do you want to sell?\n(Type 'quit' to exit.)");
-		if (!input.nextLine().contains("quit"))
-		{
-			int productChoice = ioPak.getInt("Please enter an integer here:",
-					1, 6);
+		ioPak.printf("So, which product do you want to sell?\n");
+			int productChoice = ioPak.getInt("(Press 0 to exit)Please enter an integer here:",
+					0, 6);
+			if(productChoice==0)
+			{
 			BigDecimal productPrice = ioPak.getBD(
 					"Please enter the price here:", 0);
 
@@ -256,8 +256,8 @@ public class Sale_Op
 				{
 					ioPak.printf("Error.Let's see the order again!");
 				}
-			}
-		}
+			}}
+		
 		return salesman;
 	}
 
