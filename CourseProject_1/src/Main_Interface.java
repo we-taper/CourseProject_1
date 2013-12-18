@@ -73,8 +73,8 @@ public class Main_Interface {
 					+ "");
 		while (true) {
 			// Help user log into their accounts.
-			ioPak.printf(""
-					+ "Please enter your choice:\n"
+			ioPak.printf(
+					 "Please enter your choice:\n"
 					+ "1: Administrator login.\n" 
 					+ "2: Salesman login.\n"
 					+ "3: Register a new salesman account.\n" 

@@ -660,7 +660,7 @@ public class Data
 		}
 	}
 	
-	public static int getStarIDForSales()
+	public static String getStarNameForSales()
 	{
 		BigDecimal maxSale=new BigDecimal("0");
 		int maxSaleID=0;
@@ -669,12 +669,12 @@ public class Data
 			if(s.getSale().compareTo(maxSale)==1)
 			{
 				maxSale=s.getSale();
-				maxSaleID=1+s.getAccountID();
+				maxSaleID=s.getAccountID();
 			}
 		}
-		return maxSaleID;
+		return salesman.get(maxSaleID).getName();
 	}
-	public static int getStarIDForProfit()
+	public static String getStarNameForProfit()
 	{
 		BigDecimal maxProfit=new BigDecimal("0");
 		int maxProfitID=0;
@@ -683,10 +683,10 @@ public class Data
 			if(s.getSale().compareTo(maxProfit)==1)
 			{
 				maxProfit=s.getSale();
-				maxProfitID=1+s.getAccountID();
+				maxProfitID=s.getAccountID();
 			}
 		}
-		return maxProfitID;
+		return salesman.get(maxProfitID).getName();
 	}
 	
 }

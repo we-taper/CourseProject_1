@@ -41,8 +41,12 @@ public class Sale_Op
 	{
 		while (true)
 		{
-			ioPak.printf("Welcome %s!\nWhat do you want to do?",
-					salesman.getName());
+			ioPak.printf("!!","Welcome %s!\n"
+					+ "NOTICE:\n"
+					+ "Star Salesman For Sales:!!Mr./Ms. %s\n"
+					+ "Star Salesman For Profit:!!Mr./Ms. %s\n"
+					+ "What do you want to do?",
+					salesman.getName(),Data.getStarNameForSales(),Data.getStarNameForProfit());
 			ShowChoices();
 
 			while (true)
@@ -100,7 +104,7 @@ public class Sale_Op
 
 	public static void Calculator()
 	{
-		ioPak.printf("You are now using: Calculator"
+		ioPak.printf("CALCULATOR"
 				+ "\nOn what product you want to do the calculations?\n"
 				+ "1.IPAD2\n2.IPAD3\n3.IPHONE4\n4.IPHONE4S\n5.IPHONE5\n6.IPHONE5S");
 		int calProduct;
@@ -158,7 +162,8 @@ public class Sale_Op
 				"Sales Profit:!!%.2f\n"
 				+ "Alarming sales made:!!%.2f",
 				salesman.getAccountID(), 
-				salesman.getName(),salesman.getSale(), salesman.getSaleProfit(),salesman.getAlarmDegree());
+				salesman.getName(),salesman.getSale(), 
+				salesman.getSaleProfit(),salesman.getAlarmDegree());
 		return salesman;
 	}
 
