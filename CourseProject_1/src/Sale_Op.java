@@ -14,7 +14,7 @@ public class Sale_Op
 
 			while (true)
 			{
-				int mainChoice = ioPak.getInt("Your choice:", 1, 4);
+				int mainChoice = ioPak.getInt("Your choice:", 1, 5);
 
 				if (mainChoice == 1)
 				{
@@ -37,10 +37,9 @@ public class Sale_Op
 					setPasswordInMain(salesman);
 					break;
 				}
-				else
+				if(mainChoice==5)
 				{
-					System.out
-							.println("Curiosity kill a cat!\nPlease enter 1,2,3 here:");
+					return salesman;
 				}
 			}
 			System.out
