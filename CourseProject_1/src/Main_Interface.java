@@ -104,7 +104,7 @@ public class Main_Interface {
 				login(CurrentUserID);
 				ioPak.printf("Welcome back!!");
 			} else if (choice == 4) {
-				ioPak.println("Auf Wiedersehen~~\nPress anykey to exit.");
+				ioPak.printf("Auf Wiedersehen~~\nPress anykey to exit.");
 				break;
 			} else if (choice == 5) {
 				Data.displayAccount();// TODO delete this.

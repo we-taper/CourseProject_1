@@ -636,11 +636,6 @@ public class ioPak
 		System.out.printf(content);
 	}// end print
 
-	public static void println(String content)
-	{
-		content = content + "\n";
-		printf(content);
-	}
 	public static String shift(int SPACE_BEFORE, String input)
 	{
 		boolean preN = false,sufN = false;
