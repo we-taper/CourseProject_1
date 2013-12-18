@@ -131,26 +131,28 @@ public class Main_Interface {
 						"Please enter your passowrd for user \"%s\"\nInput: ",
 						Data.getSalesman(CurrentUserID).getName());
 				pd = ioPak.getConPD();
+				if (pd.equals(Data.getSalesman(CurrentUserID).getPassword()))
+				{
+					login(CurrentUserID);
+					return;
+				}
 				for (int i = 2; i > 0; i--)// Count down to eliminate try-chances.
 				{
+
+					ioPak.printf(false, false, 0,
+							"Sorry, wrong Password! Please check.\n"
+									+ "(You still have " + i
+									+ " chances to input!)");
+					System.out.printf("Password: ");
+					pd = ioPak.getConPD();
 					if (pd.equals(Data.getSalesman(CurrentUserID).getPassword()))
 					{
 						login(CurrentUserID);
 						break;
 					}
-					else
-					{
-
-						ioPak.printf(false, false, 0,
-								"Sorry, wrong Password! Please check.\n"
-										+ "(You still have " + i
-										+ " chances to input!)");
-						System.out.printf("Password: ");
-						pd = ioPak.getConPD();
-					}
-					ioPak.printf("Sorry, program will now exit.");
 				}// end for
-				break;
+				ioPak.printf("Sorry, program will now exit.");
+				return;
 			} catch (IndexOutOfBoundsException e)
 			{
 				System.out.printf("No such account exists, please try again.\n");
@@ -181,20 +183,21 @@ public class Main_Interface {
 		ioPak.printf("Please Input Password For Administrator!");
 		System.out.printf("Password: ");
 		String pd = ioPak.getConPD();
+		if (pd.equals(admin.getPassword())){
+			login(ADMIN_ID);
+			return;
+		}
 		for (int i = 2; i > 0; i--)
 		{
-			if (pd.equals(admin.getPassword())){
-				login(ADMIN_ID);
-				return;
-			}
-			else
-			{
 			ioPak.printf(false, false, 0,
 					"Sorry, wrong Password! Please check.\n"
 							+ "(You still have " + i
 							+ " chances to input!)");
 			System.out.printf("Password: ");
 			pd = ioPak.getConPD();
+			if (pd.equals(admin.getPassword())){
+				login(ADMIN_ID);
+				return;
 			}
 		}
 		ioPak.printf("Out of chances. Sorry~~.");
@@ -226,7 +229,7 @@ public class Main_Interface {
 		byte[] dataUser, dataFile;
 		boolean equal = true;
 		String ac;// Use a temporary String ac so that accessCode remain either valid or empty.
-		for (int i = 3; i > 0; i--)
+		for (int i = 2; i >= 0; i--)
 		{
 			System.out.printf("Please enter the access code:");
 			ac = ioPak.getConPD();
@@ -239,8 +242,11 @@ public class Main_Interface {
 				}
 			}
 			if (!equal) {
-				ioPak.printf("Wrong Access Code. Program will now exit.\n"
-						+ "Still %d chance(s) left.", i);
+				if(i != 0)
+				{
+					ioPak.printf("Wrong Access Code. Still %d chance(s) left.", i);
+					equal = true;
+				}
 			}else{
 				accessCode = ac;
 				return;
