@@ -14,7 +14,7 @@ public class Admin_op
 		while (true)
 		{
 			printWhatICanDO();
-			ioPak.println("ADMINISTRATOR MAIN MENU\n"
+			ioPak.printf("ADMINISTRATOR MAIN MENU\n"
 					+ "Press 1 for Account Manage.\n"
 					+ "Press 2 for My Products.\n" 
 					+ "Press 3 for My Money.\n"
@@ -94,7 +94,7 @@ public class Admin_op
 					System.out.printf("Please try again:");
 					CurrentPassword = ioPak.getConPD();
 				}
-				ioPak.println("Please set new password.");
+				ioPak.printf("Please set new password.");
 				String pd = ioPak.setConPD("administrator");
 				admin.setPassword(pd);
 				break;
@@ -169,7 +169,7 @@ public class Admin_op
 	{
 		theWhile: while (true)
 		{
-			ioPak.println("My Products MENU\n"
+			ioPak.printf("My Products MENU\n"
 					+"Press 1 for Check Inventory.\n"
 					+"Press 2 for Update Inventory Information: Stockpiling.\n"
 					+"Press 3 for Exit My Products.");
@@ -183,7 +183,7 @@ public class Admin_op
 			}
 			case 2:// Update Inventory
 			{
-				ioPak.println("Update Inventory Information:Stockpiling\n"
+				ioPak.printf("Update Inventory Information:Stockpiling\n"
 						+ "Choose the Product:\n" 
 						+ "Press 1 for iPad 2;\n"
 						+ "Press 2 for iPad 3;\n" 
@@ -287,7 +287,7 @@ public class Admin_op
 	{
 		theWhile: while (true)
 		{
-			ioPak.println("My Money MENU\n"
+			ioPak.printf("My Money MENU\n"
 					+ "Press 1 for Suggesting Price Query.\n"
 					+ "Press 2 for Purchase Price Query.\n"
 					+ "Press 3 for Warning Percentage Query\n"
@@ -309,7 +309,7 @@ public class Admin_op
 			}
 			case 3://Warning Percentage Query
 			{
-				ioPak.println(" Let's see all the alarm price for all products");
+				ioPak.printf(" Let's see all the alarm price for all products");
 				Data.printAlarmPrice();
 				break;
 			}// end 3
@@ -319,7 +319,7 @@ public class Admin_op
 						"Please set the Warning Price Percentage:", 0);
 				price = price.divide(new BigDecimal("100"));// convert a percentage into double
 				Data.setAlarmPrice(price);
-				ioPak.println(" Let's see all the alarm price for all products");
+				ioPak.printf(" Let's see all the alarm price for all products");
 				Data.printAlarmPrice();
 				break;
 			}// end 4
