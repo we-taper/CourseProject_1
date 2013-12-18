@@ -79,7 +79,7 @@ public class Money implements Serializable
 		storageAmount[goodsID + SHIFT] = amount;
 	}
 
-	public void changeStorageAmount(int goodsID, int amount)
+	public void changeStorageAmount(int goodsID, int amount, BigDecimal price)
 	{
 		/*
 		 * Change the storage amount for product whose name is goodsID. Receive
@@ -93,6 +93,19 @@ public class Money implements Serializable
 		 * 		amount--
 		 * 		CurrentFunds++
 		 */
+		if(price.compareTo(new BigDecimal("-1")) == 0){
+			// reduce storage amount
+		}else{
+			// add storage amount
+			BigDecimal temp;
+			/*
+			 * ( (baseprice*storage) + (price*amount) ) / (amout+storage)
+			 */
+			temp =( ( Data.getBasePrice(goodsID).multiply(new BigDecimal(Data.getStorageAmount(goodsID))) )
+					.add(price.multiply(new BigDecimal(amount))) )
+					.divide(new BigDecimal(Data.getStorageAmount(goodsID)+amount));
+			Data.setBasePrice(goodsID, temp);
+		}
 		BigDecimal moneyCost = new BigDecimal("0");
 		moneyCost = getBasePrice(goodsID).multiply(new BigDecimal(amount));
 		if( stillMoneyLeft(moneyCost)){
@@ -102,6 +115,10 @@ public class Money implements Serializable
 			ioPak.printf(false, false, 0, "Sorry, not enough money left\n");
 		}
 		
+	}
+	public void changeStorageAmount(int goodsID, int amount)
+	{
+		changeStorageAmount(goodsID, amount, new BigDecimal("-1"));
 	}
 
 	public int getStorageAmount(int goodsID)

@@ -427,6 +427,14 @@ public class Data
 		money.setStorageAmount(goodsID, amount);
 	}
 
+	public static void changeStorageAmount(int goodsID, int amount, BigDecimal price)
+	{
+		/*
+		 * Add the storage amount for product whose name is goodsID. Receive
+		 * goodsID and the amount as parameter.
+		 */
+		money.changeStorageAmount(goodsID, amount, price);
+	}
 	public static void changeStorageAmount(int goodsID, int amount)
 	{
 		/*
@@ -448,7 +456,7 @@ public class Data
 	public static BigDecimal getBasePrice(int goodsID)
 	{
 		/*
-		 * Get the base price£¨½ø¼Û£© for product whose name is goodsID. Receive
+		 * Get the base priceï¿½ï¿½ï¿½ï¿½Û£ï¿½ for product whose name is goodsID. Receive
 		 * goodsID as parameter. Return the base price for this product.
 		 */
 		return money.getBasePrice(goodsID);
@@ -457,7 +465,7 @@ public class Data
 	public static void setAlarmPrice(BigDecimal price)
 	{
 		/*
-		 * Set the ÀûÈó¶î¾¯½äÏß.
+		 * Set the ï¿½ï¿½ï¿½ï¿½î¾¯ï¿½ï¿½ï¿½ï¿½.
 		 */
 		money.setAlarmPrice(price);
 	}
@@ -465,7 +473,7 @@ public class Data
 	public static BigDecimal getAlarmPrice(int goodsID)
 	{
 		/*
-		 * Get the ÀûÈó¶î¾¯½äÏß.
+		 * Get the ï¿½ï¿½ï¿½ï¿½î¾¯ï¿½ï¿½ï¿½ï¿½.
 		 */
 		return money.getAlarmPrice(goodsID);
 	}
