@@ -62,12 +62,14 @@ public class Sale_Op
 
 	public static void ShowChoices()
 	{
-		ioPak.printf("1.Calculator\n%20s" + "\n2.See my account\n%20s"
-				+ "\n3.Go Selling!\n%20s" + "\n4.Change my password\n%20s",
+		ioPak.printf("Main Menu For Salesman:\n"+"1.Calculator\n%20s" + "\n2.See my account\n%20s"
+				+ "\n3.Go Selling!\n%20s" + "\n4.Change my password\n%20s"
+						+ "\n5.Log out!\n%20s",
 				"(Do calculations to see if it's a worthy deal!)",
 				"(Check your own performance these days!)",
 				"(Make deals and add credits to your profile!)",
-				"(Change for a more secure password.)\n");
+				"(Change for a more secure password.)"
+				, "(Return to the Main Menu.)");
 	}
 
 	public static void Calculator()
