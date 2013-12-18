@@ -48,27 +48,27 @@ public class Admin_op
 
 	private static void printWhatICanDO()
 	{
-		ioPak.println("As An Administrator, You Can:\n"
+		ioPak.printf("As An Administrator, You Can:\n"
 				+ "1. My Account:\n" 
-				+ "  (1). Change My Password;\n"
-				+ "  (2). Display All Existing Accounts;\n"
-				+ "  (3). Enable Accounts;\n" 
-				+ "  (4). Disable Accounts;\n"
+				+ "  (a). Change My Password;\n"
+				+ "  (b). Display All Existing Accounts;\n"
+				+ "  (c). Enable Accounts;\n" 
+				+ "  (d). Disable Accounts;\n"
 				+ "2. My Products:\n" 
-				+ "  (1). Check Inventory;\n"
-				+ "  (2). Update Inventory Information: Stockpiling;\n"
+				+ "  (a). Check Inventory;\n"
+				+ "  (b). Update Inventory Information: Stockpiling;\n"
 				+ "3. My Money:\n" 
-				+ "  (1). Selling Price Query;\n"
-				+ "  (2). Purchase Price Query;\n"
-				+ "  (3). Set the Warning Line of Profit;\n"
-				+ "  (4). The Current Funds Query.");
+				+ "  (a). Selling Price Query;\n"
+				+ "  (b). Purchase Price Query;\n"
+				+ "  (c). Set the Warning Line of Profit;\n"
+				+ "  (d). The Current Funds Query.");
 	}
 
 	private static Administrator acManage(Administrator admin)
 	{
 		theWhile: while (true)
 		{
-			ioPak.println("My Account MENU\n"
+			ioPak.printf("My Account MENU\n"
 					+ "    Press 1 to see What I Can Do.\n"
 					+ "    Press 2 to Change Password.\n"
 					+ "    Press 3 to Display all Existing Acounts.\n"
