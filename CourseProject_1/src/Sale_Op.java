@@ -55,7 +55,7 @@ public class Sale_Op
 
 	public static void ShowChoices()
 	{
-		ioPak.printf("Main Menu For Salesman:\n"+"1.Calculator\n%20s" + "\n2.See my account\n%20s"
+		ioPak.printf("SALESMAN MAIN MENU:\n"+"1.Calculator\n%20s" + "\n2.See my account\n%20s"
 				+ "\n3.Go Selling!\n%20s" + "\n4.Change my password\n%20s"
 						+ "\n5.Log out!\n%20s",
 				"(Do calculations to see if it's a worthy deal!)",
