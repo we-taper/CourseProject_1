@@ -101,7 +101,7 @@ public class Sale_Op
 	public static void Calculator()
 	{
 		ioPak.printf("You are now using: Calculator"
-				+ "\nCould you tell me the product you want to do the calculations with?\n"
+				+ "\nOn what product you want to do the calculations?\n"
 				+ "1.IPAD2\n2.IPAD3\n3.IPHONE4\n4.IPHONE4S\n5.IPHONE5\n6.IPHONE5S");
 		int calProduct;
 
