@@ -15,6 +15,7 @@
  * 12.管理员 ranking
  * 13.订单记录
  * 14.销售员 记录老客户
+ * 15.Admin knows all the profit // By Zao
  */
 public class Main_Interface {
 	private static int CurrentUserID = 0;
