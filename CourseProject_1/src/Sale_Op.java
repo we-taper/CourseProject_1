@@ -40,7 +40,7 @@ public class Sale_Op
 				}
 				if (mainChoice == 4)
 				{
-					setPasswordInMain();
+					setPasswordInMain(salesman);
 					break;
 				}
 				else
@@ -251,10 +251,21 @@ public class Sale_Op
 		return salesman;
 	}
 
-	public static void setPasswordInMain()
+	public static void setPasswordInMain(Salesman salesman)
 	{
 		ioPak.printf("Now you are setting the password!");
-		ioPak.setConPD("account password");
+		System.out.printf("Please type your current password:");
+		String CurrentPassword = ioPak.getConPD();
+		while (!CurrentPassword.equals(salesman.getPassword()))
+		{
+			ioPak.printf(false, false, 0,
+					"The password you gave is incorrect.");
+			System.out.printf("Please try again:");
+			CurrentPassword = ioPak.getConPD();
+		}
+		ioPak.println("Please set new password.");
+		String pd = ioPak.setConPD(salesman.getName());
+		salesman.setPassword(pd);
 	}
 }// end class
 
