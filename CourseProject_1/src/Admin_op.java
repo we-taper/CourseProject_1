@@ -326,6 +326,29 @@ public class Admin_op
 			case 5://The Current Funds Query
 			{
 				Data.printCurFunds();
+				ioPak.printf("Do you want to change out Current Funds(Yes or No)?");
+				String s;
+				while(true)
+				{
+					System.out.printf("Your choice:");
+					s = ioPak.nextLine();
+					if ((s.contains("yes") || s.contains("no"))
+							&& !(s.contains("yes") && s.contains("no")))
+						// single yes or no but not both yes and no
+					{
+						break;
+					}else{
+						ioPak.printf(false, false, 0,
+								"Please don't type something that I can't understand. :)");
+					}
+				}
+				if(s.contains("yes")){
+					ioPak.printf(false, false, 0, "How much do you want to add to inventory?\n"
+							+ "( add a minus sign if you want to withdraw money from current funds, min)");
+					BigDecimal bd = ioPak.getBD("Amount:", Data.getCurrentFunds().negate().doubleValue());
+					Data.changeCurrentFunds(bd);
+					ioPak.printf("Changed successfully.");
+				}
 				break;
 
 			}
