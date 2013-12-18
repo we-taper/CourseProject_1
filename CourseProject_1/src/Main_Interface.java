@@ -26,12 +26,12 @@ public class Main_Interface {
 
 	public static void main(String[] args) {
 		// if first time, initialize admin account.
-		ioPak.printf(78, 20, 20, "Welcome to Storage Management System\n");
+		ioPak.printf(78, 20, 20, "Welcome to Storage Management System");
 		if (Data.firstTime()) {
 			initiateAccessCode();
 			initiateAdmin();
 			ioPak.cls();
-			ioPak.printf("Program has been initiated, now let's get it working!!\n");
+			ioPak.printf("Program has been initiated, now let's get it working!!");
 		}
 		judgeAccessCode();
 		Data.initiateData(accessCode);
