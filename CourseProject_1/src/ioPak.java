@@ -13,8 +13,7 @@ public class ioPak
 	public static String setUserName(int SPACE_BEFORE)
 	{
 		String name;
-		System.out
-				.printf(shift(SPACE_BEFORE, "Please set your name(only English characters, numbers, hyphens "
+		ioPak.printf(shift(SPACE_BEFORE, "Please set your name(only English characters, numbers, hyphens "
 						+ "\nunderlines or spaces are allowed).\n"));
 		while (true)
 		{
@@ -497,6 +496,14 @@ public class ioPak
 		 * SPACE_BEFORE: The spaces before the whole block, used to shift the 
 		 * 				block right.
 		 */
+		// Chech if there is a appending \n(the preceeding \n will not be check
+		// Since the split method of sting will creat an empty string first if
+		// the content start with a \n
+		boolean sufN = false;
+		if( content.endsWith("\n"))
+		{
+			sufN = true;
+		}
 		// Turn the contents into entirely and only pure strings.
 		content = String.format(content, args);
 		// Find the maximum string
@@ -605,6 +612,14 @@ public class ioPak
 			}
 			content = "." + content;
 		}
+		// Now add the missing \n line (if any) caused by split before adding the tail
+		if(sufN){
+			content = content + v_LINE;
+			for(int i=0; i<slash_m-2;i++){
+				content = content + " ";
+			}
+			content = content + v_LINE + "\n";
+		}
 		if (TAIL)
 		{
 			content = content + "*";
@@ -616,7 +631,7 @@ public class ioPak
 		}
 		// Now shift output right with spaces
 		content = shift(SPACE_BEFORE, content );
-		content = content + "\n";// add the missing \n deleted by shift
+
 		// Now print
 		System.out.printf(content);
 	}// end print
@@ -628,6 +643,21 @@ public class ioPak
 	}
 	public static String shift(int SPACE_BEFORE, String input)
 	{
+		boolean preN = false,sufN = false;
+		// find out if input has a per-\n or suf-\n and record it
+		if(input.charAt(0) == '\n')
+		{
+			input = input.substring(1);
+			/*
+			 *  Delete the first \n so that the split below will not start with
+			 *  an empty string because of the pre-N.
+			 */
+			preN = true;
+		}
+		if(input.charAt(input.length()-1) == '\n')
+		{
+			sufN = true;
+		}
 		// Split
 		String[] s = input.split("\n");
 		input = "";//clear input
@@ -641,9 +671,17 @@ public class ioPak
 			if(j < s.length-1){
 				input = input + s[j] + "\n";
 			}else{
-				input = input + s[j];// Don't add \n to the last line.
+				input = input + s[j];// Don't add \n to the last line. It will
+										// be added later
 			}
 		}// end for
+		// Add the missing \n if any
+		if(preN){
+			input = "\n" + input;
+		}
+		if(sufN){
+			input = input + "\n";
+		}
 		return input;
 	}
 
