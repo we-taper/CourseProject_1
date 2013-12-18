@@ -79,9 +79,8 @@ public class Main_Interface {
 					+ "2: Salesman login.\n"
 					+ "3: Register a new salesman account.\n" 
 					+ "4: Quit.\n"
-					+ "5: Display accounts!"// TODO delete this display.
 					+ "");
-			choice = ioPak.getInt("Your choice:",1,5);
+			choice = ioPak.getInt("Your choice:",1,4);
 			if (choice == 1)
 			{
 				adminLogin();
@@ -106,8 +105,6 @@ public class Main_Interface {
 			} else if (choice == 4) {
 				ioPak.printf("Auf Wiedersehen~~\nPress anykey to exit.");
 				break;
-			} else if (choice == 5) {
-				Data.displayAccount();// TODO delete this.
 			} else {}// end of if
 		}// end while(true)
 	}
@@ -126,6 +123,7 @@ public class Main_Interface {
 									+ "Please ask your administrator to enable you account.",
 							Data.getSalesman(CurrentUserID).getName(),
 							CurrentUserID);
+					return;
 				}
 				System.out.printf(
 						"Please enter your passowrd for user \"%s\"\nInput: ",

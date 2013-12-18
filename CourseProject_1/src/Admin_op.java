@@ -15,7 +15,7 @@ public class Admin_op
 		{
 			printWhatICanDO();
 			ioPak.printf("ADMINISTRATOR MAIN MENU\n"
-					+ "Press 1 for Account Manage.\n"
+					+ "Press 1 for Account Management.\n"
 					+ "Press 2 for My Products.\n" 
 					+ "Press 3 for My Money.\n"
 					+ "Press 4 for Logout Administrator.");

@@ -110,11 +110,9 @@ public class Salesman implements Serializable {
 	@Override
 	public String toString()
 	{
-		if(isDisabled()){
-			return "";
-		}else{
-		return String.format("User name:%s, ID:%d, Salesamount: %s\n",
-				this.name,this.accountID,this.saleAmount);
-		}
+		return String.format("User name:%s, ID:%d, Salesamount: %s\n"
+				+ "The account is %s",
+				this.name,this.accountID,this.saleAmount,
+				isDisabled() ? "disabled.":"accessiable.");
 	}
 }
