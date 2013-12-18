@@ -47,7 +47,7 @@ public class ioPak
 			s2 = getConPD();
 			if (s1.equals(s2))
 			{
-				ioPak.printf(SPACE_BEFORE, "Successfully set the password for %s!\n", name_of_account);
+				ioPak.printf(SPACE_BEFORE, "Successfully set the password for %s!", name_of_account);
 				break;
 			}
 			else
