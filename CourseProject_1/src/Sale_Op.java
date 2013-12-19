@@ -166,7 +166,7 @@ public class Sale_Op
 				Data.getMinPrice(Money.IPHONE5S),
 				Data.getSugPrice(Money.IPHONE5S));
 		// Print out all the products & their information!
-		ioPak.printf("So, which product do you want to sell?\n");
+		ioPak.printf("So, which product do you want to sell?");
 		int productChoice = ioPak.getInt(
 				"(Press 0 to exit)Please enter an integer here:", 0, 6);
 		if (productChoice != 0)
@@ -207,7 +207,11 @@ public class Sale_Op
 							+ "\nThe profit is %.2f,%s the alarm line.",
 							totalPrice, totalProfit, judge);
 
-					ioPak.printf("Now,please enter these information from the customer:");
+					ioPak.printf("Would you like to enter information of the customer?\n"
+							+ "Press 1 for yes or 2 for no.");
+					int ifEnterInfo=ioPak.getInt("Your choice:", 1,2);
+					if(ifEnterInfo==1)
+					{
 					System.out.println("What about the address?\n"
 							+ "Please enter here:");
 					String address = ioPak.nextLine();
@@ -270,7 +274,7 @@ public class Sale_Op
 						}
 					}
 				}
-			}
+			}}
 		}
 		return salesman;
 	}
