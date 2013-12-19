@@ -24,18 +24,20 @@ public class Main_Interface {
 	private static Salesman salesman = new Salesman();
 	private static Administrator admin = new Administrator();
 	private static String accessCode = "";
-
+	
 	public static void main(String[] args) {
 		// if first time, initialize admin account.
 		ioPak.printf(78, 20, 20, "Welcome to Storage Management System");
 		if (Data.firstTime()) {
 			initiateAccessCode();
 			initiateAdmin();
+			ioPak.printWait();
 			ioPak.cls();
 			ioPak.printf("Program has been initiated, now let's get it working!!");
 		}
 		judgeAccessCode();
 		Data.initiateData(accessCode);
+		ioPak.printWait();
 		ioPak.cls();
 		mainMenu();
 		// After login. Write all data to file.
@@ -99,7 +101,7 @@ public class Main_Interface {
 					ioPak.printf("Welcome back!!");
 				}
 			} else if (choice == 3) {
-				register();
+				registerSalesman();
 				login(CurrentUserID);
 				ioPak.printf("Welcome back!!");
 			} else if (choice == 4) {
@@ -201,7 +203,7 @@ public class Main_Interface {
 		ioPak.printf("Out of chances. Sorry~~.");
 	}
 
-	private static void register() {
+	private static void registerSalesman() {
 		// Retrieve data from user.
 		salesman.setName(ioPak.setUserName());
 		salesman.setPassword(ioPak.setConPD("Salesman "+salesman.getName()));

@@ -9,12 +9,13 @@ public class ioPak
 	private static Scanner input = new Scanner(System.in);
 	public static int LEFT_ARROW = 0;
 	public static int RIGHT_ARROW = 1;
+	public static int NO_SHIFT = 0;
 
 	public static String setUserName(int SPACE_BEFORE)
 	{
 		String name;
 		ioPak.printf(shift(SPACE_BEFORE, "Please set your name(only English characters, numbers, hyphens "
-						+ "\nunderlines or spaces are allowed).\n"));
+						+ "\nunderlines or spaces are allowed)."));
 		while (true)
 		{
 			System.out.printf(shift(SPACE_BEFORE, "Your username:"));
@@ -331,8 +332,10 @@ public class ioPak
 		}
 	}
 	public static void printBlock(int x, int y, int horizon, int vertical,
-			char star, char space_l, char space_r)
+			String star, String space_l, String space_r)
 	{
+		// x,y position of star
+		// horizon,vertical size of block
 		if (vertical < 1 || horizon < 1 || x<1 || y<1 || x>horizon || y>vertical)
 		{
 			return;
@@ -365,7 +368,7 @@ public class ioPak
 			// print the *******
 			for (int i = 1; i < length; i++)
 			{
-				printBlock(i, 1, length, 1, '.', ' ', ' ');
+				printBlock(i, 1, length, 1, ".", " ", " ");
 				try
 				{
 					Thread.sleep(timeGap);
@@ -375,7 +378,7 @@ public class ioPak
 				}
 			}
 			// print the >
-			printBlock(length, 1, length, 1, '+', ' ', ' ');
+			printBlock(length, 1, length, 1, "+", " ", " ");
 			try
 			{
 				Thread.sleep(timeGap);
@@ -389,7 +392,7 @@ public class ioPak
 			// print the *******
 			for (int i = length; i > 1; i--)
 			{
-				printBlock(i, 1, length, 1, '.', ' ', ' ');
+				printBlock(i, 1, length, 1, ".", " ", " ");
 				try
 				{
 					Thread.sleep(timeGap);
@@ -399,7 +402,7 @@ public class ioPak
 				}
 			}
 			// print the >
-			printBlock(length, 1, 1, 1, '+', ' ', ' ');
+			printBlock(length, 1, 1, 1, "+", " ", " ");
 			try
 			{
 				Thread.sleep(timeGap);
@@ -407,6 +410,69 @@ public class ioPak
 			{
 				e.printStackTrace();
 			}
+		}
+	}
+	public static void printWait(int shift, int length, long timeGap)
+	{
+		for(int i=0; i<shift; i++)
+		{
+			System.out.printf(" ");
+		}
+		System.out.printf("Please Wait...: ");
+		for(int i=0; i<length-1; i++ )
+		{
+			pause(timeGap);
+			System.out.printf(">");
+		}
+		pause(timeGap+500);
+		System.out.printf(" Complete.\n");
+		pause(timeGap+500);
+	}
+	public static void printWait(int shift)
+	{
+		printWait(shift, 20, 150);
+	}
+	public static void printWait()
+	{
+		printWait(NO_SHIFT, 20, 150);
+	}
+	public static void printZ(int size, long timeGap)
+	{
+		pause(timeGap);
+		for(int i=0; i<size; i++)
+		{
+			System.out.printf(" *");
+			pause(timeGap);
+		}
+		System.out.println();
+		for(int i=size-2; i>0; i--)
+		{
+			for(int j=0; j<i; j++)
+			{
+				System.out.printf("  ");
+			}
+			System.out.printf(" *\n");
+			pause(timeGap);
+		}
+		for(int i=0; i<size; i++)
+		{
+			System.out.printf(" *");
+			pause(timeGap);
+		}
+		System.out.println();
+	}
+	public static void printZ()
+	{
+		printZ(10, 100);
+	}
+	public static void pause(long milli)
+	{
+		try
+		{
+			Thread.sleep(milli);
+		} catch (InterruptedException e)
+		{
+			e.printStackTrace();
 		}
 	}
 	public static void printf(String content, Object... args)

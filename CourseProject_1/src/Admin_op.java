@@ -51,16 +51,18 @@ public class Admin_op
 		ioPak.printf("As An Administrator, You Can:\n"
 				+ "1. My Account:\n" 
 				+ "  (a). Change My Password;\n"
-				+ "  (b). Display All Existing Accounts;\n"
-				+ "  (c). Enable Accounts;\n" 
-				+ "  (d). Disable Accounts;\n"
+				+ "  (b). Change Password.\n"
+				+ "  (c). Display all Existing Acounts.\n"
+				+ "  (d). Enable Saleman's Account.\n"
+				+ "  (e). Disable Saleman's Accounts.\n"
+				+ "  (f). Reset Salesman's password.\n"
 				+ "2. My Products:\n" 
 				+ "  (a). Check Inventory;\n"
 				+ "  (b). Update Inventory Information: Stockpiling;\n"
 				+ "3. My Money:\n" 
-				+ "  (a). Selling Price Query;\n"
+				+ "  (a). Suggesting Price Query;\n"
 				+ "  (b). Purchase Price Query;\n"
-				+ "  (c). Set the Warning Line of Profit;\n"
+				+ "  (c). Warning Percentage Query;\n"
 				+ "  (d). The Current Funds Query.");
 	}
 
@@ -72,10 +74,11 @@ public class Admin_op
 					+ "    Press 1 to see What I Can Do.\n"
 					+ "    Press 2 to Change Password.\n"
 					+ "    Press 3 to Display all Existing Acounts.\n"
-					+ "    Press 4 to Enable Acounts.\n"
-					+ "    Press 5 to Disable Accounts.\n"
-					+ "    Press 6 for Exit Account Management.");
-			int choice = ioPak.getInt("Your choice:", 1, 6);
+					+ "    Press 4 to Enable Saleman's Account.\n"
+					+ "    Press 5 to Disable Saleman's Accounts.\n"
+					+ "    Press 6 to Reset Salesman's password.\n"
+					+ "    Press 7 for Exit Account Management.");
+			int choice = ioPak.getInt("Your choice:", 1, 7);
 			switch (choice)
 			{
 			case 1:
@@ -156,7 +159,21 @@ public class Admin_op
 				}
 				break;
 			}// end 5
-			case 6:// Exit Account Management.(GET)
+			case 6:// Reset password
+			{
+				if(Data.getSalesmanCount() == 0){
+					ioPak.printf("No Salesman's account exits yet~~");
+				}else{
+					ioPak.printf("Which Salesman's password you want to disable?");
+					int accID = ioPak.getInt("Salesman ID:", 1,
+							Data.getSalesmanCount());
+					Data.getSalesman(accID).setPassword("luckybear");
+					ioPak.printf("Successfully reset the password to \"luckybear\"\n"
+							+ "Salesman: %s (ID: %d).", Data.getSalesman(accID).getName(),
+							Data.getSalesman(accID).getAccountID());
+				}
+			}
+			case 7:// Exit Account Management.(GET)
 			{
 				break theWhile;
 			}// end 3
