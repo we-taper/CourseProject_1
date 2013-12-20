@@ -1,3 +1,4 @@
+import java.security.GeneralSecurityException;
 
 // TODO:
 /*
@@ -31,14 +32,43 @@ public class Main_Interface {
 		if (Data.firstTime()) {
 			initiateAccessCode();
 			initiateAdmin();
-			ioPak.printWait();
-			ioPak.cls();
+			ioPak.printWait(CS.LEVEL1, CS.WAIT_FOR_BAR,"Decrypting Data...", "  Done!\n");
+			ioPak.cls();// Clear Screen
 			ioPak.printf(CS.All_LENGTH,3,3,"Program has been initiated, now let's get it working!!");
 		}
 		judgeAccessCode();
-		Data.initiateData(accessCode);
-		ioPak.printWait(CS.LEVEL1,CS.WAIT_G);
-		ioPak.cls();
+		try
+		{
+			Data.initiateData(accessCode);
+		} catch (GeneralSecurityException  e)
+		{
+			ioPak.printf(CS.LEVEL1, 
+					"Wrong Access Code! Perhaps you have\n"
+					+ "opened a file that has a different access code previous\n"
+					+ "(e.g. a backup file).\n"
+					+ "Please now type the original access code for that file\n"
+					+ "(if you remember it). Make sure it is correct or else the\n"
+					+ "system has to quit.");
+			try
+			{
+				System.out.printf(CS.level1()+"Previous access code:");
+				String acode = ioPak.getConPD(CS.LEVEL1);
+				Data.initiateData(acode);
+				// If successfully decrypt file
+				accessCode = acode;
+				ioPak.printf(CS.LEVEL1, "Now the access code for this file\n"
+						+ "was changed to the current one(which you typed before)");
+				ioPak.enterATC(CS.LEVEL1);
+				Data.setAccessCode(accessCode);
+			} catch (GeneralSecurityException  e1)
+			{
+				ioPak.printf("Wrong access code again!\n"
+						+ "System will now exit.");
+				System.exit(1);
+			}
+		}
+		ioPak.printWait(CS.LEVEL1, CS.WAIT_FOR_BAR,"Decrypting Data...", "  Done!\n");
+		ioPak.cls();// Clear Screen
 		mainMenu();
 		// After login. Write all data to file.
 		Data.storeData(accessCode);
@@ -96,7 +126,6 @@ public class Main_Interface {
 				}
 				else
 				{
-
 					testSMPD();
 					ioPak.printf(CS.LEVEL1,"Welcome back!!");
 				}
@@ -105,6 +134,7 @@ public class Main_Interface {
 				login(CurrentUserID);
 				ioPak.printf(CS.LEVEL1,"Welcome back!!");
 			} else if (choice == 4) {
+				ioPak.printWait(CS.LEVEL1, CS.WAIT_FOR_BAR, "Storing Data...","  Done!\n");
 				ioPak.printf(CS.LEVEL1,"Auf Wiedersehen~~\nPress anykey to exit.");
 				break;
 			} else {}// end of if
@@ -127,9 +157,10 @@ public class Main_Interface {
 							CurrentUserID);
 					return;
 				}
-				System.out.printf(CS.level1(),
-						"Please enter your passowrd for user \"%s\"\nInput: ",
+				System.out.printf(CS.level1()+
+						"Please enter your passowrd for user \"%s\"\n",
 						Data.getSalesman(CurrentUserID).getName());
+				System.out.printf(CS.level1()+"Input: ");
 				pd = ioPak.getConPD(CS.LEVEL1);
 				if (pd.equals(Data.getSalesman(CurrentUserID).getPassword()))
 				{
@@ -155,6 +186,7 @@ public class Main_Interface {
 				return;
 			} catch (IndexOutOfBoundsException e)
 			{
+				e.printStackTrace();
 				System.out.printf(CS.level1()+"No such account exists, please try again.\n");
 			}// try-catch
 		}// end while
@@ -163,12 +195,10 @@ public class Main_Interface {
 	private static void login(int ID) {
 		if (ID == ADMIN_ID) {
 			admin = Admin_op.main(Data.getAdmin());
-			ioPak.cls();// clear screen.
 			// Then write admin into Data
 			Data.setAdmin(admin);
 		} else {
 			salesman = Sale_Op.main(Data.getSalesman(CurrentUserID));
-			ioPak.cls();// clear screen.
 			// Then write salesman into Data
 			Data.setSalesman(CurrentUserID, salesman);
 		}
@@ -273,7 +303,15 @@ public class Main_Interface {
 	public static String getAccessCode(){
 		/**
 		 *  This method should work only of the ioPak!!
+		 *  and ChangeAC() in Admin_op as well.
 		 */
 		return accessCode;
+	}
+	public static void setAccessCode(String acode){
+		/**
+		 *  This method should work only of the ioPak!!
+		 *  and ChangeAC() in Admin_op as well.
+		 */
+		accessCode = acode;
 	}
 }// end of class Main_Interface

@@ -11,6 +11,7 @@ public class Admin_op
 
 	private static Administrator mainMenu(Administrator admin)
 	{
+		ioPak.printNextLevel(CS.LEVEL1,CS.LEVEL2, CS.LEVEL_G);
 		while (true)
 		{
 			printWhatICanDO(CS.LEVEL2);
@@ -19,7 +20,8 @@ public class Admin_op
 					+ "Press 1 for Account Management.\n"
 					+ "Press 2 for My Products.\n" 
 					+ "Press 3 for My Money.\n"
-					+ "Press 4 for Logout Administrator.");
+					+ "Press 4 for Change Access Code."
+					+ "Press 5 for Logout Administrator.");
 			int choice = ioPak.getInt(CS.LEVEL2,"Your choice:", 1, 4);
 			switch (choice)
 			{
@@ -38,7 +40,11 @@ public class Admin_op
 				admin = myMoney(admin);
 				break;
 			}
-			case 4:// Logout Administrator.
+			case 4:// Change Access Code
+			{
+				ChangeAC();
+			}
+			case 5:// Logout Administrator.
 			{
 				return admin;
 			}
@@ -65,12 +71,15 @@ public class Admin_op
 				+ "  (a). Suggesting Price Query;\n"
 				+ "  (b). Purchase Price Query;\n"
 				+ "  (c). Warning Percentage Query;\n"
-				+ "  (d). The Current Funds Query."
+				+ "  (d). The Current Funds Query.\n"
+				+ "4. Change Access Code."
 				+"");
+		ioPak.enterATC(SHIFT_BEFORE);
 	}
 
 	private static Administrator acManage(Administrator admin)
 	{
+		ioPak.printNextLevel(CS.LEVEL2, CS.LEVEL3, CS.LEVEL_G);
 		theWhile: while (true)
 		{
 			ioPak.printf(CS.LEVEL3,
@@ -87,11 +96,14 @@ public class Admin_op
 			{
 			case 1:
 			{
+				ioPak.printNextLevel(CS.LEVEL3, CS.LEVEL4, CS.LEVEL_G);
 				printWhatICanDO(CS.LEVEL4);
+				ioPak.printBackLevel(CS.LEVEL3, CS.LEVEL4, CS.LEVEL_G);
 				break;
 			}// end 1
 			case 2:
 			{
+				ioPak.printNextLevel(CS.LEVEL3, CS.LEVEL4, CS.LEVEL_G);
 				System.out.printf(CS.level4()+"Type your current password:");
 				String CurrentPassword = ioPak.getConPD();
 				while (!CurrentPassword.equals(admin.getPassword()))
@@ -104,15 +116,21 @@ public class Admin_op
 				ioPak.printf(CS.LEVEL4,"Please set new password.");
 				String pd = ioPak.setConPD(CS.LEVEL4,"administrator");
 				admin.setPassword(pd);
+				ioPak.enterATC(CS.LEVEL4);
+				ioPak.printBackLevel(CS.LEVEL3, CS.LEVEL4, CS.LEVEL_G);
 				break;
 			}// end 2
 			case 3:
 			{
+				ioPak.printNextLevel(CS.LEVEL3, CS.LEVEL4, CS.LEVEL_G);
 				Data.displayAccount(CS.LEVEL4);
+				ioPak.enterATC(CS.LEVEL4);
+				ioPak.printBackLevel(CS.LEVEL3, CS.LEVEL4, CS.LEVEL_G);
 				break;
 			}
-			case 4:
+			case 4:// enable account
 			{
+				ioPak.printNextLevel(CS.LEVEL3, CS.LEVEL4, CS.LEVEL_G);
 				if(Data.getSalesmanCount() == 0){
 					ioPak.printf(CS.LEVEL4,"Sorry, no accounts exits!");
 					break;
@@ -136,10 +154,13 @@ public class Admin_op
 							"This account \"%s\" (ID:%d) is already enabled, there's no need to enable it again",
 							sa.getName(), sa.getAccountID());
 				}
+				ioPak.enterATC(CS.LEVEL4);
+				ioPak.printBackLevel(CS.LEVEL3, CS.LEVEL4, CS.LEVEL_G);
 				break;
 			}// end 4
-			case 5:
+			case 5:// disable account
 			{
+				ioPak.printNextLevel(CS.LEVEL3, CS.LEVEL4, CS.LEVEL_G);
 				if(Data.getSalesmanCount() == 0){
 					ioPak.printf(CS.LEVEL4,"Sorry, no accounts exits!");
 					break;
@@ -163,10 +184,13 @@ public class Admin_op
 							"This account \"%s\" (ID:%d) is already disabled, there's no need to disable it again",
 							sa.getName(), sa.getAccountID());
 				}
+				ioPak.enterATC(CS.LEVEL4);
+				ioPak.printBackLevel(CS.LEVEL3, CS.LEVEL4, CS.LEVEL_G);
 				break;
 			}// end 5
 			case 6:// Reset password
 			{
+				ioPak.printNextLevel(CS.LEVEL3, CS.LEVEL4, CS.LEVEL_G);
 				if(Data.getSalesmanCount() == 0){
 					ioPak.printf(CS.LEVEL4,"No Salesman's account exits yet~~");
 				}else{
@@ -179,9 +203,13 @@ public class Admin_op
 							+ "Salesman: %s (ID: %d).", Data.getSalesman(accID).getName(),
 							Data.getSalesman(accID).getAccountID());
 				}
+				ioPak.enterATC(CS.LEVEL4);
+				ioPak.printBackLevel(CS.LEVEL3, CS.LEVEL4, CS.LEVEL_G);
+				break;
 			}
 			case 7:// Exit Account Management.(GET)
 			{
+				ioPak.printBackLevel(CS.LEVEL2, CS.LEVEL3, CS.LEVEL_G);
 				break theWhile;
 			}// end 3
 			}// end switch
@@ -191,23 +219,30 @@ public class Admin_op
 
 	private static Administrator myProduct(Administrator admin)
 	{
+		ioPak.printNextLevel(CS.LEVEL2, CS.LEVEL3, CS.LEVEL_G);
 		theWhile: while (true)
 		{
-			ioPak.printf("My Products MENU\n"
+			ioPak.printf(CS.LEVEL3,
+					"My Products MENU\n"
 					+"Press 1 for Check Inventory.\n"
 					+"Press 2 for Update Inventory Information: Stockpiling.\n"
 					+"Press 3 for Exit My Products.");
-			int choice = ioPak.getInt("Your Choice:", 1, 3);
+			int choice = ioPak.getInt(CS.LEVEL3,"Your Choice:", 1, 3);
 			switch (choice)
 			{
 			case 1:// Check Inventory.(GET)
 			{
-				Data.printInventory();
+				ioPak.printNextLevel(CS.LEVEL3, CS.LEVEL4, CS.LEVEL_G);
+				Data.printInventory(CS.LEVEL4);
+				ioPak.enterATC(CS.LEVEL4);
+				ioPak.printBackLevel(CS.LEVEL3, CS.LEVEL4, CS.LEVEL_G);
 				break;
 			}
 			case 2:// Update Inventory
 			{
-				ioPak.printf("Update Inventory Information:Stockpiling\n"
+				ioPak.printNextLevel(CS.LEVEL3, CS.LEVEL4, CS.LEVEL_G);
+				ioPak.printf(CS.LEVEL4,
+						"Update Inventory Information:Stockpiling\n"
 						+ "Choose the Product:\n" 
 						+ "Press 1 for iPad 2;\n"
 						+ "Press 2 for iPad 3;\n" 
@@ -216,79 +251,91 @@ public class Admin_op
 						+ "Press 5 for iPhone 5;\n"
 						+ "Press 6 for iPhone 5S;\n"
 						+ "Press 7 for Exit Stockpiling.");
-				int SpProductChoice = ioPak.getInt("Your Choice:", 1, 7);
+				int SpProductChoice = ioPak.getInt(CS.LEVEL4,"Your Choice:", 1, 7);
 				switch (SpProductChoice)
 				{
 				case 1:
 				{
-					ioPak.printf("Present in-stock amount of iPad 2 is: %d.",
+					ioPak.printf(CS.LEVEL4,
+							"Present in-stock amount of iPad 2 is: %d.",
 							Data.getStorageAmount(Money.IPAD2));
-					ioPak.printf(false, false, 0,
+					ioPak.printf(false, false, 0,CS.LEVEL4,
 							"Please type the amount added to stock");
-					int temp = ioPak.getInt("Amount:", 0);
+					int temp = ioPak.getInt(CS.LEVEL4,"Amount:", 0);
 					Data.changeStorageAmount(Money.IPAD2, temp);
-					ioPak.printf("Successfully changed!");
-					Data.printInventory();
+					ioPak.printf(CS.LEVEL4,"Successfully changed!");
+					Data.printInventory(CS.LEVEL4);
+					ioPak.enterATC(CS.LEVEL4);
 					break;
 				}
 				case 2:
 				{
-					ioPak.printf("Present in-stock amount of iPad 3 is: %d.",
+					ioPak.printf(CS.LEVEL4,
+							"Present in-stock amount of iPad 3 is: %d.",
 							Data.getStorageAmount(Money.IPAD3));
-					ioPak.printf(false, false, 0,
+					ioPak.printf(false, false, 0,CS.LEVEL4,
 							"Please type the amount added to stock");
-					int temp = ioPak.getInt("Amount:", 0);
+					int temp = ioPak.getInt(CS.LEVEL4,"Amount:", 0);
 					Data.changeStorageAmount(Money.IPAD3, temp);
-					ioPak.printf("Successfully changed!");
-					Data.printInventory();
+					ioPak.printf(CS.LEVEL4,"Successfully changed!");
+					Data.printInventory(CS.LEVEL4);
+					ioPak.enterATC(CS.LEVEL4);
 					break;
 				}
 				case 3:
 				{
-					ioPak.printf("Present in-stock amount of iPhone 4 is: %d.",
+					ioPak.printf(CS.LEVEL4,
+							"Present in-stock amount of iPhone 4 is: %d.",
 							Data.getStorageAmount(Money.IPHONE4));
-					ioPak.printf(false, false, 0,
+					ioPak.printf(false, false, 0,CS.LEVEL4,
 							"Please type the amount added to stock");
-					int temp = ioPak.getInt("Amount:", 0);
+					int temp = ioPak.getInt(CS.LEVEL4,"Amount:", 0);
 					Data.changeStorageAmount(Money.IPHONE4, temp);
-					ioPak.printf("Successfully changed!");
-					Data.printInventory();
+					ioPak.printf(CS.LEVEL4,"Successfully changed!");
+					Data.printInventory(CS.LEVEL4);
+					ioPak.enterATC(CS.LEVEL4);
 					break;
 				}
 				case 4:
 				{
-					ioPak.printf("Present in-stock amount of iPhone 4S is: %d.",
+					ioPak.printf(CS.LEVEL4,
+							"Present in-stock amount of iPhone 4S is: %d.",
 							Data.getStorageAmount(Money.IPHONE4S));
-					ioPak.printf(false, false, 0,
+					ioPak.printf(false, false, 0,CS.LEVEL4,
 							"Please type the amount added to stock");
 					int temp = ioPak.getInt("Amount:", 0);
 					Data.changeStorageAmount(Money.IPHONE4S, temp);
-					ioPak.printf("Successfully changed!");
-					Data.printInventory();
+					ioPak.printf(CS.LEVEL4,"Successfully changed!");
+					Data.printInventory(CS.LEVEL4);
+					ioPak.enterATC(CS.LEVEL4);
 					break;
 				}
 				case 5:
 				{
-					ioPak.printf("Present in-stock amount of iPhone 5S is: %d.",
+					ioPak.printf(CS.LEVEL4,
+							"Present in-stock amount of iPhone 5S is: %d.",
 							Data.getStorageAmount(Money.IPHONE5));
-					ioPak.printf(false, false, 0,
+					ioPak.printf(false, false, 0,CS.LEVEL4,
 							"Please type the amount added to stock");
-					int temp = ioPak.getInt("Amount:", 0);
+					int temp = ioPak.getInt(CS.LEVEL4,"Amount:", 0);
 					Data.changeStorageAmount(Money.IPHONE5, temp);
-					ioPak.printf("Successfully changed!");
-					Data.printInventory();
+					ioPak.printf(CS.LEVEL4,"Successfully changed!");
+					Data.printInventory(CS.LEVEL4);
+					ioPak.enterATC(CS.LEVEL4);
 					break;
 				}
 				case 6:
 				{
-					ioPak.printf("Present in-stock amount of iPhone 5S is: %d.",
+					ioPak.printf(CS.LEVEL4,
+							"Present in-stock amount of iPhone 5S is: %d.",
 							Data.getStorageAmount(Money.IPHONE5S));
-					ioPak.printf(false, false, 0,
+					ioPak.printf(false, false, 0,CS.LEVEL4,
 							"Please type the amount added to stock");
-					int temp = ioPak.getInt("Amount:", 0);
+					int temp = ioPak.getInt(CS.LEVEL4,"Amount:", 0);
 					Data.changeStorageAmount(Money.IPHONE5S, temp);
-					ioPak.printf("Successfully changed!");
-					Data.printInventory();
+					ioPak.printf(CS.LEVEL4,"Successfully changed!");
+					Data.printInventory(CS.LEVEL4);
+					ioPak.enterATC(CS.LEVEL4);
 					break;
 				}
 				case 7:// Exit Stockpiling.(GET)
@@ -296,10 +343,12 @@ public class Admin_op
 					;
 				}
 				}// end inner switch
+				ioPak.printBackLevel(CS.LEVEL3, CS.LEVEL4, CS.LEVEL_G);
 				break;
 			}// end 2
 			case 3:// Exit My Products.(GET)
 			{
+				ioPak.printBackLevel(CS.LEVEL2, CS.LEVEL3, CS.LEVEL_G);
 				break theWhile;
 			}// end 3
 			}// switch
@@ -309,6 +358,7 @@ public class Admin_op
 
 	private static Administrator myMoney(Administrator admin)
 	{
+		ioPak.printNextLevel(CS.LEVEL2, CS.LEVEL3, CS.LEVEL_G);
 		theWhile: while (true)
 		{
 			ioPak.printf(CS.LEVEL3,"My Money MENU\n"
@@ -318,37 +368,50 @@ public class Admin_op
 					+ "Press 4 to Set the Warning Percentage.\n"
 					+ "Press 5 for The Current Funds Query.\n"
 					+ "Press 6 for Exit My Money.");
-			int choice = ioPak.getInt("Your Choice:", 1, 6);
+			int choice = ioPak.getInt(CS.LEVEL3,"Your Choice:", 1, 6);
 			switch (choice)
 			{
 			case 1://Suggesting Price Query
 			{
+				ioPak.printNextLevel(CS.LEVEL3, CS.LEVEL4, CS.LEVEL_G);
 				Data.printSugPrice(CS.LEVEL4);
+				ioPak.enterATC(CS.LEVEL4);
+				ioPak.printBackLevel(CS.LEVEL3, CS.LEVEL4, CS.LEVEL_G);
 				break;
 			}
 			case 2://Purchase Price Query
 			{
+				ioPak.printNextLevel(CS.LEVEL3, CS.LEVEL4, CS.LEVEL_G);
 				Data.printPurchasePrice(CS.LEVEL4);
+				ioPak.enterATC(CS.LEVEL4);
+				ioPak.printBackLevel(CS.LEVEL3, CS.LEVEL4, CS.LEVEL_G);
 				break;
 			}
 			case 3://Warning Percentage Query
 			{
+				ioPak.printNextLevel(CS.LEVEL3, CS.LEVEL4, CS.LEVEL_G);
 				ioPak.printf(CS.LEVEL4,"Let's see all the alarm price for all products");
 				Data.printAlarmPrice(CS.LEVEL4);
+				ioPak.enterATC(CS.LEVEL4);
+				ioPak.printBackLevel(CS.LEVEL3, CS.LEVEL4, CS.LEVEL_G);
 				break;
 			}// end 3
 			case 4://Set the Warning Percentage
 			{
+				ioPak.printNextLevel(CS.LEVEL3, CS.LEVEL4, CS.LEVEL_G);
 				BigDecimal price = ioPak.getBD(CS.LEVEL4,
-						"Please set the Warning Price Percentage(%):", 0);
+						"Please set the Warning Price Percentage(%%):", 0);
 				price = price.divide(new BigDecimal("100"));// convert a percentage into double
 				Data.setAlarmPrice(price);
 				ioPak.printf(CS.LEVEL4,"Let's see all the alarm price for all products");
 				Data.printAlarmPrice(CS.LEVEL4);
+				ioPak.enterATC(CS.LEVEL4);
+				ioPak.printBackLevel(CS.LEVEL3, CS.LEVEL4, CS.LEVEL_G);
 				break;
 			}// end 4
 			case 5://The Current Funds Query
 			{
+				ioPak.printNextLevel(CS.LEVEL3, CS.LEVEL4, CS.LEVEL_G);
 				Data.printCurFunds(CS.LEVEL4);
 				ioPak.printf(CS.LEVEL4,"Do you want to change out Current Funds(Yes or No)?");
 				String s;
@@ -374,16 +437,31 @@ public class Admin_op
 					Data.changeCurrentFunds(bd);
 					ioPak.printf(CS.LEVEL4,"Changed successfully.");
 				}
+				ioPak.enterATC(CS.LEVEL4);
+				ioPak.printBackLevel(CS.LEVEL3, CS.LEVEL4, CS.LEVEL_G);
 				break;
-
 			}
 			case 6://Exit My Money
 			{
+				ioPak.printBackLevel(CS.LEVEL2, CS.LEVEL3, CS.LEVEL_G);
 				break theWhile;
 			}
 			}// end switch
 		}// end while
 		return admin;
 	}// end myMoney
-
+	private static void ChangeAC()
+	{
+		ioPak.printNextLevel(CS.LEVEL2, CS.LEVEL3, CS.LEVEL_G);
+		System.out.printf(CS.level3()+"Please input your orginal Access Code:");
+		String acode = ioPak.nextLine(CS.LEVEL3);
+		if( acode.equals(Main_Interface.getAccessCode()) )
+		{
+			acode = ioPak.setConPD(CS.LEVEL3, "Access Code");
+			Main_Interface.setAccessCode(acode);
+		}else{
+			ioPak.printf(CS.LEVEL3,"Mismatched AccessCode. "
+					+ "Sorry, you cannot set the access code");
+		}
+	}
 }

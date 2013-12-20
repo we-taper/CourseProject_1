@@ -66,7 +66,9 @@ public class encryption {
 	public static String fromByte2Str( byte[] data){
 		return (new String(data));
 	}
-	public static void DecryptFile(String infile, String outfile, String password) {
+	public static void DecryptFile(String infile, String outfile, String password) 
+	throws GeneralSecurityException
+	{
 		try {
 			FileInputStream fin = new FileInputStream(infile);
 			FileOutputStream fout = new FileOutputStream(outfile);
@@ -104,8 +106,6 @@ public class encryption {
 			fin.close();
 			fout.flush();
 			fout.close();
-		} catch (GeneralSecurityException e) {
-			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

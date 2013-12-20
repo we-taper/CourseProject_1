@@ -1,6 +1,11 @@
 
 public class testByte {
 	public static void main(String[] args) {
-		ioPak.printf(CS.All_LENGTH,20,20,CS.LEVEL1,"Welcome to Storage Management system.");
+		ioPak.printTable(25,
+				"!!", "Welcome s!\n" + "NOTICE:\n"// TODO ask world of "!!"
+				+ "Star Salesman For Sales:!!Mr./Ms. s\n"
+				+ "Star Salesman For Profit:!!Mr./Ms. s\n"
+				);
+		ioPak.getBD(10, "how:", 1);
 	}
 }

@@ -2,12 +2,18 @@
 public class CS
 {
 	// For storing all the constants in system.
-	public static final int AR_G = 100; // ArrowGap, for whole system.
+	public static final int LEVEL_G = 50;
+	// Level time Gap, for whole system when printing arrow
 	public static final int LEVEL1 = 1;
 	public static final int LEVEL2 = LEVEL1 + 10; // Shift right, for level one
 	public static final int LEVEL3 = LEVEL2 +10;// Shift right, for level two
 	public static final int LEVEL4 = LEVEL3 + 10;// Shift right, for level three
-	public static final int WAIT_G = 100;// WatiGap, for whole system.
+	public static final int WAIT_FOR_BAR = 30;
+	// Wait gap, for progress bar.
+	public static final int WAIT_G_FOR_SEE = 500;
+	// Wait gap, for customer to see the message, for whole system.
+	public static final int WAIT_G_FOR_MENU = 300;
+	// Wait gap, for customer to see the Menu, for whole system.
 	public static final int All_LENGTH = 80;// The length of the cmd windows
 	public static final int NO_SHIFT = 0;  // Do not shift the output right
 	

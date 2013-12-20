@@ -1,4 +1,5 @@
 import java.math.BigDecimal;
+import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.Formatter;
 import java.io.EOFException;
@@ -114,7 +115,8 @@ public class Data
 		}
 	}
 
-	public static void initiateData(String accessCode)
+	public static void initiateData (String accessCode) 
+			throws GeneralSecurityException
 	{
 		// Initiate and prepare data for reading.
 		// 1. Initiate the files.
@@ -510,16 +512,17 @@ public class Data
 		// Add or subtract money to current funds.
 		money.changeCurrentFunds(m);
 	}
-	public static void printInventory()
+	public static void printInventory(int SHIFT_BEFORE)
 	{
-		ioPak.printTable(20, "Inventory List:\n"
+		ioPak.printTable(20,SHIFT_BEFORE,
+				"Inventory List:\n"
 				+ "Name!!Amounts\n"
 				+ "iPad2!!%d\n"
 				+ "iPad3!!%d\n"
 				+ "iPhone 4!!%d\n"
 				+ "iPhone 4S!!%d\n"
 				+ "iPhone 5!!%d\n"
-				+ "iPhone 5S!!%d\n"
+				+ "iPhone 5S!!%d"
 				, Data.getStorageAmount(Money.IPAD2)
 				, Data.getStorageAmount(Money.IPAD3)
 				, Data.getStorageAmount(Money.IPHONE4)
@@ -530,8 +533,9 @@ public class Data
 	public static void printSugPrice(int SHIFT_BEFORE)
 	{
 		ioPak.printf(SHIFT_BEFORE,
-				"The current Suggesting Prices of Priducts are as follow:\n");
-		ioPak.printTable(15,"Name!!Price\n"
+				"The current Suggesting Prices of Priducts are as follow:");
+		ioPak.printTable(15,SHIFT_BEFORE,
+				"Name!!Price\n"
 				+"iPad 2!!%s CNY.\n"
 				+"iPad 3!!%s CNY.\n"
 				+"iPhone 4!!%s CNY.\n"
@@ -548,8 +552,9 @@ public class Data
 	public static void printPurchasePrice(int SHIFT_BEFORE)
 	{
 		ioPak.printf(SHIFT_BEFORE,
-				"The current Purchase Prices of Priducts are as follow:\n");
-		ioPak.printTable(15,"Name!!Price\n"
+				"The current Purchase Prices of Priducts are as follow:");
+		ioPak.printTable(15,SHIFT_BEFORE,
+				"Name!!Price\n"
 				+"iPad 2!!%s CNY.\n"
 				+"iPad 3!!%s CNY.\n"
 				+"iPhone 4!!%s CNY.\n"
@@ -566,7 +571,7 @@ public class Data
 	public static void printMinPrice(int SHIFT_BEFORE)
 	{
 		ioPak.printf(SHIFT_BEFORE,
-				"The current Minimum Prices of Priducts are as follow:\n");
+				"The current Minimum Prices of Priducts are as follow:");
 		ioPak.printTable(20,SHIFT_BEFORE,
 				"Name!!Price\n"
 				+"iPad 2!!%s CNY.\n"
@@ -586,8 +591,9 @@ public class Data
 	public static void printAlarmPrice(int SHIFT_BEFORE)
 	{
 		// AlarmPrice == MinPrice
-		ioPak.printf(SHIFT_BEFORE,"The current Alarm Prices of Priducts are as follow:\n");
-		ioPak.printf(false, false, 0, SHIFT_BEFORE, "Warning Percent: %s.", money.getAlarmPercent());
+		ioPak.printf(SHIFT_BEFORE,"The current Alarm Prices of Priducts are as follow:");
+		ioPak.printf(false, false, 0, SHIFT_BEFORE, 
+				"Warning Percent: %s.", money.getAlarmPercent());
 		ioPak.printTable(20,SHIFT_BEFORE,
 				"Name!!Price\n"
 				+"iPad 2!!%s CNY.\n"
@@ -668,7 +674,7 @@ public class Data
 	public static String getStarNameForSales()
 	{
 		BigDecimal maxSale=new BigDecimal("0");
-		int maxSaleID=0;
+		int maxSaleID=1;
 		for(Salesman s:salesman)
 		{
 			if(s.getSale().compareTo(maxSale)==1)
@@ -677,12 +683,14 @@ public class Data
 				maxSaleID=s.getAccountID();
 			}
 		}
-		return salesman.get(maxSaleID).getName();
+		// TODO tell world about this error
+		// return salesman.get(maxSaleID).getName();
+		return getSalesman(maxSaleID).getName();
 	}
 	public static String getStarNameForProfit()
 	{
 		BigDecimal maxProfit=new BigDecimal("0");
-		int maxProfitID=0;
+		int maxProfitID=1;
 		for(Salesman s:salesman)
 		{
 			if(s.getSale().compareTo(maxProfit)==1)
@@ -691,7 +699,7 @@ public class Data
 				maxProfitID=s.getAccountID();
 			}
 		}
-		return salesman.get(maxProfitID).getName();
+		return getSalesman(maxProfitID).getName();
 	}
 	
 }

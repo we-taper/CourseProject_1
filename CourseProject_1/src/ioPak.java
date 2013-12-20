@@ -40,9 +40,9 @@ public class ioPak
 		String s1 = "", s2 = "";
 		while (true)
 		{
-			System.out.printf(shift(SHIFT_BEFORE, "Please set your password: "));
+			System.out.printf(shift(SHIFT_BEFORE, "Please set the password: "));
 			s1 = getConPD();
-			System.out.printf(shift(SHIFT_BEFORE,"Please type your password again:"));
+			System.out.printf(shift(SHIFT_BEFORE,"Please type the password again:"));
 			s2 = getConPD();
 			if (s1.equals(s2))
 			{
@@ -116,7 +116,42 @@ public class ioPak
 	{
 		return getConPD(0);
 	}
-
+	public static String getStr(int SHIFT_BEFORE)
+	{
+		String pd = "";
+		while (true)
+		{
+			try{
+				// First, read password
+				if (System.console() != null)
+				{
+					pd = new String(System.console().readPassword());
+					/*
+					 *  Here throw NullPointerException, which will be caught later
+					 *  Throw NullPointerException if user press Ctrl-Z or else like.
+					 */
+					break;
+				}
+				else
+				{
+					pd = nextLine(SHIFT_BEFORE);
+					break;
+				}
+			} catch (NullPointerException e)
+			{
+				cls(1);
+				ioPak.printWarn(SHIFT_BEFORE,
+						"Come on, don't be naughty, never try to \n"
+						+ "press Ctrl-Z or whatever else.");
+				/*
+				 * If program reaches here, it must be inside a ioPak Console, then
+				 * System could automatically clear the Ctrl-Z character.
+				 */
+				System.out.printf(shift(SHIFT_BEFORE,"Please try again:"));
+			}
+		}// end while
+		return pd;
+	}
 	public static void cls()
 	{
 		try
@@ -329,7 +364,7 @@ public class ioPak
 			return false;
 		}
 	}
-	public static void printBlock(int x, int y, int horizon, int vertical,
+	public static void printBlock(int SHIFT_BEFORE, int x, int y, int horizon, int vertical,
 			String star, String space_l, String space_r)
 	{
 		// x,y position of star
@@ -340,8 +375,14 @@ public class ioPak
 		}
 		for (int i = 1; i <= vertical; i++)
 		{
+			// Scan every line
+			for(int k=0; k<SHIFT_BEFORE; k++)
+			{
+				System.out.print(" ");
+			}// Shift right.
 			for (int j = 1; j <= horizon; j++)
 			{
+				// Move right
 				if (j == x && i == y)
 				{
 					System.out.print(star);
@@ -359,81 +400,70 @@ public class ioPak
 		}
 	}
 	
-	public static void printArrow(int length, int timeGap, int direction){
+	public static void printArrow(int SHIFT_BEFORE,int length, long timeGap, int direction){
 		// print ******>
 		if( direction == RIGHT_ARROW)
 		{
 			// print the *******
 			for (int i = 1; i < length; i++)
 			{
-				printBlock(i, 1, length, 1, ".", " ", " ");
-				try
-				{
-					Thread.sleep(timeGap);
-				} catch (InterruptedException e)
-				{
-					e.printStackTrace();
-				}
+				printBlock(SHIFT_BEFORE, i, 1, length, 1, ".", " ", " ");
+				pause(timeGap);
+
 			}
 			// print the >
-			printBlock(length, 1, length, 1, "+", " ", " ");
-			try
-			{
-				Thread.sleep(timeGap);
-			} catch (InterruptedException e)
-			{
-				e.printStackTrace();
-			}
+			printBlock(SHIFT_BEFORE, length, 1, length, 1, "+", " ", " ");
+			pause(timeGap);
 		}
 		else if(direction == LEFT_ARROW)
 		{
 			// print the *******
 			for (int i = length; i > 1; i--)
 			{
-				printBlock(i, 1, length, 1, ".", " ", " ");
-				try
-				{
-					Thread.sleep(timeGap);
-				} catch (InterruptedException e)
-				{
-					e.printStackTrace();
-				}
+				printBlock(SHIFT_BEFORE, i, 1, length, 1, ".", " ", " ");
+				pause(timeGap);
 			}
 			// print the >
-			printBlock(length, 1, 1, 1, "+", " ", " ");
-			try
-			{
-				Thread.sleep(timeGap);
-			} catch (InterruptedException e)
-			{
-				e.printStackTrace();
-			}
+			printBlock(SHIFT_BEFORE, 1, 1, length, 1, "+", " ", " ");
+			pause(timeGap);
 		}
 	}
-	public static void printWait(int SHIFT_BEFORE, int length, long timeGap)
+	public static void printNextLevel(int level_depth, int next_level_length, long timeGap)
+	{
+		int next_level_gap_length = next_level_length - level_depth;
+		printArrow(level_depth, next_level_gap_length, timeGap, ioPak.RIGHT_ARROW);
+	}
+	public static void printBackLevel(int level_depth, int next_level_length, long timeGap)
+	{
+		int next_level_gap_length = next_level_length - level_depth;
+		printArrow(level_depth, next_level_gap_length, timeGap, ioPak.LEFT_ARROW);
+	}
+	public static void printWait(int SHIFT_BEFORE, int length, long timeGap, 
+			String start, String end)
 	{
 		for(int i=0; i<SHIFT_BEFORE; i++)
 		{
 			System.out.printf(" ");
 		}
-		System.out.printf("Please Wait...: ");
+		System.out.printf(start);
 		for(int i=0; i<length-1; i++ )
 		{
 			pause(timeGap);
 			System.out.printf(">");
 		}
 		pause(timeGap+500);
-		System.out.printf(" Complete.\n");
+		System.out.printf(end);
 		pause(timeGap+500);
 	}
-	public static void printWait(int SHIFT_BEFORE, int timeGap)
+	public static void printWait(int SHIFT_BEFORE, long timeGap)
 	{
-		printWait(SHIFT_BEFORE, 20, timeGap);
+		printWait(SHIFT_BEFORE, 20, timeGap, "Please Wait...: ", "  Complete.\n");
 	}
-	public static void printWait()
+	public static void printWait(int SHIFT_BEFORE, int timeGap, String start, String end)
 	{
-		printWait(CS.NO_SHIFT, 20, 150);
+		printWait(SHIFT_BEFORE, 20, timeGap, start, end);
 	}
+
 	public static void printZ(int size, long timeGap)
 	{
 		pause(timeGap);
@@ -472,6 +502,11 @@ public class ioPak
 		{
 			e.printStackTrace();
 		}
+	}
+	public static void enterATC(int SHIFT_BEFORE)
+	{
+		System.out.printf(shift(SHIFT_BEFORE, "Enter anything to continue...:"));
+		getStr(SHIFT_BEFORE);
 	}
 	public static void printWarn(int SHIFT_BEFORE, String content, Object...args )
 	{
