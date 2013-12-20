@@ -527,9 +527,10 @@ public class Data
 				, Data.getStorageAmount(Money.IPHONE5)
 				, Data.getStorageAmount(Money.IPHONE5S));
 	}
-	public static void printSugPrice()
+	public static void printSugPrice(int SHIFT_BEFORE)
 	{
-		ioPak.printf("The current Suggesting Prices of Priducts are as follow:\n");
+		ioPak.printf(SHIFT_BEFORE,
+				"The current Suggesting Prices of Priducts are as follow:\n");
 		ioPak.printTable(15,"Name!!Price\n"
 				+"iPad 2!!%s CNY.\n"
 				+"iPad 3!!%s CNY.\n"
@@ -544,9 +545,10 @@ public class Data
 				, getSugPrice(Money.IPHONE5)
 				, getSugPrice(Money.IPHONE5S));
 	}
-	public static void printPurchasePrice()
+	public static void printPurchasePrice(int SHIFT_BEFORE)
 	{
-		ioPak.printf("The current Purchase Prices of Priducts are as follow:\n");
+		ioPak.printf(SHIFT_BEFORE,
+				"The current Purchase Prices of Priducts are as follow:\n");
 		ioPak.printTable(15,"Name!!Price\n"
 				+"iPad 2!!%s CNY.\n"
 				+"iPad 3!!%s CNY.\n"
@@ -561,10 +563,12 @@ public class Data
 				, getBasePrice(Money.IPHONE5)
 				, getBasePrice(Money.IPHONE5S));
 	}
-	public static void printMinPrice()
+	public static void printMinPrice(int SHIFT_BEFORE)
 	{
-		ioPak.printf("The current Minimum Prices of Priducts are as follow:\n");
-		ioPak.printTable(20,"Name!!Price\n"
+		ioPak.printf(SHIFT_BEFORE,
+				"The current Minimum Prices of Priducts are as follow:\n");
+		ioPak.printTable(20,SHIFT_BEFORE,
+				"Name!!Price\n"
 				+"iPad 2!!%s CNY.\n"
 				+"iPad 3!!%s CNY.\n"
 				+"iPhone 4!!%s CNY.\n"
@@ -579,12 +583,13 @@ public class Data
 				, getMinPrice(Money.IPHONE5S));
 	}
 	
-	public static void printAlarmPrice()
+	public static void printAlarmPrice(int SHIFT_BEFORE)
 	{
 		// AlarmPrice == MinPrice
-		ioPak.printf("The current Alarm Prices of Priducts are as follow:\n");
-		ioPak.printf(false, false, 0, "Warning Percent: %s.", money.getAlarmPercent());
-		ioPak.printTable(20,"Name!!Price\n"
+		ioPak.printf(SHIFT_BEFORE,"The current Alarm Prices of Priducts are as follow:\n");
+		ioPak.printf(false, false, 0, SHIFT_BEFORE, "Warning Percent: %s.", money.getAlarmPercent());
+		ioPak.printTable(20,SHIFT_BEFORE,
+				"Name!!Price\n"
 				+"iPad 2!!%s CNY.\n"
 				+"iPad 3!!%s CNY.\n"
 				+"iPhone 4!!%s CNY.\n"
@@ -599,9 +604,9 @@ public class Data
 				, getMinPrice(Money.IPHONE5S));
 	}
 
-	public static void printCurFunds(){
-		ioPak.printf("The current funds is %s Yuan.",
-				getCurrentFunds());
+	public static void printCurFunds(int SHIFT_BEFORE){
+		ioPak.printf(SHIFT_BEFORE,
+				"The current funds is %s Yuan.",getCurrentFunds());
 	}
 	public static byte[] getHashAccessCode()
 	{
@@ -645,17 +650,17 @@ public class Data
 		}
 	}
 
-	public static void displayAccount()
+	public static void displayAccount(int SHIFT_BEFORE )
 	{
 		if (Data.getSalesmanCount() == 0)
 		{
-			ioPak.printf("Sorry, no account exits!");
+			ioPak.printf(SHIFT_BEFORE,"Sorry, no account exits!");
 		}
 		else
 		{
 			for (Salesman sla : salesman)
 			{
-				ioPak.printf("%s", sla);
+				ioPak.printf(SHIFT_BEFORE,"%s", sla);
 			}
 		}
 	}

@@ -9,20 +9,18 @@ public class ioPak
 	private static Scanner input = new Scanner(System.in);
 	public static int LEFT_ARROW = 0;
 	public static int RIGHT_ARROW = 1;
-	public static int NO_SHIFT = 0;
-
-	public static String setUserName(int SPACE_BEFORE)
+	public static String setUserName(int SHIFT_BEFORE)
 	{
 		String name;
-		ioPak.printf(shift(SPACE_BEFORE, "Please set your name(only English characters, numbers, hyphens "
+		ioPak.printf(shift(SHIFT_BEFORE, "Please set your name(only English characters, numbers, hyphens "
 						+ "\nunderlines or spaces are allowed)."));
 		while (true)
 		{
-			System.out.printf(shift(SPACE_BEFORE, "Your username:"));
-			name = nextLine();
+			System.out.printf(shift(SHIFT_BEFORE, "Your username:"));
+			name = nextLine(SHIFT_BEFORE);
 			if (!name.matches("[a-zA-Z0-9-_ ]*"))
 			{
-				printf(SPACE_BEFORE, '-', '!',
+				printf(SHIFT_BEFORE, '-', '!',
 						"Your name shoule only contains English characters,\n"
 								+ "numbers, hyphens or underlines.");
 			}
@@ -37,24 +35,23 @@ public class ioPak
 		return setUserName(0);
 	}
 
-	public static String setConPD(int SPACE_BEFORE, String name_of_account)
+	public static String setConPD(int SHIFT_BEFORE, String name_of_account)
 	{
 		String s1 = "", s2 = "";
 		while (true)
 		{
-			System.out.printf(shift(SPACE_BEFORE, " Please set your password: "));
+			System.out.printf(shift(SHIFT_BEFORE, "Please set your password: "));
 			s1 = getConPD();
-			System.out.printf(shift(SPACE_BEFORE," Please type your password again:"));
+			System.out.printf(shift(SHIFT_BEFORE,"Please type your password again:"));
 			s2 = getConPD();
 			if (s1.equals(s2))
 			{
-				ioPak.printf(SPACE_BEFORE, "Successfully set the password for %s!", name_of_account);
+				ioPak.printf(SHIFT_BEFORE, "Successfully set the password for %s!", name_of_account);
 				break;
 			}
 			else
 			{
-				ioPak.printf(false, false, 0,
-						SPACE_BEFORE, " Mismatch input, please try again.\n");
+				ioPak.printWarn(SHIFT_BEFORE, "Mismatch input, please try again.");
 			}
 		}
 		return s1;
@@ -64,7 +61,7 @@ public class ioPak
 		return setConPD(0,name_of_account);
 	}
 
-	public static String getConPD(int SPACE_BEFORE)
+	public static String getConPD(int SHIFT_BEFORE)
 	{
 		String pd = "";
 		while (true)
@@ -81,20 +78,20 @@ public class ioPak
 				}
 				else
 				{
-					pd = nextLine();
+					pd = nextLine(SHIFT_BEFORE);
 				}
 				// Then judge password
 				if (pd.length() > 16)
 				{
-					ioPak.printf(false, false, 0, SPACE_BEFORE,
-							"Sorry, password should be no more than 16 letters.\n");
-					System.out.printf(shift(SPACE_BEFORE,"Please try again:"));
+					ioPak.printWarn(SHIFT_BEFORE,
+							"Sorry, password should be no more than 16 letters.");
+					System.out.printf(shift(SHIFT_BEFORE,"Please try again:"));
 				}
 				else if (pd.length() < 8)
 				{
-					ioPak.printf(false, false, 0, SPACE_BEFORE,
-							"Sorry, password should be no less than 8 letters.\n");
-					System.out.printf(shift(SPACE_BEFORE,"Please try again:"));
+					ioPak.printWarn(SHIFT_BEFORE,
+							"Sorry, password should be no less than 8 letters.");
+					System.out.printf(shift(SHIFT_BEFORE,"Please try again:"));
 				}
 				else
 				{
@@ -103,13 +100,14 @@ public class ioPak
 			} catch (NullPointerException e)
 			{
 				cls(1);
-				ioPak.printf(false, false, 0, SPACE_BEFORE,
-						"Come on, don't be naughty, never try to press Ctrl-Z or whatever else.\n");
+				ioPak.printWarn(SHIFT_BEFORE,
+						"Come on, don't be naughty, never try to \n"
+						+ "press Ctrl-Z or whatever else.");
 				/*
 				 * If program reaches here, it must be inside a ioPak Console, then
 				 * System could automatically clear the Ctrl-Z character.
 				 */
-				System.out.printf(shift(SPACE_BEFORE,"Please try again:"));
+				System.out.printf(shift(SHIFT_BEFORE,"Please try again:"));
 			}
 		}// end while
 		return pd;
@@ -147,7 +145,7 @@ public class ioPak
 		}
 	}
 
-	public static int getInt(int SPACE_BEFORE, String ask_phrase, int min, String min_tip,
+	public static int getInt(int SHIFT_BEFORE, String ask_phrase, int min, String min_tip,
 			int max, String max_tip)
 	{
 		String a;
@@ -156,8 +154,8 @@ public class ioPak
 		do
 		{
 			flag = true;
-			System.out.printf(shift(SPACE_BEFORE,""+ ask_phrase));
-			a = nextLine();
+			System.out.printf(shift(SHIFT_BEFORE,""+ ask_phrase));
+			a = nextLine(SHIFT_BEFORE);
 			if(a.length() == 0)
 			{
 				flag = false;
@@ -171,8 +169,8 @@ public class ioPak
 			}
 			if (!flag)
 			{
-				ioPak.printf(false, false, 0, SPACE_BEFORE,
-						"Error input, please type an integer.\n");
+				ioPak.printWarn(SHIFT_BEFORE,
+						"Error input, please type an integer.");
 			}
 			else
 			{
@@ -182,21 +180,21 @@ public class ioPak
 					{
 						flag = false;
 						System.out.println(max_tip);
-						ioPak.printf(false, false, 0, SPACE_BEFORE,
-								"The number should be within %d and %d.\n", min,
+						ioPak.printWarn(SHIFT_BEFORE,
+								"The number should be within %d and %d.", min,
 								max);
 					}
 					else if (b < min)
 					{
 						flag = false;
-						ioPak.printf(SPACE_BEFORE, min_tip + "\n"
+						ioPak.printf(SHIFT_BEFORE, min_tip + "\n"
 								+ "The number should be within %d to %d\n", min,
 								max);
 					}
 				}catch (NumberFormatException e){
 					// catch the too long number
-					ioPak.printf(false, false, 0, SPACE_BEFORE,
-							"The number should be within %d and %d.\n", min,
+					ioPak.printWarn(SHIFT_BEFORE,
+							"The number should be within %d and %d.", min,
 							max);
 					flag =false;
 				}
@@ -211,9 +209,9 @@ public class ioPak
 		return getInt(0, ask_phrase, min, min_tip,max, max_tip);
 	}
 
-	public static int getInt(int SPACE_BEFORE,String ask_phrase, int min, int max)
+	public static int getInt(int SHIFT_BEFORE,String ask_phrase, int min, int max)
 	{
-		return getInt(SPACE_BEFORE, ask_phrase, min, "Sorry, the number is too small.", max,
+		return getInt(SHIFT_BEFORE, ask_phrase, min, "Sorry, the number is too small.", max,
 				"Oh! The number is too big.");
 	}
 	public static int getInt(String ask_phrase, int min, int max)
@@ -221,9 +219,9 @@ public class ioPak
 		return getInt(0, ask_phrase, min, "Sorry, the number is too small.", max,
 				"Oh! The number is too big.");
 	}
-	public static int getInt(int SPACE_BEFORE, String ask_phrase, int min)
+	public static int getInt(int SHIFT_BEFORE, String ask_phrase, int min)
 	{
-		return getInt(SPACE_BEFORE, ask_phrase, min, "Sorry, the number is too small.", Integer.MAX_VALUE,
+		return getInt(SHIFT_BEFORE, ask_phrase, min, "Sorry, the number is too small.", Integer.MAX_VALUE,
 				"Oh! The number is too big.");
 	}
 	public static int getInt( String ask_phrase, int min)
@@ -231,28 +229,28 @@ public class ioPak
 		return getInt(0, ask_phrase, min, "Sorry, the number is too small.", Integer.MAX_VALUE,
 				"Oh! The number is too big.");
 	}
-	public static BigDecimal getBD(int SPACE_BEFORE,String ask_phrase, double min)
+	public static BigDecimal getBD(int SHIFT_BEFORE,String ask_phrase, double min)
 	{
 		double num;
 		String s;
 		BigDecimal b;
 		do
 		{
-			System.out.printf(shift(SPACE_BEFORE,""+ ask_phrase));
+			System.out.printf(shift(SHIFT_BEFORE,""+ ask_phrase));
 			try
 			{
-				s = nextLine();
+				s = nextLine(SHIFT_BEFORE);
 				if (s.contains("e") || s.contains("d"))
 				{
-					ioPak.printf(false, false, 0,SPACE_BEFORE,
-							"Error input, please type an double.\n");
+					ioPak.printWarn(SHIFT_BEFORE,
+							"Error input, please type an double.");
 				}
 				else
 				{
 					num = Double.parseDouble(s);
 					if (num < min)
 					{
-						ioPak.printf(SPACE_BEFORE,"Sorry, The number is too small."
+						ioPak.printf(SHIFT_BEFORE,"Sorry, The number is too small."
 								+ "The number should be higher than %.2f.\n",
 								min);
 					}
@@ -263,7 +261,7 @@ public class ioPak
 				}
 			} catch (NumberFormatException e)
 			{
-				ioPak.printf(false, false, 0,SPACE_BEFORE,
+				ioPak.printWarn(SHIFT_BEFORE,
 						"Error input, please type an double.\n");
 			}
 		} while (true);
@@ -275,7 +273,7 @@ public class ioPak
 	{
 		return getBD(0, ask_phrase, min);
 	}
-	public static String nextLine(){
+	public static String nextLine(int SHIFT_BEFORE){
 		String str = "";
 		while(true){
 			try
@@ -292,7 +290,7 @@ public class ioPak
 						 * System could automatically clear the Ctrl-Z character.
 						 */
 						cls(1);
-						ioPak.printf(false, false, 0,
+						ioPak.printWarn(SHIFT_BEFORE,
 								"Come on, don't be naughty, never try to press Ctrl-Z or whatever else\n"
 								+ "again.\n");
 						System.out.printf("Try again:");
@@ -303,7 +301,7 @@ public class ioPak
 			} catch (NoSuchElementException e)
 			{
 				cls(1);
-				ioPak.printf(false, false, 0,
+				ioPak.printWarn(SHIFT_BEFORE,
 						"Come on, don't be naughty, never try to press Ctrl-Z or whatever else\n"
 						+ "again.This forces System to quit.\n");
 				if (System.console() != null)
@@ -412,9 +410,9 @@ public class ioPak
 			}
 		}
 	}
-	public static void printWait(int shift, int length, long timeGap)
+	public static void printWait(int SHIFT_BEFORE, int length, long timeGap)
 	{
-		for(int i=0; i<shift; i++)
+		for(int i=0; i<SHIFT_BEFORE; i++)
 		{
 			System.out.printf(" ");
 		}
@@ -428,13 +426,13 @@ public class ioPak
 		System.out.printf(" Complete.\n");
 		pause(timeGap+500);
 	}
-	public static void printWait(int shift)
+	public static void printWait(int SHIFT_BEFORE, int timeGap)
 	{
-		printWait(shift, 20, 150);
+		printWait(SHIFT_BEFORE, 20, timeGap);
 	}
 	public static void printWait()
 	{
-		printWait(NO_SHIFT, 20, 150);
+		printWait(CS.NO_SHIFT, 20, 150);
 	}
 	public static void printZ(int size, long timeGap)
 	{
@@ -475,13 +473,25 @@ public class ioPak
 			e.printStackTrace();
 		}
 	}
+	public static void printWarn(int SHIFT_BEFORE, String content, Object...args )
+	{
+		// Print warning message to the screen.
+		printf('-', '*', false, false, CS.All_LENGTH, 3, 3, 0, "", 0, content, args);
+	}
+	public static void printNextDo(int SHIFT_BEFORE, String content, Object...args )
+	{
+		/**
+		 * Print a message which tell people what to do next
+		 */
+		printf('-', ' ', true, false, 0, 3, 3, 0, "", SHIFT_BEFORE, content, args);
+	}
 	public static void printf(String content, Object... args)
 	{
 		printf('-', '*', true, true, 0, 3, 3, 0, "", 0, content, args);
 	}
-	public static void printf(int SPACE_BEFORE, String content, Object... args)
+	public static void printf(int SHIFT_BEFORE, String content, Object... args)
 	{
-		printf('-', '*', true, true, 0, 3, 3, 0, "", SPACE_BEFORE, content, args);
+		printf('-', '*', true, true, 0, 3, 3, 0, "", SHIFT_BEFORE, content, args);
 	}
 
 	public static void printf(boolean HEAD, boolean TAIL, int slash_m,
@@ -490,9 +500,9 @@ public class ioPak
 		printf('-', '*', HEAD, TAIL, slash_m, 3, 3, 0, "", 0, content, args);
 	}
 	public static void printf(boolean HEAD, boolean TAIL, int slash_m,
-			int SPACE_BEFORE, String content, Object... args)
+			int SHIFT_BEFORE, String content, Object... args)
 	{
-		printf('-', '*', HEAD, TAIL, slash_m, 3, 3, 0, "", SPACE_BEFORE, content, args);
+		printf('-', '*', HEAD, TAIL, slash_m, 3, 3, 0, "", SHIFT_BEFORE, content, args);
 	}
 
 	public static void printf(char h_LINE, char v_LINE, String content,
@@ -500,10 +510,10 @@ public class ioPak
 	{
 		ioPak.printf(h_LINE, v_LINE, true, true, 0, 3, 3, 0, "", 0, content, args);
 	}
-	public static void printf(char h_LINE, char v_LINE,int SPACE_BEFORE, String content,
+	public static void printf(char h_LINE, char v_LINE,int SHIFT_BEFORE, String content,
 			Object... args)
 	{
-		ioPak.printf(h_LINE, v_LINE, true, true, 0, 3, 3, 0, "", SPACE_BEFORE, content, args);
+		ioPak.printf(h_LINE, v_LINE, true, true, 0, 3, 3, 0, "", SHIFT_BEFORE, content, args);
 	}
 
 	public static void printf(int slash_m, int SPACE_AHEAD, int SPACE_LAST,
@@ -513,9 +523,9 @@ public class ioPak
 				content, args);
 	}
 	public static void printf(int slash_m, int SPACE_AHEAD, int SPACE_LAST,
-			int SPACE_BEFORE, String content, Object... args)
+			int SHIFT_BEFORE, String content, Object... args)
 	{
-		printf('-', '*', true, true, slash_m, SPACE_AHEAD, SPACE_LAST, 0, "", SPACE_BEFORE,
+		printf('-', '*', true, true, slash_m, SPACE_AHEAD, SPACE_LAST, 0, "", SHIFT_BEFORE,
 				content, args);
 	}
 
@@ -524,24 +534,24 @@ public class ioPak
 	{
 		printf('-', '*', true, true, 0, 3, 3, c_length, SPLIT, 0, content, args);
 	}
-	public static void printTable(int c_length, String SPLIT, int SPACE_BEFORE, String content,
+	public static void printTable(int c_length, String SPLIT, int SHIFT_BEFORE, String content,
 			Object... args)
 	{
-		printf('-', '*', true, true, 0, 3, 3, c_length, SPLIT, SPACE_BEFORE, content, args);
+		printf('-', '*', true, true, 0, 3, 3, c_length, SPLIT, SHIFT_BEFORE, content, args);
 	}
 
 	public static void printTable(int c_length, String content, Object... args)
 	{
 		printTable(c_length, "!!", content, args);
 	}
-	public static void printTable(int c_length, int SPACE_BEFORE, String content, Object... args)
+	public static void printTable(int c_length, int SHIFT_BEFORE, String content, Object... args)
 	{
-		printTable(c_length, "!!", SPACE_BEFORE, content, args);
+		printTable(c_length, "!!", SHIFT_BEFORE, content, args);
 	}
 
 	public static void printf(char h_LINE, char v_LINE, boolean HEAD,
 			boolean TAIL, int slash_m, int SPACE_AHEAD, int SPACE_LAST,
-			int c_length, String SPLIT, int SPACE_BEFORE, String content,
+			int c_length, String SPLIT, int SHIFT_BEFORE, String content,
 			Object... args)
 	{
 		/**
@@ -559,7 +569,7 @@ public class ioPak
 		 * 		with the troublesome \t. 
 		 * SPLIT: The character or string used to identity splitting strings. 
 		 * 		Be careful that SPLIT must not be a regular expression.
-		 * SPACE_BEFORE: The spaces before the whole block, used to shift the 
+		 * SHIFT_BEFORE: The spaces before the whole block, used to shift the 
 		 * 				block right.
 		 */
 		// Chech if there is a appending \n(the preceeding \n will not be check
@@ -696,13 +706,13 @@ public class ioPak
 			content = content + "*\n";
 		}
 		// Now shift output right with spaces
-		content = shift(SPACE_BEFORE, content );
+		content = shift(SHIFT_BEFORE, content );
 
 		// Now print
 		System.out.printf(content);
 	}// end print
 
-	public static String shift(int SPACE_BEFORE, String input)
+	public static String shift(int SHIFT_BEFORE, String input)
 	{
 		boolean preN = false,sufN = false;
 		// find out if input has a per-\n or suf-\n and record it
@@ -725,7 +735,7 @@ public class ioPak
 		// one by one shift right
 		for (int j=0; j<s.length; j++)
 		{
-			for (int i = 0; i < SPACE_BEFORE; i++)
+			for (int i = 0; i < SHIFT_BEFORE; i++)
 			{
 				s[j] = " " + s[j];
 			}
