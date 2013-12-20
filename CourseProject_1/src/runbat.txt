@@ -1,0 +1,24 @@
+@echo off
+title Storage Management system
+color f0
+main.exe
+rem Backup data
+set CurDate=%date:~0,10%
+set Year=%CurDate:~0,4%
+set Month=%CurDate:~5,2%
+set Day=%CurDate:~8,2%
+set CurTime=%time%
+set Hour=%CurTime:~0,2%
+if /i %Hour% LSS 10 ( set Hour=0%Hour:~1,1%)
+set Min=%CurTime:~3,2%
+set Sec=%CurTime:~6,2%
+set CurDateTime=Backup-%Year%-%Month%-%Day%-%Hour%h-%Min%min-%Sec%s
+echo Current backup dirctory: "backup\%CurDateTime%"
+@echo off
+mkdir backup\%CurDateTime%
+copy account.ser.DES backup\%CurDateTime%\account.ser.DES
+copy money.ser.DES backup\%CurDateTime%\money.ser.DES
+copy ac.data backup\%CurDateTime%\ac.data
+copy open_records.txt backup\%CurDateTime%\open_records.txt
+echo Backup Complete!
+pause
