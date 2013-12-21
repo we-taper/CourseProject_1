@@ -69,7 +69,8 @@ public class Data
 			} catch (SecurityException securityException)
 			{
 				System.out
-						.println("You do not have write access to the file open_records.txt.");
+						.println("You do not have write access to \n"
+								+ "the file open_records.txt.");
 				System.exit(1);
 			} catch (FileNotFoundException fileNotFoundException1)
 			{
@@ -103,7 +104,8 @@ public class Data
 			} catch (SecurityException securityException)
 			{
 				System.out
-						.println("You do not have write access to the file open_records.txt.");
+						.println("You do not have write access \n"
+								+ "to the file open_records.txt.");
 				System.exit(1);
 			} catch (FileNotFoundException fileNotFoundException)
 			{
@@ -533,7 +535,8 @@ public class Data
 	public static void printSugPrice(int SHIFT_BEFORE)
 	{
 		ioPak.printf(SHIFT_BEFORE,
-				"The current Suggesting Prices of Priducts are as follow:");
+				"The current Suggesting Prices of Priducts\n"
+				+ "are as follow:");
 		ioPak.printTable(15,SHIFT_BEFORE,
 				"Name!!Price\n"
 				+"iPad 2!!%s CNY.\n"
@@ -552,7 +555,8 @@ public class Data
 	public static void printPurchasePrice(int SHIFT_BEFORE)
 	{
 		ioPak.printf(SHIFT_BEFORE,
-				"The current Purchase Prices of Priducts are as follow:");
+				"The current Purchase Prices of Priducts\n"
+				+ "are as follow:");
 		ioPak.printTable(15,SHIFT_BEFORE,
 				"Name!!Price\n"
 				+"iPad 2!!%s CNY.\n"
@@ -571,7 +575,8 @@ public class Data
 	public static void printMinPrice(int SHIFT_BEFORE)
 	{
 		ioPak.printf(SHIFT_BEFORE,
-				"The current Minimum Prices of Priducts are as follow:");
+				"The current Minimum Prices of Priducts\n"
+				+ "are as follow:");
 		ioPak.printTable(20,SHIFT_BEFORE,
 				"Name!!Price\n"
 				+"iPad 2!!%s CNY.\n"
@@ -591,7 +596,8 @@ public class Data
 	public static void printAlarmPrice(int SHIFT_BEFORE)
 	{
 		// AlarmPrice == MinPrice
-		ioPak.printf(SHIFT_BEFORE,"The current Alarm Prices of Priducts are as follow:");
+		ioPak.printf(SHIFT_BEFORE,"The current Alarm Prices of\n"
+				+ "Priducts are as follow:");
 		ioPak.printf(false, false, 0, SHIFT_BEFORE, 
 				"Warning Percent: %s.", money.getAlarmPercent());
 		ioPak.printTable(20,SHIFT_BEFORE,
