@@ -98,7 +98,13 @@ public class Sale_Op
 		ioPak.printf(CS.LEVEL3,
 				"CALCULATOR"
 				+ "\nOn what product you want to do the calculations?\n"
-				+ "1.IPAD2\n2.IPAD3\n3.IPHONE4\n4.IPHONE4S\n5.IPHONE5\n6.IPHONE5S\nPress 7 to Quit Calculator");
+				+ "1.IPAD2\n"
+				+ "2.IPAD3\n"
+				+ "3.IPHONE4\n"
+				+ "4.IPHONE4S\n"
+				+ "5.IPHONE5\n"
+				+ "6.IPHONE5S\n"
+				+ "Press 7 to Quit Calculator");
 		int calProduct;
 
 		calProduct = ioPak.getInt(CS.LEVEL3,"Your choice:", 1, 7);
@@ -116,7 +122,10 @@ public class Sale_Op
 					Data.getStorageAmount(calProduct));
 
 			ioPak.printf(CS.LEVEL3,
-					"Do you want to calculate the\n1.PRICE\n2.PROFIT\nPress 3 to exit.");
+					"Do you want to calculate the\n"
+					+ "1.PRICE\n"
+					+ "2.PROFIT\n"
+					+ "Press 3 to exit.");
 
 			// Choice One(Calculator) has two functions!Here are two!
 

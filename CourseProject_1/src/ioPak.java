@@ -12,8 +12,9 @@ public class ioPak
 	public static String setUserName(int SHIFT_BEFORE)
 	{
 		String name;
-		ioPak.printf(shift(SHIFT_BEFORE, "Please set your name(only English characters, numbers, hyphens "
-						+ "\nunderlines or spaces are allowed)."));
+		ioPak.printf(shift(SHIFT_BEFORE, 
+				"Please set your name(only English characters, numbers,\n"
+				+ "hyphens, nunderlines or spaces are allowed)."));
 		while (true)
 		{
 			System.out.printf(shift(SHIFT_BEFORE, "Your username:"));

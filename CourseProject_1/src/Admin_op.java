@@ -134,6 +134,7 @@ public class Admin_op
 				ioPak.printNextLevel(CS.LEVEL3, CS.LEVEL4, CS.LEVEL_G);
 				if(Data.getSalesmanCount() == 0){
 					ioPak.printf(CS.LEVEL4,"Sorry, no accounts exits!");
+					ioPak.printBackLevel(CS.LEVEL3, CS.LEVEL4, CS.LEVEL_G);
 					break;
 				}
 				int accID = ioPak.getInt(CS.LEVEL4,
@@ -152,7 +153,8 @@ public class Admin_op
 				else
 				{
 					ioPak.printf(CS.LEVEL4,
-							"This account \"%s\" (ID:%d) is already enabled, there's no need to enable it again",
+							"This account \"%s\" (ID:%d) is already enabled, there's no need\n"
+							+ "to enable it again",
 							sa.getName(), sa.getAccountID());
 				}
 				ioPak.enterATC(CS.LEVEL4);
@@ -164,6 +166,7 @@ public class Admin_op
 				ioPak.printNextLevel(CS.LEVEL3, CS.LEVEL4, CS.LEVEL_G);
 				if(Data.getSalesmanCount() == 0){
 					ioPak.printf(CS.LEVEL4,"Sorry, no accounts exits!");
+					ioPak.printBackLevel(CS.LEVEL3, CS.LEVEL4, CS.LEVEL_G);
 					break;
 				}
 				int accID = ioPak.getInt(CS.LEVEL4,
@@ -182,7 +185,8 @@ public class Admin_op
 				else
 				{
 					ioPak.printf(CS.LEVEL4,
-							"This account \"%s\" (ID:%d) is already disabled, there's no need to disable it again",
+							"This account \"%s\" (ID:%d) is already disabled, there's no need\n"
+							+ "to disable it again",
 							sa.getName(), sa.getAccountID());
 				}
 				ioPak.enterATC(CS.LEVEL4);
@@ -433,8 +437,10 @@ public class Admin_op
 				if(s.contains("yes")){
 					ioPak.printf(false, false, 0, CS.LEVEL4,
 							"How much do you want to add to inventory?\n"
-							+ "( add a minus sign if you want to withdraw money from current funds, min)");
-					BigDecimal bd = ioPak.getBD(CS.LEVEL4,"Amount:", Data.getCurrentFunds().negate().doubleValue());
+							+ "( add a minus sign if you want to withdraw \n"
+							+ "money from current funds, min)");
+					BigDecimal bd = ioPak.getBD(CS.LEVEL4,"Amount:",
+							Data.getCurrentFunds().negate().doubleValue());
 					Data.changeCurrentFunds(bd);
 					ioPak.printf(CS.LEVEL4,"Changed successfully.");
 				}
