@@ -506,7 +506,7 @@ public class ioPak
 	}
 	public static void typeATC(int SHIFT_BEFORE)
 	{
-		ioPak.printf(shift(SHIFT_BEFORE, "Please Press ENTER to Continue !"));
+		ioPak.printf(SHIFT_BEFORE, "Please Press ENTER to Continue !");
 		getStr(SHIFT_BEFORE);
 	}
 	public static void printWarn(int SHIFT_BEFORE, String content, Object...args )
