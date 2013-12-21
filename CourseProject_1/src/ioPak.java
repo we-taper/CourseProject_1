@@ -21,7 +21,7 @@ public class ioPak
 			name = nextLine(SHIFT_BEFORE);
 			if (!name.matches("[a-zA-Z0-9-_ ]*"))
 			{
-				printf(SHIFT_BEFORE, '-', '!',
+				printWarn(SHIFT_BEFORE,
 						"Your name shoule only contains English characters,\n"
 								+ "numbers, hyphens or underlines.");
 			}
@@ -41,7 +41,7 @@ public class ioPak
 		String s1 = "", s2 = "";
 		while (true)
 		{
-			System.out.printf(shift(SHIFT_BEFORE, "Please set the password: "));
+			System.out.printf(shift(SHIFT_BEFORE, "Please set the password:"));
 			s1 = getConPD();
 			System.out.printf(shift(SHIFT_BEFORE,"Please type the password again:"));
 			s2 = getConPD();
@@ -215,8 +215,7 @@ public class ioPak
 					if (b > max)
 					{
 						flag = false;
-						System.out.println(max_tip);
-						ioPak.printWarn(SHIFT_BEFORE,
+						ioPak.printWarn(SHIFT_BEFORE,max_tip + "\n" +
 								"The number should be within %d and %d.", min,
 								max);
 					}
@@ -228,7 +227,7 @@ public class ioPak
 								max);
 					}
 				}catch (NumberFormatException e){
-					// catch the too long number
+					// catch the too long a number
 					ioPak.printWarn(SHIFT_BEFORE,
 							"The number should be within %d and %d.", min,
 							max);

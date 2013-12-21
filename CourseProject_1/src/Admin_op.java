@@ -17,7 +17,7 @@ public class Admin_op
 			printWhatICanDO(CS.LEVEL2);
 			ioPak.printf(CS.LEVEL2,
 					"ADMINISTRATOR MAIN MENU\n"
-					+ "Press 1 for My Account.\n"
+					+ "Press 1 for Account Management.\n"
 					+ "Press 2 for My Products.\n" 
 					+ "Press 3 for My Money.\n"
 					+ "Press 4 for Change Access Code.\n"
@@ -59,7 +59,7 @@ public class Admin_op
 	{
 		ioPak.printf(SHIFT_BEFORE,
 				"As An Administrator, You Can:\n"
-				+ "1. My Account:\n" 
+				+ "1. Account Management:\n" 
 				+ "  (a). Change My Password;\n"
 				+ "  (b). Change Password.\n"
 				+ "  (c). Display all Existing Acounts.\n"
@@ -85,7 +85,7 @@ public class Admin_op
 		theWhile: while (true)
 		{
 			ioPak.printf(CS.LEVEL3,
-					"My Account MENU\n"
+					"Account Management MENU\n"
 					+ "    Press 1 to see What I Can Do.\n"
 					+ "    Press 2 to Change Password.\n"
 					+ "    Press 3 to Display all Existing Acounts.\n"

@@ -8,20 +8,6 @@ public class Sale_Op
 		ioPak.printNextLevel(CS.LEVEL1,CS.LEVEL2, CS.LEVEL_G);
 		while (true)
 		{
-			/*
-			  ioPak.printTable(25,CS.LEVEL2,
-			 
-					"!!", "Welcome %s!\n" + "NOTICE:\n"// TODO ask world of "!!"
-					+ "Star Salesman For Sales:!!Mr./Ms. %s\n"
-					+ "Star Salesman For Profit:!!Mr./Ms. %s\n",
-					salesman.getName(), Data.getStarNameForSales(),
-					Data.getStarNameForProfit());
-			ioPak.printTable(25,
-				"!!", "Welcome s!\n" + "NOTICE:\n"// TODO ask world of "!!"
-				+ "Star Salesman For Sales:!!Mr./Ms. s\n"
-				+ "Star Salesman For Profit:!!Mr./Ms. s\n"
-				);
-			*/
 			ioPak.printTable(25,CS.LEVEL2,
 					"Welcome %s!\n" + "NOTICE:\n"
 					+ "Star Salesman For Sales:!!Mr./Ms. %s\n"
@@ -187,14 +173,14 @@ public class Sale_Op
 		ioPak.printf(CS.LEVEL3,
 				"MAKING DEALS!\n"
 				+ "Here is our products and their amount left in our store:");
-		ioPak.printTable(17,CS.LEVEL3,/* "!!",*/
-						" Name!!Amount!!Minimal Price!!Suggested Price\n"
+		ioPak.printTable(14,CS.LEVEL3,
+						" Name!!Amount!!MinPrice!!SugPrice\n"
 						+ "1.IPAD2:!!%d!!%.2f!!%.2f\n"
 						+ "2.IPAD3:!!%d!!%.2f!!%.2f\n"
 						+ "3.IPHONE4:!!%d!!%.2f!!%.2f\n"
 						+ "4.IPHONE4S:!!%d!!%.2f!!%.2f\n"
 						+ "5.IPHONE5:!!%d!!%.2f!!%.2f\n"
-						+ "6.IPHONE5S:!!%d!!%.2f!!%.2f",
+						+ "6.IPHONE5S:!!%d!!%.2f!!%.2f\n",
 				Data.getStorageAmount(Money.IPAD2),
 				Data.getMinPrice(Money.IPAD2), Data.getSugPrice(Money.IPAD2),
 				Data.getStorageAmount(Money.IPAD3),
@@ -211,6 +197,8 @@ public class Sale_Op
 				Data.getStorageAmount(Money.IPHONE5S),
 				Data.getMinPrice(Money.IPHONE5S),
 				Data.getSugPrice(Money.IPHONE5S));
+		ioPak.printf(CS.LEVEL3, "MinPrice: Minimal price for product.\n"
+						+ "SugPrice: Suggested(more profitable) price.\n");
 		// Print out all the products & their information!
 		ioPak.printf(CS.LEVEL3,"So, which product do you want to sell?");
 		int productChoice = ioPak.getInt(CS.LEVEL3,

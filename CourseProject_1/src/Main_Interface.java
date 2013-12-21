@@ -32,7 +32,7 @@ public class Main_Interface {
 		if (Data.firstTime()) {
 			initiateAccessCode();
 			initiateAdmin();
-			ioPak.printWait(CS.LEVEL1, CS.WAIT_FOR_BAR,"Decrypting Data...", "  Done!\n");
+			ioPak.printWait(CS.LEVEL1, CS.WAIT_FOR_BAR,"Preparing Data...", "  Done!\n");
 			ioPak.printf(CS.LEVEL1,
 ""+
 "		         ,--\"\"\"\",--.__,---[],-------._\n"+         
@@ -292,6 +292,8 @@ public class Main_Interface {
 
 	private static void registerSalesman() {
 		// Retrieve data from user.
+		// Must clear salesman before
+		salesman = new Salesman();
 		ioPak.printNextLevel(CS.LEVEL1, CS.LEVEL2, CS.LEVEL_G);
 		salesman.setName(ioPak.setUserName(CS.LEVEL2));
 		salesman.setPassword(ioPak.setConPD(CS.LEVEL2,"Salesman "+salesman.getName()));
@@ -301,6 +303,7 @@ public class Main_Interface {
 		// Above add account to salesman, return a
 		// accountID if add successfully and return a
 		// Data.CREAT_FAILED if add unsuccessfully
+		// The method has been abandoned due to unreliability.
 		if (CurrentUserID == Data.CREAT_FAILED) {
 			ioPak.printf(CS.LEVEL2,"Failed to creat your account");
 		} else {// Successfully Created
