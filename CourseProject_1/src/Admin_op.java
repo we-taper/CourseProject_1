@@ -20,9 +20,9 @@ public class Admin_op
 					+ "Press 1 for Account Management.\n"
 					+ "Press 2 for My Products.\n" 
 					+ "Press 3 for My Money.\n"
-					+ "Press 4 for Change Access Code."
+					+ "Press 4 for Change Access Code.\n"
 					+ "Press 5 for Logout Administrator.");
-			int choice = ioPak.getInt(CS.LEVEL2,"Your choice:", 1, 4);
+			int choice = ioPak.getInt(CS.LEVEL2,"Your choice:", 1, 5);
 			switch (choice)
 			{
 			case 1:// Account Management.
@@ -43,6 +43,7 @@ public class Admin_op
 			case 4:// Change Access Code
 			{
 				ChangeAC();
+				break;
 			}
 			case 5:// Logout Administrator.
 			{
@@ -454,14 +455,16 @@ public class Admin_op
 	{
 		ioPak.printNextLevel(CS.LEVEL2, CS.LEVEL3, CS.LEVEL_G);
 		System.out.printf(CS.level3()+"Please input your orginal Access Code:");
-		String acode = ioPak.nextLine(CS.LEVEL3);
+		String acode = ioPak.getConPD(CS.LEVEL3);
 		if( acode.equals(Main_Interface.getAccessCode()) )
 		{
 			acode = ioPak.setConPD(CS.LEVEL3, "Access Code");
 			Main_Interface.setAccessCode(acode);
 		}else{
-			ioPak.printf(CS.LEVEL3,"Mismatched AccessCode. "
+			ioPak.printf(CS.LEVEL3,"Mismatched AccessCode. \n"
 					+ "Sorry, you cannot set the access code");
 		}
+		ioPak.enterATC(CS.LEVEL4);
+		ioPak.printBackLevel(CS.LEVEL2, CS.LEVEL3, CS.LEVEL_G);
 	}
 }

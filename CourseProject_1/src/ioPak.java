@@ -326,8 +326,8 @@ public class ioPak
 						 */
 						cls(1);
 						ioPak.printWarn(SHIFT_BEFORE,
-								"Come on, don't be naughty, never try to press Ctrl-Z or whatever else\n"
-								+ "again.\n");
+								"Come on, don't be naughty, never try to press Ctrl-Z\n"
+								+ "or whatever else again.\n");
 						System.out.printf("Try again:");
 					}else{
 						break;
@@ -337,8 +337,8 @@ public class ioPak
 			{
 				cls(1);
 				ioPak.printWarn(SHIFT_BEFORE,
-						"Come on, don't be naughty, never try to press Ctrl-Z or whatever else\n"
-						+ "again.This forces System to quit.\n");
+						"Come on, don't be naughty, never try to press Ctrl-Z\n"
+						+ "or whatever else again.This forces System to quit.\n");
 				if (System.console() != null)
 				{
 					System.out.printf("Try again:");
@@ -511,7 +511,7 @@ public class ioPak
 	public static void printWarn(int SHIFT_BEFORE, String content, Object...args )
 	{
 		// Print warning message to the screen.
-		printf('-', '*', false, false, CS.All_LENGTH, 3, 3, 0, "", 0, content, args);
+		printf('-', '*', false, false, CS.All_LENGTH, 15, 3, 0, "", 0, content, args);
 	}
 	public static void printNextDo(int SHIFT_BEFORE, String content, Object...args )
 	{
