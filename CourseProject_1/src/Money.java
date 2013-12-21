@@ -93,32 +93,33 @@ public class Money implements Serializable
 		 * 		amount--
 		 * 		CurrentFunds++
 		 */
-		if(price.compareTo(new BigDecimal("-1")) == 0){
+		BigDecimal moneyCost;
+		if(amount < 0){
 			// reduce storage amount
+			storageAmount[goodsID] = storageAmount[goodsID+SHIFT] - amount;
+			// meanwhile add money to current funds.
+			currentFunds = currentFunds.add(price.multiply(new BigDecimal(amount)));
 		}else{
 			// add storage amount
-			BigDecimal temp;
-			/*
-			 * ( (baseprice*storage) + (price*amount) ) / (amout+storage)
-			 */
-			temp =( ( Data.getBasePrice(goodsID).multiply(new BigDecimal(Data.getStorageAmount(goodsID))) )
-					.add(price.multiply(new BigDecimal(amount))) )
-					.divide(new BigDecimal(Data.getStorageAmount(goodsID)+amount));
-			Data.setBasePrice(goodsID, temp);
+			moneyCost = price.multiply(new BigDecimal(amount));
+			if( stillMoneyLeft(moneyCost)){
+				storageAmount[goodsID + SHIFT] += amount;
+				changeCurrentFunds(getCurrentFunds().subtract(moneyCost).negate());
+				/* Calculate the average purchase(base) price
+				 * ( (baseprice*storage) + (price*amount) ) / (amout+storage)
+				 */
+				moneyCost =( ( getBasePrice(goodsID).multiply(new BigDecimal(getStorageAmount(goodsID))) )
+						.add(price.multiply(new BigDecimal(amount))) )
+						.divide(new BigDecimal(getStorageAmount(goodsID)+amount), BigDecimal.ROUND_HALF_UP);
+				setBasePrice(goodsID, moneyCost);
+			}else{
+				ioPak.printf(false, false, 0, "Sorry, not enough money left");
+			}
+			
+			
 		}
-		BigDecimal moneyCost = new BigDecimal("0");
-		moneyCost = getBasePrice(goodsID).multiply(new BigDecimal(amount));
-		if( stillMoneyLeft(moneyCost)){
-			storageAmount[goodsID + SHIFT] += amount;
-			changeCurrentFunds(getCurrentFunds().subtract(moneyCost).negate());
-		}else{
-			ioPak.printf(false, false, 0, "Sorry, not enough money left");
-		}
+
 		
-	}
-	public void changeStorageAmount(int goodsID, int amount)
-	{
-		changeStorageAmount(goodsID, amount, new BigDecimal("-1"));
 	}
 
 	public int getStorageAmount(int goodsID)

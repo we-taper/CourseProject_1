@@ -439,14 +439,6 @@ public class Data
 		 */
 		money.changeStorageAmount(goodsID, amount, price);
 	}
-	public static void changeStorageAmount(int goodsID, int amount)
-	{
-		/*
-		 * Add the storage amount for product whose name is goodsID. Receive
-		 * goodsID and the amount as parameter.
-		 */
-		money.changeStorageAmount(goodsID, amount);
-	}
 
 	public static int getStorageAmount(int goodsID)
 	{

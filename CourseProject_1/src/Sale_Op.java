@@ -295,7 +295,7 @@ public class Sale_Op
 							{
 								ioPak.printf(CS.LEVEL3,"Deal accomplished!");
 								Data.changeStorageAmount(productChoice,
-										-productNum);
+										-productNum,productPrice);
 								Data.changeCurrentFunds(totalPrice);
 								salesman.changeSaleAmount(totalPrice);
 								salesman.changeSaleProfit(totalProfit);
