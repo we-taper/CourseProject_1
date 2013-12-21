@@ -17,7 +17,7 @@ public class Admin_op
 			printWhatICanDO(CS.LEVEL2);
 			ioPak.printf(CS.LEVEL2,
 					"ADMINISTRATOR MAIN MENU\n"
-					+ "Press 1 for Account Management.\n"
+					+ "Press 1 for My Account.\n"
 					+ "Press 2 for My Products.\n" 
 					+ "Press 3 for My Money.\n"
 					+ "Press 4 for Change Access Code.\n"
@@ -70,7 +70,7 @@ public class Admin_op
 				+ "  (a). Check Inventory;\n"
 				+ "  (b). Update Inventory Information: Stockpiling;\n"
 				+ "3. My Money:\n" 
-				+ "  (a). Suggesting Price Query;\n"
+				+ "  (a). Suggested Price Query;\n"
 				+ "  (b). Purchase Price Query;\n"
 				+ "  (c). Warning Percentage Query;\n"
 				+ "  (d). The Current Funds Query.\n"
@@ -136,6 +136,7 @@ public class Admin_op
 				if(Data.getSalesmanCount() == 0){
 					ioPak.printf(CS.LEVEL4,"Sorry, no accounts exits!");
 					ioPak.printBackLevel(CS.LEVEL3, CS.LEVEL4, CS.LEVEL_G);
+					ioPak.typeATC(CS.LEVEL4);
 					break;
 				}
 				int accID = ioPak.getInt(CS.LEVEL4,
@@ -168,6 +169,7 @@ public class Admin_op
 				if(Data.getSalesmanCount() == 0){
 					ioPak.printf(CS.LEVEL4,"Sorry, no accounts exits!");
 					ioPak.printBackLevel(CS.LEVEL3, CS.LEVEL4, CS.LEVEL_G);
+					ioPak.typeATC(CS.LEVEL4);
 					break;
 				}
 				int accID = ioPak.getInt(CS.LEVEL4,
@@ -320,7 +322,7 @@ public class Admin_op
 							"Please type the amount added to stock");
 					int temp = ioPak.getInt(CS.LEVEL4,"Amount:", 0);
 					ioPak.printf(false, false, 0,CS.LEVEL4,
-							"Please type the purchase price of iPhone 4SS.");
+							"Please type the purchase price of iPhone 4S.");
 					BigDecimal bd = ioPak.getBD(CS.LEVEL4, "Price:", 0);
 					Data.changeStorageAmount(Money.IPHONE4S, temp,bd);
 					ioPak.printf(CS.LEVEL4,"Successfully changed!");
@@ -386,7 +388,7 @@ public class Admin_op
 		theWhile: while (true)
 		{
 			ioPak.printf(CS.LEVEL3,"My Money MENU\n"
-					+ "Press 1 for Suggesting Price Query.\n"
+					+ "Press 1 for Suggested Price Query.\n"
 					+ "Press 2 for Purchase Price Query.\n"
 					+ "Press 3 for Warning Percentage Query\n"
 					+ "Press 4 to  Set the Warning Percentage.\n"
@@ -395,7 +397,7 @@ public class Admin_op
 			int choice = ioPak.getInt(CS.LEVEL3,"Your Choice:", 1, 6);
 			switch (choice)
 			{
-			case 1://Suggesting Price Query
+			case 1://Suggested Price Query
 			{
 				ioPak.printNextLevel(CS.LEVEL3, CS.LEVEL4, CS.LEVEL_G);
 				Data.printSugPrice(CS.LEVEL4);
@@ -437,24 +439,10 @@ public class Admin_op
 			{
 				ioPak.printNextLevel(CS.LEVEL3, CS.LEVEL4, CS.LEVEL_G);
 				Data.printCurFunds(CS.LEVEL4);
-				ioPak.printf(CS.LEVEL4,"Do you want to change out Current Funds\n"
-						+ "(Yes or No)?");
-				String s;
-				while(true)
-				{
-					System.out.printf(CS.level4(),"Your choice:");
-					s = ioPak.nextLine(CS.LEVEL4);
-					if ((s.contains("yes") || s.contains("no"))
-							&& !(s.contains("yes") && s.contains("no")))
-						// single yes or no but not both yes and no
-					{
-						break;
-					}else{
-						ioPak.printf(false, false, 0,CS.LEVEL4,
-								"Please don't type something that I can't understand. :)");
-					}
-				}
-				if(s.contains("yes")){
+				ioPak.printf(CS.LEVEL4,"Do you want to change Current Funds\n"
+						+ "(1 For Yes or 2 For No)?");
+				int choice_cf = ioPak.getInt("Your choice:", 1, 2);
+				if(choice_cf == 1){
 					ioPak.printf(false, false, 0, CS.LEVEL4,
 							"How much do you want to add to inventory?\n"
 							+ "( add a minus sign if you want to withdraw \n"

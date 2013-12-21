@@ -539,12 +539,12 @@ public class Data
 				+ "are as follow:");
 		ioPak.printTable(15,SHIFT_BEFORE,
 				"Name!!Price\n"
-				+"iPad 2!!%s CNY.\n"
-				+"iPad 3!!%s CNY.\n"
-				+"iPhone 4!!%s CNY.\n"
-				+"iPhone 4S!!%s CNY.\n"
-				+"iPhone 5!!%s CNY.\n"
-				+"iPhone 5S!!%s CNY."
+				+"iPad 2!!%.2f CNY.\n"
+				+"iPad 3!!%.2f CNY.\n"
+				+"iPhone 4!!%.2f CNY.\n"
+				+"iPhone 4S!!%.2f CNY.\n"
+				+"iPhone 5!!%.2f CNY.\n"
+				+"iPhone 5S!!%.2f CNY."
 				, getSugPrice(Money.IPAD2)
 				, getSugPrice(Money.IPAD3)
 				, getSugPrice(Money.IPHONE4)
@@ -559,12 +559,12 @@ public class Data
 				+ "are as follow:");
 		ioPak.printTable(15,SHIFT_BEFORE,
 				"Name!!Price\n"
-				+"iPad 2!!%s CNY.\n"
-				+"iPad 3!!%s CNY.\n"
-				+"iPhone 4!!%s CNY.\n"
-				+"iPhone 4S!!%s CNY.\n"
-				+"iPhone 5!!%s CNY.\n"
-				+"iPhone 5S!!%s CNY."
+				+"iPad 2!!%.2f CNY.\n"
+				+"iPad 3!!%.2f CNY.\n"
+				+"iPhone 4!!%.2f CNY.\n"
+				+"iPhone 4S!!%.2f CNY.\n"
+				+"iPhone 5!!%.2f CNY.\n"
+				+"iPhone 5S!!%.2f CNY."
 				, getBasePrice(Money.IPAD2)
 				, getBasePrice(Money.IPAD3)
 				, getBasePrice(Money.IPHONE4)
@@ -579,12 +579,12 @@ public class Data
 				+ "are as follow:");
 		ioPak.printTable(20,SHIFT_BEFORE,
 				"Name!!Price\n"
-				+"iPad 2!!%s CNY.\n"
-				+"iPad 3!!%s CNY.\n"
-				+"iPhone 4!!%s CNY.\n"
-				+"iPhone 4S!!%s CNY.\n"
-				+"iPhone 5!!%s CNY.\n"
-				+"iPhone 5S!!%s CNY."
+				+"iPad 2!!%.2f CNY.\n"
+				+"iPad 3!!%.2f CNY.\n"
+				+"iPhone 4!!%.2f CNY.\n"
+				+"iPhone 4S!!%.2f CNY.\n"
+				+"iPhone 5!!%.2f CNY.\n"
+				+"iPhone 5S!!%.2f CNY."
 				, getMinPrice(Money.IPAD2)
 				, getMinPrice(Money.IPAD3)
 				, getMinPrice(Money.IPHONE4)
@@ -602,12 +602,12 @@ public class Data
 				"Warning Percent: %s.", money.getAlarmPercent());
 		ioPak.printTable(20,SHIFT_BEFORE,
 				"Name!!Price\n"
-				+"iPad 2!!%s CNY.\n"
-				+"iPad 3!!%s CNY.\n"
-				+"iPhone 4!!%s CNY.\n"
-				+"iPhone 4S!!%s CNY.\n"
-				+"iPhone 5!!%s CNY.\n"
-				+"iPhone 5S!!%s CNY."
+				+"iPad 2!!%.2f CNY.\n"
+				+"iPad 3!!%.2f CNY.\n"
+				+"iPhone 4!!%.2f CNY.\n"
+				+"iPhone 4S!!%.2f CNY.\n"
+				+"iPhone 5!!%.2f CNY.\n"
+				+"iPhone 5S!!%.2f CNY."
 				, getMinPrice(Money.IPAD2)
 				, getMinPrice(Money.IPAD3)
 				, getMinPrice(Money.IPHONE4)
@@ -618,7 +618,7 @@ public class Data
 
 	public static void printCurFunds(int SHIFT_BEFORE){
 		ioPak.printf(SHIFT_BEFORE,
-				"The current funds is %s Yuan.",getCurrentFunds());
+				"The current funds is %.2f Yuan.",getCurrentFunds());
 	}
 	public static byte[] getHashAccessCode()
 	{

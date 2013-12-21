@@ -28,7 +28,7 @@ public class Main_Interface {
 	
 	public static void main(String[] args) {
 		// if first time, initialize admin account.
-		ioPak.printf(CS.All_LENGTH, 20, 20, "Welcome to Storage Management System");
+		ioPak.printf(CS.All_LENGTH, 20, 20, "Welcome to Sale Management System");
 		if (Data.firstTime()) {
 			initiateAccessCode();
 			initiateAdmin();
@@ -118,10 +118,10 @@ public class Main_Interface {
 
 	private static void mainMenu() {
 		int choice = 0;
-		ioPak.printf(CS.All_LENGTH,20,20,CS.LEVEL1,"Welcome to Storage Management system.");
+		ioPak.printf(CS.All_LENGTH,20,20,CS.LEVEL1,"Welcome to Sale Management system.");
 		ioPak.printf(CS.LEVEL1,
 					  ",------------.                ,.--\"\"-._\n"
-					+ "|   Storage   `.           __/         `.\n"
+					+ "|     Sale    `.           __/         `.\n"
 					+ "|               |     _,**\"   \"*-.       `.\n"
 					+ "|  Management   |   ,'            `.       \\\n"
 					+ "|               |  ;    _,.---._    \\  ,'\\  \\\n"
