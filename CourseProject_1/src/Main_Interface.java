@@ -150,7 +150,7 @@ public class Main_Interface {
 					+ "1: Administrator login.\n" 
 					+ "2: Salesman login.\n"
 					+ "3: Register a new salesman account.\n" 
-					+ "4: Thank you note.\n"
+					+ "4: About me.\n"
 					+ "5: Quit."
 					+ "");
 			choice = ioPak.getInt(CS.LEVEL1,"Your choice:",1,5);
@@ -175,7 +175,7 @@ public class Main_Interface {
 				login(CurrentUserID);
 				ioPak.printf(CS.LEVEL1,"Welcome back!!");
 			} else if (choice == 4) {
-				printThank();
+				printAboutUs();
 			} else if (choice == 5) {
 				ioPak.printWait(CS.LEVEL1, CS.WAIT_FOR_BAR, "Storing Data...","  Done!\n");
 				ioPak.printf(CS.LEVEL1,"Auf Wiedersehen~~\nPress anykey to exit.");
@@ -358,7 +358,7 @@ public class Main_Interface {
 		admin.setPassword(ioPak.setConPD(CS.LEVEL1,"Administrator"));
 		
 	}
-	private static void printThank()
+	private static void printAboutUs()
 	{
 		ioPak.printf(CS.LEVEL1,
 ""+
