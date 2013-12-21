@@ -47,6 +47,7 @@ public class Admin_op
 			}
 			case 5:// Logout Administrator.
 			{
+				ioPak.printBackLevel(CS.LEVEL1, CS.LEVEL2, CS.LEVEL_G);
 				return admin;
 			}
 			}
@@ -75,7 +76,7 @@ public class Admin_op
 				+ "  (d). The Current Funds Query.\n"
 				+ "4. Change Access Code."
 				+"");
-		ioPak.enterATC(SHIFT_BEFORE);
+		ioPak.typeATC(SHIFT_BEFORE);
 	}
 
 	private static Administrator acManage(Administrator admin)
@@ -117,7 +118,7 @@ public class Admin_op
 				ioPak.printf(CS.LEVEL4,"Please set new password.");
 				String pd = ioPak.setConPD(CS.LEVEL4,"administrator");
 				admin.setPassword(pd);
-				ioPak.enterATC(CS.LEVEL4);
+				ioPak.typeATC(CS.LEVEL4);
 				ioPak.printBackLevel(CS.LEVEL3, CS.LEVEL4, CS.LEVEL_G);
 				break;
 			}// end 2
@@ -125,7 +126,7 @@ public class Admin_op
 			{
 				ioPak.printNextLevel(CS.LEVEL3, CS.LEVEL4, CS.LEVEL_G);
 				Data.displayAccount(CS.LEVEL4);
-				ioPak.enterATC(CS.LEVEL4);
+				ioPak.typeATC(CS.LEVEL4);
 				ioPak.printBackLevel(CS.LEVEL3, CS.LEVEL4, CS.LEVEL_G);
 				break;
 			}
@@ -157,7 +158,7 @@ public class Admin_op
 							+ "to enable it again",
 							sa.getName(), sa.getAccountID());
 				}
-				ioPak.enterATC(CS.LEVEL4);
+				ioPak.typeATC(CS.LEVEL4);
 				ioPak.printBackLevel(CS.LEVEL3, CS.LEVEL4, CS.LEVEL_G);
 				break;
 			}// end 4
@@ -189,7 +190,7 @@ public class Admin_op
 							+ "to disable it again",
 							sa.getName(), sa.getAccountID());
 				}
-				ioPak.enterATC(CS.LEVEL4);
+				ioPak.typeATC(CS.LEVEL4);
 				ioPak.printBackLevel(CS.LEVEL3, CS.LEVEL4, CS.LEVEL_G);
 				break;
 			}// end 5
@@ -208,7 +209,7 @@ public class Admin_op
 							+ "Salesman: %s (ID: %d).", Data.getSalesman(accID).getName(),
 							Data.getSalesman(accID).getAccountID());
 				}
-				ioPak.enterATC(CS.LEVEL4);
+				ioPak.typeATC(CS.LEVEL4);
 				ioPak.printBackLevel(CS.LEVEL3, CS.LEVEL4, CS.LEVEL_G);
 				break;
 			}
@@ -239,7 +240,7 @@ public class Admin_op
 			{
 				ioPak.printNextLevel(CS.LEVEL3, CS.LEVEL4, CS.LEVEL_G);
 				Data.printInventory(CS.LEVEL4);
-				ioPak.enterATC(CS.LEVEL4);
+				ioPak.typeATC(CS.LEVEL4);
 				ioPak.printBackLevel(CS.LEVEL3, CS.LEVEL4, CS.LEVEL_G);
 				break;
 			}
@@ -267,10 +268,13 @@ public class Admin_op
 					ioPak.printf(false, false, 0,CS.LEVEL4,
 							"Please type the amount added to stock");
 					int temp = ioPak.getInt(CS.LEVEL4,"Amount:", 0);
-					Data.changeStorageAmount(Money.IPAD2, temp);
+					ioPak.printf(false, false, 0,CS.LEVEL4,
+							"Please type the purchase price of iPad 2.");
+					BigDecimal bd = ioPak.getBD(CS.LEVEL4, "Price:", 0);
+					Data.changeStorageAmount(Money.IPAD2, temp,bd);
 					ioPak.printf(CS.LEVEL4,"Successfully changed!");
 					Data.printInventory(CS.LEVEL4);
-					ioPak.enterATC(CS.LEVEL4);
+					ioPak.typeATC(CS.LEVEL4);
 					break;
 				}
 				case 2:
@@ -281,10 +285,13 @@ public class Admin_op
 					ioPak.printf(false, false, 0,CS.LEVEL4,
 							"Please type the amount added to stock");
 					int temp = ioPak.getInt(CS.LEVEL4,"Amount:", 0);
-					Data.changeStorageAmount(Money.IPAD3, temp);
+					ioPak.printf(false, false, 0,CS.LEVEL4,
+							"Please type the purchase price of iPad 3.");
+					BigDecimal bd = ioPak.getBD(CS.LEVEL4, "Price:", 0);
+					Data.changeStorageAmount(Money.IPAD3, temp,bd);
 					ioPak.printf(CS.LEVEL4,"Successfully changed!");
 					Data.printInventory(CS.LEVEL4);
-					ioPak.enterATC(CS.LEVEL4);
+					ioPak.typeATC(CS.LEVEL4);
 					break;
 				}
 				case 3:
@@ -295,10 +302,13 @@ public class Admin_op
 					ioPak.printf(false, false, 0,CS.LEVEL4,
 							"Please type the amount added to stock");
 					int temp = ioPak.getInt(CS.LEVEL4,"Amount:", 0);
-					Data.changeStorageAmount(Money.IPHONE4, temp);
+					ioPak.printf(false, false, 0,CS.LEVEL4,
+							"Please type the purchase price of iPhone 4.");
+					BigDecimal bd = ioPak.getBD(CS.LEVEL4, "Price:", 0);
+					Data.changeStorageAmount(Money.IPHONE4, temp,bd);
 					ioPak.printf(CS.LEVEL4,"Successfully changed!");
 					Data.printInventory(CS.LEVEL4);
-					ioPak.enterATC(CS.LEVEL4);
+					ioPak.typeATC(CS.LEVEL4);
 					break;
 				}
 				case 4:
@@ -308,14 +318,34 @@ public class Admin_op
 							Data.getStorageAmount(Money.IPHONE4S));
 					ioPak.printf(false, false, 0,CS.LEVEL4,
 							"Please type the amount added to stock");
-					int temp = ioPak.getInt("Amount:", 0);
-					Data.changeStorageAmount(Money.IPHONE4S, temp);
+					int temp = ioPak.getInt(CS.LEVEL4,"Amount:", 0);
+					ioPak.printf(false, false, 0,CS.LEVEL4,
+							"Please type the purchase price of iPhone 4SS.");
+					BigDecimal bd = ioPak.getBD(CS.LEVEL4, "Price:", 0);
+					Data.changeStorageAmount(Money.IPHONE4S, temp,bd);
 					ioPak.printf(CS.LEVEL4,"Successfully changed!");
 					Data.printInventory(CS.LEVEL4);
-					ioPak.enterATC(CS.LEVEL4);
+					ioPak.typeATC(CS.LEVEL4);
 					break;
 				}
 				case 5:
+				{
+					ioPak.printf(CS.LEVEL4,
+							"Present in-stock amount of iPhone 5 is: %d.",
+							Data.getStorageAmount(Money.IPHONE5));
+					ioPak.printf(false, false, 0,CS.LEVEL4,
+							"Please type the amount added to stock");
+					int temp = ioPak.getInt(CS.LEVEL4,"Amount:", 0);
+					ioPak.printf(false, false, 0,CS.LEVEL4,
+							"Please type the purchase price of iPhone 5.");
+					BigDecimal bd = ioPak.getBD(CS.LEVEL4, "Price:", 0);
+					Data.changeStorageAmount(Money.IPHONE5, temp,bd);
+					ioPak.printf(CS.LEVEL4,"Successfully changed!");
+					Data.printInventory(CS.LEVEL4);
+					ioPak.typeATC(CS.LEVEL4);
+					break;
+				}
+				case 6:
 				{
 					ioPak.printf(CS.LEVEL4,
 							"Present in-stock amount of iPhone 5S is: %d.",
@@ -323,24 +353,13 @@ public class Admin_op
 					ioPak.printf(false, false, 0,CS.LEVEL4,
 							"Please type the amount added to stock");
 					int temp = ioPak.getInt(CS.LEVEL4,"Amount:", 0);
-					Data.changeStorageAmount(Money.IPHONE5, temp);
-					ioPak.printf(CS.LEVEL4,"Successfully changed!");
-					Data.printInventory(CS.LEVEL4);
-					ioPak.enterATC(CS.LEVEL4);
-					break;
-				}
-				case 6:
-				{
-					ioPak.printf(CS.LEVEL4,
-							"Present in-stock amount of iPhone 5S is: %d.",
-							Data.getStorageAmount(Money.IPHONE5S));
 					ioPak.printf(false, false, 0,CS.LEVEL4,
-							"Please type the amount added to stock");
-					int temp = ioPak.getInt(CS.LEVEL4,"Amount:", 0);
-					Data.changeStorageAmount(Money.IPHONE5S, temp);
+							"Please type the purchase price of iPhone 5S.");
+					BigDecimal bd = ioPak.getBD(CS.LEVEL4, "Price:", 0);
+					Data.changeStorageAmount(Money.IPHONE5S, temp,bd);
 					ioPak.printf(CS.LEVEL4,"Successfully changed!");
 					Data.printInventory(CS.LEVEL4);
-					ioPak.enterATC(CS.LEVEL4);
+					ioPak.typeATC(CS.LEVEL4);
 					break;
 				}
 				case 7:// Exit Stockpiling.(GET)
@@ -370,7 +389,7 @@ public class Admin_op
 					+ "Press 1 for Suggesting Price Query.\n"
 					+ "Press 2 for Purchase Price Query.\n"
 					+ "Press 3 for Warning Percentage Query\n"
-					+ "Press 4 to Set the Warning Percentage.\n"
+					+ "Press 4 to  Set the Warning Percentage.\n"
 					+ "Press 5 for The Current Funds Query.\n"
 					+ "Press 6 for Exit My Money.");
 			int choice = ioPak.getInt(CS.LEVEL3,"Your Choice:", 1, 6);
@@ -380,7 +399,7 @@ public class Admin_op
 			{
 				ioPak.printNextLevel(CS.LEVEL3, CS.LEVEL4, CS.LEVEL_G);
 				Data.printSugPrice(CS.LEVEL4);
-				ioPak.enterATC(CS.LEVEL4);
+				ioPak.typeATC(CS.LEVEL4);
 				ioPak.printBackLevel(CS.LEVEL3, CS.LEVEL4, CS.LEVEL_G);
 				break;
 			}
@@ -388,7 +407,7 @@ public class Admin_op
 			{
 				ioPak.printNextLevel(CS.LEVEL3, CS.LEVEL4, CS.LEVEL_G);
 				Data.printPurchasePrice(CS.LEVEL4);
-				ioPak.enterATC(CS.LEVEL4);
+				ioPak.typeATC(CS.LEVEL4);
 				ioPak.printBackLevel(CS.LEVEL3, CS.LEVEL4, CS.LEVEL_G);
 				break;
 			}
@@ -397,7 +416,7 @@ public class Admin_op
 				ioPak.printNextLevel(CS.LEVEL3, CS.LEVEL4, CS.LEVEL_G);
 				ioPak.printf(CS.LEVEL4,"Let's see all the alarm price for all products");
 				Data.printAlarmPrice(CS.LEVEL4);
-				ioPak.enterATC(CS.LEVEL4);
+				ioPak.typeATC(CS.LEVEL4);
 				ioPak.printBackLevel(CS.LEVEL3, CS.LEVEL4, CS.LEVEL_G);
 				break;
 			}// end 3
@@ -410,7 +429,7 @@ public class Admin_op
 				Data.setAlarmPrice(price);
 				ioPak.printf(CS.LEVEL4,"Let's see all the alarm price for all products");
 				Data.printAlarmPrice(CS.LEVEL4);
-				ioPak.enterATC(CS.LEVEL4);
+				ioPak.typeATC(CS.LEVEL4);
 				ioPak.printBackLevel(CS.LEVEL3, CS.LEVEL4, CS.LEVEL_G);
 				break;
 			}// end 4
@@ -418,7 +437,8 @@ public class Admin_op
 			{
 				ioPak.printNextLevel(CS.LEVEL3, CS.LEVEL4, CS.LEVEL_G);
 				Data.printCurFunds(CS.LEVEL4);
-				ioPak.printf(CS.LEVEL4,"Do you want to change out Current Funds(Yes or No)?");
+				ioPak.printf(CS.LEVEL4,"Do you want to change out Current Funds\n"
+						+ "(Yes or No)?");
 				String s;
 				while(true)
 				{
@@ -443,8 +463,9 @@ public class Admin_op
 							Data.getCurrentFunds().negate().doubleValue());
 					Data.changeCurrentFunds(bd);
 					ioPak.printf(CS.LEVEL4,"Changed successfully.");
+					Data.printCurFunds(CS.LEVEL4);
 				}
-				ioPak.enterATC(CS.LEVEL4);
+				ioPak.typeATC(CS.LEVEL4);
 				ioPak.printBackLevel(CS.LEVEL3, CS.LEVEL4, CS.LEVEL_G);
 				break;
 			}
@@ -470,7 +491,7 @@ public class Admin_op
 			ioPak.printf(CS.LEVEL3,"Mismatched AccessCode. \n"
 					+ "Sorry, you cannot set the access code");
 		}
-		ioPak.enterATC(CS.LEVEL4);
+		ioPak.typeATC(CS.LEVEL4);
 		ioPak.printBackLevel(CS.LEVEL2, CS.LEVEL3, CS.LEVEL_G);
 	}
 }

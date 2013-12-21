@@ -2,13 +2,13 @@
 public class CS
 {
 	// For storing all the constants in system.
-	public static final int LEVEL_G = 50;
+	public static final int LEVEL_G = 150;
 	// Level time Gap, for whole system when printing arrow
 	public static final int LEVEL1 = 1;
 	public static final int LEVEL2 = LEVEL1 +7; // Shift right, for level one
 	public static final int LEVEL3 = LEVEL2 +7;// Shift right, for level two
 	public static final int LEVEL4 = LEVEL3 +7;// Shift right, for level three
-	public static final int WAIT_FOR_BAR = 30;
+	public static final int WAIT_FOR_BAR = 50;
 	// Wait gap, for progress bar.
 	public static final int WAIT_G_FOR_SEE = 500;
 	// Wait gap, for customer to see the message, for whole system.

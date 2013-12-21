@@ -504,9 +504,9 @@ public class ioPak
 			e.printStackTrace();
 		}
 	}
-	public static void enterATC(int SHIFT_BEFORE)
+	public static void typeATC(int SHIFT_BEFORE)
 	{
-		System.out.printf(shift(SHIFT_BEFORE, "Enter anything to continue...:"));
+		ioPak.printf(shift(SHIFT_BEFORE, "Please Press ENTER to Continue !"));
 		getStr(SHIFT_BEFORE);
 	}
 	public static void printWarn(int SHIFT_BEFORE, String content, Object...args )

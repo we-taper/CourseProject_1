@@ -98,7 +98,7 @@ public class Main_Interface {
 				accessCode = acode;
 				ioPak.printf(CS.LEVEL1, "Now the access code for this file\n"
 						+ "was changed to the current one(which you typed before)");
-				ioPak.enterATC(CS.LEVEL1);
+				ioPak.typeATC(CS.LEVEL1);
 				Data.setAccessCode(accessCode);
 			} catch (GeneralSecurityException  e1)
 			{
@@ -153,7 +153,7 @@ public class Main_Interface {
 					+ "4: Thank you note.\n"
 					+ "5: Quit."
 					+ "");
-			choice = ioPak.getInt(CS.LEVEL1,"Your choice:",1,4);
+			choice = ioPak.getInt(CS.LEVEL1,"Your choice:",1,5);
 			if (choice == 1)
 			{
 				adminLogin();
@@ -292,8 +292,9 @@ public class Main_Interface {
 
 	private static void registerSalesman() {
 		// Retrieve data from user.
-		salesman.setName(ioPak.setUserName(CS.LEVEL1));
-		salesman.setPassword(ioPak.setConPD(CS.LEVEL1,"Salesman "+salesman.getName()));
+		ioPak.printNextLevel(CS.LEVEL1, CS.LEVEL2, CS.LEVEL_G);
+		salesman.setName(ioPak.setUserName(CS.LEVEL2));
+		salesman.setPassword(ioPak.setConPD(CS.LEVEL2,"Salesman "+salesman.getName()));
 		CurrentUserID = Data.getSalesmanCount() + 1;
 		salesman.setAccountID(CurrentUserID);
 		CurrentUserID = Data.addSalesman(salesman, CurrentUserID);
@@ -301,14 +302,15 @@ public class Main_Interface {
 		// accountID if add successfully and return a
 		// Data.CREAT_FAILED if add unsuccessfully
 		if (CurrentUserID == Data.CREAT_FAILED) {
-			ioPak.printf(CS.LEVEL1,"Failed to creat your account");
+			ioPak.printf(CS.LEVEL2,"Failed to creat your account");
 		} else {// Successfully Created
-			ioPak.printf(CS.LEVEL1,"Successfully registered."
+			ioPak.printf(CS.LEVEL2,"Successfully registered."
 					+ "Your account ID is %d.\n"
 					+ "Please remember you accountID, or else you will not \n"
 					+ "be able to login again.", CurrentUserID);
+			ioPak.typeATC(CS.LEVEL2);
 		}
-
+		ioPak.printBackLevel(CS.LEVEL1, CS.LEVEL2, CS.LEVEL_G);
 		salesman = null;
 	}// end of register
 
@@ -358,7 +360,48 @@ public class Main_Interface {
 	}
 	private static void printThank()
 	{
-		
+		ioPak.printf(CS.LEVEL1,
+""+
+"		         ,--\"\"\"\",--.__,---[],-------._\n"+         
+"       ,\"   __,\'            \\         \\--\"\"\"\"\"\"==;-\n"+
+"     ,\" _,-\"  \"/---.___     \\       ___\\   ,-\'\',\"\n"+
+"    /,-\'      / ;. ,.--\'-.__\\  _,-\"\" ,| `,\'   /\n"+
+"   /``\"\"\"\"-._/,-|:\\       []\\,\' ```-/:;-. `. /\n"+
+"             `  ;:::      ||       /:,;  `-.\\\n"+
+"                =.,\'__,---||-.____\',.=\n"+
+"                =(:\\_     ||__    ):)=\n"+
+"               ,\"::::`----||::`--\':::\"._\n"+
+"             ,\':::::::::::||::::::::::::\'.\n"+
+"    .__     ;:::.-.:::::__||___:::::.-.:::\\     __,\n"+
+"       \"\"\"-;:::( O )::::>_|| _<::::( O )::::-\"\"\"\n"+
+"   =======;:::::`-`:::::::||\':::::::`-`:::::\\=======\n"+
+"    ,--\"\";:::_____________||______________::::\"\"----.          , ,\n"+
+"         ; ::`._(    |    |||     |   )_,\'::::\\_,,,,,,,,,,____/,\'_,\n"+
+"       ,;    :::`--._|____[]|_____|_.-\'::::::::::::::::::::::::);_\n"+
+"      ;/ /      :::::::::,||,:::::::::::::::::::::::::::::::::::/\n"+
+"     /; ``\'\'\'\'----------/,\'/,__,,,,,____:::::::::::::::::::::,\"\n"+
+"     ;/                :);/|_;| ,--.. . ```-.:::::::::::::_,\"\n"+
+"    /;                :::):__,\'//\"\"\\\\. ,--.. \\:::,:::::_,\"\n"+
+"   ;/              :::::/ . . . . . . //\"\"\\\\. \\::\":__,\"\n"+
+"   ;/          :::::::,\' . . . . . . . . . . .:`::\\\n"+
+"   \';      :::::::__,\'. ,--.. . .,--. . . . . .:`::`\n"+
+"   \';   __,..--\'\'\'-. . //\"\"\\\\. .//\"\"\\\\ . ,--.. :`:::`\n"+
+"   ;    /  \\\\ .//\"\"\\\\ . . . . . . . . . //\"\"\\\\. :`::`\n"+
+"   ;   /       . . . . . . . . . . . . . . . . .:`::`\n"+
+"   ;   (          . . . . . . . . . . . . . . . ;:::`\n"+
+"   ,:  ;,         Programmer: . . . .  . . . . ;\':::`\n"+
+"   ,:  ;,               we.taper . . .. . . . .;`:::\n"+
+"   ,:   ;,              Eki . . . . .  . . . . ;`::;`\n"+
+"    ,:  ;               Lily, Zhang. .. . . . ;\':::;`\n"+
+"     :   ;        Post Design:. . . .  . . . ,\':::;\n"+
+"      :   \'.           Lily, Zhang . . . . .,\':::;`\n"+
+"       :    `.       . . . . . . . . . . . ;::::;`\n"+
+"        \'.    `-.   . . . . . . . . . . ,-\'::::;\n"+
+"          `:_    ``--..___________..--\'\':::::;\'`\n"+
+"             `._::,.:,.:,:_-_-_:,:,.::,.:_;\'`\n"+
+"________________`\"\\/\"\\/\\/\'\"\"\"\"`\\/\"\\/\"\"\\/\"____________________________\n"+		
+				"");
+		ioPak.typeATC(CS.LEVEL1);
 	}
 	
 	public static String getAccessCode(){

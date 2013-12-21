@@ -174,7 +174,7 @@ public class Sale_Op
 				+ "Alarming sales made:!!%.2f", salesman.getAccountID(),
 				salesman.getName(), salesman.getSale(),
 				salesman.getSaleProfit(), salesman.getAlarmDegree());
-		ioPak.enterATC(CS.LEVEL3);
+		ioPak.typeATC(CS.LEVEL3);
 		ioPak.printBackLevel(CS.LEVEL2, CS.LEVEL3, CS.LEVEL_G);
 		return salesman;
 	}
@@ -359,7 +359,7 @@ public class Sale_Op
 		ioPak.printf(CS.LEVEL3,"Please set new password.");
 		String pd = ioPak.setConPD(CS.LEVEL3,salesman.getName());
 		salesman.setPassword(pd);
-		ioPak.pause(CS.WAIT_G_FOR_SEE);
+		ioPak.typeATC(CS.LEVEL3);
 		ioPak.printBackLevel(CS.LEVEL2, CS.LEVEL3, CS.LEVEL_G);
 	}
 }// end class
