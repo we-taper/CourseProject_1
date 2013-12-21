@@ -286,7 +286,7 @@ public class ioPak
 					num = Double.parseDouble(s);
 					if (num < min)
 					{
-						ioPak.printf(SHIFT_BEFORE,"Sorry, The number is too small."
+						ioPak.printf(SHIFT_BEFORE,"Sorry, The number is too small.\n"
 								+ "The number should be higher than %.2f.\n",
 								min);
 					}

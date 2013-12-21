@@ -400,14 +400,15 @@ public class Data
 		// Add a salesman object to salesman arraylist and return his accountID.
 		salesman.add(a_salesman);
 		// Check the sequence of arraylist salesman.
-		if (salesman.indexOf(a_salesman) == accountID - 1)
+		/*if (salesman.indexOf(a_salesman) == (accountID - 1))
 		{
 			return accountID;
 		}
 		else
 		{
 			return CREAT_FAILED;
-		}
+		}*/
+		return accountID;
 	}
 
 	public static Salesman getSalesman(int accountID)

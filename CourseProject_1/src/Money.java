@@ -16,7 +16,6 @@ public class Money implements Serializable
 	private int[] storageAmount = new int[6];
 	private BigDecimal[] 
 			basePrice= new BigDecimal[6], 
-//			minPrice = new BigDecimal[6], 
 			sugPrice = new BigDecimal[6]; 
 	private BigDecimal alarmPrice;
 	private BigDecimal currentFunds;
@@ -96,7 +95,7 @@ public class Money implements Serializable
 		BigDecimal moneyCost;
 		if(amount < 0){
 			// reduce storage amount
-			storageAmount[goodsID] = storageAmount[goodsID+SHIFT] - amount;
+			storageAmount[goodsID+SHIFT] = storageAmount[goodsID+SHIFT] - amount;
 			// meanwhile add money to current funds.
 			currentFunds = currentFunds.add(price.multiply(new BigDecimal(amount)));
 		}else{
@@ -201,7 +200,7 @@ public class Money implements Serializable
 		if(price.compareTo(new BigDecimal("0")) == -1){
 			ioPak.printf(false, false, 0, "Oh no, base price can't below zero!!");
 		}else{
-			basePrice[goodsID] = price;
+			basePrice[goodsID+SHIFT] = price;
 		}
 	}
 	public BigDecimal getCurrentFunds()

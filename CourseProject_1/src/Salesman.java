@@ -27,6 +27,7 @@ public class Salesman implements Serializable {
 		password = "0";
 		name = "Tom";
 		saleAmount = new BigDecimal("0");
+		saleAmount.setScale(2, BigDecimal.ROUND_HALF_UP);
 		disabled = false;
 	}
 

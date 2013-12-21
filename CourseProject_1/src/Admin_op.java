@@ -401,6 +401,24 @@ public class Admin_op
 			{
 				ioPak.printNextLevel(CS.LEVEL3, CS.LEVEL4, CS.LEVEL_G);
 				Data.printSugPrice(CS.LEVEL4);
+				ioPak.printf(CS.LEVEL4,"Do you want to change Suggested Price\n"
+						+ "(1 For Yes or 2 For No)?");
+				int choice_cf = ioPak.getInt(CS.LEVEL4,"Your choice:", 1, 2);
+				if(choice_cf == 1){
+					ioPak.printf(CS.LEVEL4,
+							"Which product you want to change?\n"
+							+ "1. iPad2;\n"
+							+ "2. iPad3;\n"
+							+ "3. iPhone 4;\n"
+							+ "4. iPhone 4S;\n"
+							+ "5. iPkone 5;\n"
+							+ "6. iPhone 5S.");
+					int choice_product = ioPak.getInt(CS.LEVEL4, "Product ID:", 1, 6);
+					ioPak.printf(CS.LEVEL4, "Enter the price you want to set.");
+					Data.setSugPrice(choice_product, ioPak.getBD(CS.LEVEL4,"Price:"
+							, Data.getMinPrice(choice_product).doubleValue()));
+					ioPak.printf(CS.LEVEL4,"Set successfully.");
+				}
 				ioPak.typeATC(CS.LEVEL4);
 				ioPak.printBackLevel(CS.LEVEL3, CS.LEVEL4, CS.LEVEL_G);
 				break;
@@ -441,7 +459,7 @@ public class Admin_op
 				Data.printCurFunds(CS.LEVEL4);
 				ioPak.printf(CS.LEVEL4,"Do you want to change Current Funds\n"
 						+ "(1 For Yes or 2 For No)?");
-				int choice_cf = ioPak.getInt("Your choice:", 1, 2);
+				int choice_cf = ioPak.getInt(CS.LEVEL4,"Your choice:", 1, 2);
 				if(choice_cf == 1){
 					ioPak.printf(false, false, 0, CS.LEVEL4,
 							"How much do you want to add to inventory?\n"

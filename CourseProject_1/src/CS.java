@@ -2,7 +2,7 @@
 public class CS
 {
 	// For storing all the constants in system.
-	public static final int LEVEL_G = 150;
+	public static final int LEVEL_G = 100;
 	// Level time Gap, for whole system when printing arrow
 	public static final int LEVEL1 = 1;
 	public static final int LEVEL2 = LEVEL1 +7; // Shift right, for level one
