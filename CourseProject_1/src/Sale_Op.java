@@ -186,7 +186,7 @@ public class Sale_Op
 		Scanner input = new Scanner(System.in);
 		ioPak.printf(CS.LEVEL3,
 				"MAKING DEALS!\n"
-				+ "Here is our products and their amount left in our store:\n");
+				+ "Here is our products and their amount left in our store:");
 		ioPak.printTable(17,CS.LEVEL3,/* "!!",*/
 						" Name!!Amount!!Minimal Price!!Suggested Price\n"
 						+ "1.IPAD2:!!%d!!%.2f!!%.2f\n"
