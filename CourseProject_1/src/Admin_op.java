@@ -66,6 +66,7 @@ public class Admin_op
 				+ "  (d). Enable Saleman's Account.\n"
 				+ "  (e). Disable Saleman's Accounts.\n"
 				+ "  (f). Reset Salesman's password.\n"
+				+ "  (g). Set Announcement.\n"
 				+ "2. My Products:\n" 
 				+ "  (a). Check Inventory;\n"
 				+ "  (b). Update Inventory Information: Stockpiling;\n"
@@ -92,8 +93,9 @@ public class Admin_op
 					+ "    Press 4 to Enable Saleman's Account.\n"
 					+ "    Press 5 to Disable Saleman's Accounts.\n"
 					+ "    Press 6 to Reset Salesman's password.\n"
-					+ "    Press 7 for Exit Account Management.");
-			int choice = ioPak.getInt(CS.LEVEL3,"Your choice:", 1, 7);
+					+ "    Press 7 to Set Announcement for Salesmen.\n"
+					+ "    Press 8 for Exit Account Management.");
+			int choice = ioPak.getInt(CS.LEVEL3,"Your choice:", 1, 8);
 			switch (choice)
 			{
 			case 1:
@@ -215,7 +217,21 @@ public class Admin_op
 				ioPak.printBackLevel(CS.LEVEL3, CS.LEVEL4, CS.LEVEL_G);
 				break;
 			}
-			case 7:// Exit Account Management.(GET)
+			case 7:// set announcement
+			{
+				ioPak.printNextLevel(CS.LEVEL3, CS.LEVEL4, CS.LEVEL_G);
+				ioPak.printf(false, false, 0, CS.LEVEL4, "Current announcement:");
+				Data.printAnoce(CS.LEVEL4);
+				System.out.printf(ioPak.shift(CS.LEVEL4,"Please type your new message:"));
+				String ance = ioPak.nextLine(CS.LEVEL4);
+				Data.setAnoce(ance);
+				ioPak.printf(false, false, 0, CS.LEVEL4, "New announcement:");
+				Data.printAnoce(CS.LEVEL4);
+				ioPak.typeATC(CS.LEVEL4);
+				ioPak.printBackLevel(CS.LEVEL3, CS.LEVEL4, CS.LEVEL_G);
+				break;
+			}
+			case 8:// Exit Account Management.(GET)
 			{
 				ioPak.printBackLevel(CS.LEVEL2, CS.LEVEL3, CS.LEVEL_G);
 				break theWhile;

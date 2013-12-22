@@ -132,9 +132,9 @@ public class Data
 		else
 		{
 			// If not first time, read data from files.
-			encryption.DecryptFile(ACCOUNT_FILE + encryption.FILE_EXTENSION,
+			encryption.decryptFileDES(ACCOUNT_FILE + encryption.FILE_EXTENSION,
 					ACCOUNT_FILE, accessCode);
-			encryption.DecryptFile(MONEY_FILE + encryption.FILE_EXTENSION,
+			encryption.decryptFileDES(MONEY_FILE + encryption.FILE_EXTENSION,
 					MONEY_FILE, accessCode);
 			readMoney();
 			readAccount();
@@ -146,8 +146,8 @@ public class Data
 	{
 		writeMoney();
 		writeAccount();
-		encryption.encryptFile(MONEY_FILE, accessCode);
-		encryption.encryptFile(ACCOUNT_FILE, accessCode);
+		encryption.encryptFileDES(MONEY_FILE, accessCode);
+		encryption.encryptFileDES(ACCOUNT_FILE, accessCode);
 		// Record this run time in RECORD_FILE
 		recordRunTime();
 		clearFiles();
@@ -612,6 +612,27 @@ public class Data
 	public static void printCurFunds(int SHIFT_BEFORE){
 		ioPak.printf(SHIFT_BEFORE,
 				"The current funds is %.2f Yuan.",getCurrentFunds());
+	}
+	public static void printAnoce(int SHIFT_BEFORE)
+	{
+		String s = money.getAnoce();
+		if (s.isEmpty())
+		{
+			return;
+		}
+		else
+		{
+			ioPak.printf(SHIFT_BEFORE, "ACCNOUNCEMENT.");
+			ioPak.printf(SHIFT_BEFORE, ""+money.getAnoce());
+		}
+	}
+	public static String getAnoce()
+	{
+		return money.getAnoce();
+	}
+	public static void setAnoce( String a )
+	{
+		money.setAnoce(a);
 	}
 	public static byte[] getHashAccessCode()
 	{

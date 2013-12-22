@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.util.IllegalFormatException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
@@ -616,7 +617,19 @@ public class ioPak
 			sufN = true;
 		}
 		// Turn the contents into entirely and only pure strings.
-		content = String.format(content, args);
+		try{
+			content = String.format(content, args);
+		} catch ( IllegalFormatException e )
+		{
+			System.out.printf(shift(SHIFT_BEFORE, "The message contain bad words,\n"
+					+ "please change them.\n"));
+			return;
+		} catch (NullPointerException e)
+		{
+			System.out.printf(shift(SHIFT_BEFORE, "The message is empty,\n"
+					+ "I can not print it.\n"));
+			return;
+		}
 		// Find the maximum string
 		int max_length = 0, temp = 0;
 		String string[] = content.split("\n");
@@ -744,7 +757,17 @@ public class ioPak
 		content = shift(SHIFT_BEFORE, content );
 
 		// Now print
-		System.out.printf(content);
+		try{
+			System.out.printf(content);
+		} catch ( IllegalFormatException e )
+		{
+			System.out.printf(shift(SHIFT_BEFORE, "The message contain bad words,\n"
+					+ "please change them."));
+		} catch (NullPointerException e)
+		{
+			System.out.printf(shift(SHIFT_BEFORE, "The message is empty,\n"
+					+ "I can not print it."));
+		}
 	}// end print
 
 	public static String shift(int SHIFT_BEFORE, String input)

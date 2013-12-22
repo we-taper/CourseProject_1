@@ -11,7 +11,6 @@ public class Money implements Serializable
 	public static final int IPHONE5 = 005;
 	public static final int IPHONE5S = 006;
 	private static final int SHIFT = -1;// Use +SHIFT to shift numbers in comply
-	public static byte[] accessCode;
 	// with array index.
 	private int[] storageAmount = new int[6];
 	private BigDecimal[] 
@@ -19,6 +18,7 @@ public class Money implements Serializable
 			sugPrice = new BigDecimal[6]; 
 	private BigDecimal alarmPrice;
 	private BigDecimal currentFunds;
+	private static String anocMen = "Work Harder and achieve Greater!";// Store announcement for all Salesmen
 
 	public void initiateData()
 	{
@@ -213,5 +213,13 @@ public class Money implements Serializable
 	{
 		// Add or subtract money to current funds.
 		currentFunds = currentFunds.add(money);
+	}
+	public void setAnoce(String s)
+	{
+		anocMen = s;
+	}
+	public String getAnoce()
+	{
+		return anocMen;
 	}
 }

@@ -14,7 +14,8 @@ public class Sale_Op
 					+ "Star Salesman For Profit:!!Mr./Ms. %s",
 					salesman.getName(), Data.getStarNameForSales(),
 					Data.getStarNameForProfit());
-			
+			Data.printAnoce(CS.LEVEL2);
+			ioPak.typeATC(CS.LEVEL2);
 			ShowChoices();
 
 			while (true)
