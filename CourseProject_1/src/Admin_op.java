@@ -70,10 +70,11 @@ public class Admin_op
 				+ "  (a). Check Inventory;\n"
 				+ "  (b). Update Inventory Information: Stockpiling;\n"
 				+ "3. My Money:\n" 
-				+ "  (a). Suggested Price Query;\n"
-				+ "  (b). Purchase Price Query;\n"
-				+ "  (c). Warning Percentage Query;\n"
-				+ "  (d). The Current Funds Query.\n"
+				+ "  (a). Suggested Price Query.\n"
+				+ "  (b). Purchase Price Query.\n"
+				+ "  (c). Warning Percentage Query\n"
+				+ "  (b). Set the Warning Percentage.\n"
+				+ "  (e). The Current Funds Query.\n"
 				+ "4. Change Access Code."
 				+"");
 		ioPak.typeATC(SHIFT_BEFORE);
@@ -156,8 +157,8 @@ public class Admin_op
 				else
 				{
 					ioPak.printf(CS.LEVEL4,
-							"This account \"%s\" (ID:%d) is already enabled, there's no need\n"
-							+ "to enable it again",
+							"This account \"%s\" (ID:%d) is already enabled, \n"
+							+ "there's no need to enable it again!",
 							sa.getName(), sa.getAccountID());
 				}
 				ioPak.typeATC(CS.LEVEL4);
@@ -189,7 +190,8 @@ public class Admin_op
 				else
 				{
 					ioPak.printf(CS.LEVEL4,
-							"This account \"%s\" (ID:%d) is already disabled, there's no need\n"
+							"This account \"%s\" (ID:%d) is already disabled,\n"
+							+ "there's no need"
 							+ "to disable it again",
 							sa.getName(), sa.getAccountID());
 				}
