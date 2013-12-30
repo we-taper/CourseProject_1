@@ -20,13 +20,12 @@ public class Sale_Op
 
 			while (true)
 			{
-				int mainChoice = ioPak.getInt(CS.LEVEL2,"Your choice:", 1, 5);
+				int mainChoice = ioPak.getInt(CS.LEVEL2,"Your choice:", 1, 6);
 
 				if (mainChoice == 1)
 				{
 					Calculator();
 					break;
-
 				}
 				if (mainChoice == 2)
 				{
@@ -35,7 +34,7 @@ public class Sale_Op
 				}
 				if (mainChoice == 3)
 				{
-					MakeDeal(salesman);
+					salesman = MakeDeal(salesman);
 					break;
 				}
 				if (mainChoice == 4)
@@ -44,6 +43,11 @@ public class Sale_Op
 					break;
 				}
 				if (mainChoice == 5)
+				{
+					showRec(salesman);
+					break;
+				}
+				if (mainChoice == 6)
 				{
 					ioPak.printBackLevel(CS.LEVEL1,CS.LEVEL2, CS.LEVEL_G);
 					return salesman;
@@ -62,7 +66,21 @@ public class Sale_Op
 		return salesman;
 	}// end main
 
-	public static void ShowChoices()
+	private static void showRec(Salesman salesman)
+	{
+		ioPak.printNextLevel(CS.LEVEL2, CS.LEVEL3, CS.LEVEL_G);
+		if(salesman.getSaleRec().isEmpty())
+		{
+			ioPak.printf(CS.LEVEL3,"You haven't sold anything. Try to do some~~");
+		}else
+		{
+			ioPak.printf(CS.LEVEL3, salesman.getSaleRec());
+		}
+		ioPak.typeATC(CS.LEVEL3);
+		ioPak.printBackLevel(CS.LEVEL2, CS.LEVEL3, CS.LEVEL_G);
+	}
+
+	private static void ShowChoices()
 	{
 		ioPak.printf(CS.LEVEL2,
 				"SALESMAN MAIN MENU:\n" 
@@ -70,15 +88,17 @@ public class Sale_Op
 				+ "\n2.See my account\n%20s" 
 				+ "\n3.Go Selling!\n%20s"
 				+ "\n4.Change my password\n%20s" 
-				+ "\n5.Log out!\n%20s",
+				+ "\n5.Show selling record.\n%20s"
+				+ "\n6.Log out!\n%20s",
 				"(Do calculations to see if it's a worthy deal!)",
 				"(Check your own performance these days!)",
 				"(Make deals and add credits to your profile!)",
 				"(Change for a more secure password.)",
+				"(Show what you have sold!)",
 				"(Return to the Main Menu.)");
 	}
 
-	public static void Calculator()
+	private static void Calculator()
 	{
 		ioPak.printNextLevel(CS.LEVEL2, CS.LEVEL3, CS.LEVEL_G);
 		boolean falseToExit = true;
@@ -144,29 +164,28 @@ public class Sale_Op
 					break;
 				}
 			}// End While
+			ioPak.typeATC(CS.LEVEL3);
 		}// End If
 		ioPak.printBackLevel(CS.LEVEL2, CS.LEVEL3, CS.LEVEL_G);
 	}
 
-	public static Salesman ShowAccount(Salesman salesman)
+	private static void ShowAccount(Salesman salesman)
 	{
 		ioPak.printNextLevel(CS.LEVEL2, CS.LEVEL3, CS.LEVEL_G);
 		ioPak.printf(CS.LEVEL3,
 				"You are now viewing your account.\n"
 				+ "Have you work well these days?Check!");
 		ioPak.printTable(20,CS.LEVEL3,
-				/*"!!",*/
-				"Account ID:!!%d\n" + "Name:!!%s\n"//TODO ask world
+				"Account ID:!!%d\n" + "Name:!!%s\n"
 				+ "Sales Amount:!!%.2f\n" + "Sales Profit:!!%.2f\n"
 				+ "Alarming sales made:!!%.2f", salesman.getAccountID(),
 				salesman.getName(), salesman.getSale(),
 				salesman.getSaleProfit(), salesman.getAlarmDegree());
 		ioPak.typeATC(CS.LEVEL3);
 		ioPak.printBackLevel(CS.LEVEL2, CS.LEVEL3, CS.LEVEL_G);
-		return salesman;
 	}
 
-	public static Salesman MakeDeal(Salesman salesman)
+	private static Salesman MakeDeal(Salesman salesman)
 	{
 		ioPak.printNextLevel(CS.LEVEL2, CS.LEVEL3, CS.LEVEL_G);
 		@SuppressWarnings({ "unused", "resource" })
@@ -181,7 +200,7 @@ public class Sale_Op
 						+ "3.IPHONE4:!!%d!!%.2f!!%.2f\n"
 						+ "4.IPHONE4S:!!%d!!%.2f!!%.2f\n"
 						+ "5.IPHONE5:!!%d!!%.2f!!%.2f\n"
-						+ "6.IPHONE5S:!!%d!!%.2f!!%.2f\n",
+						+ "6.IPHONE5S:!!%d!!%.2f!!%.2f",
 				Data.getStorageAmount(Money.IPAD2),
 				Data.getMinPrice(Money.IPAD2), Data.getSugPrice(Money.IPAD2),
 				Data.getStorageAmount(Money.IPAD3),
@@ -198,8 +217,9 @@ public class Sale_Op
 				Data.getStorageAmount(Money.IPHONE5S),
 				Data.getMinPrice(Money.IPHONE5S),
 				Data.getSugPrice(Money.IPHONE5S));
-		ioPak.printf(CS.LEVEL3, "MinPrice: Minimal price for product.\n"
-						+ "SugPrice: Suggested(more profitable) price.\n");
+		ioPak.printf(false, true, 0, CS.LEVEL3, 
+				"MinPrice: Minimal price for product.\n"
+						+ "SugPrice: Suggested(more profitable) price.");
 		// Print out all the products & their information!
 		ioPak.printf(CS.LEVEL3,"So, which product do you want to sell?");
 		int productChoice = ioPak.getInt(CS.LEVEL3,
@@ -239,92 +259,103 @@ public class Sale_Op
 						break;
 					}
 					ioPak.printf(CS.LEVEL3, "The total price is %.2f"
-							+ "\nThe profit is %.2f,%s the alarm line.",
+							+ "\nThe profit is %.2f, %s the alarm line.",
 							totalPrice, totalProfit, judge);
 
 					ioPak.printf(CS.LEVEL3,
-							"Would you like to enter information of the customer?\n"
-									+ "Press 1 for yes or 2 for no.");
-					int ifEnterInfo = ioPak.getInt(CS.LEVEL3, "Your choice:",
-							1, 2);
-					if (ifEnterInfo == 1)
+							"Please enter information of the customer.");
+					System.out.printf(ioPak.shift(CS.LEVEL3, "Name:"));
+					String name = ioPak.nextLine(CS.LEVEL3);
+					System.out.printf(CS.level3()
+							+ "What about the address?\n"
+							+ CS.level3()+"Please enter here:");
+					String address = ioPak.nextLine(CS.LEVEL3);
+					System.out
+							.printf(CS.level3()
+									+ "Then the telephone number.\n"
+									+CS.level3()+"Please enter it here:");
+					String tele = ioPak.nextLine(CS.LEVEL3);
+					// Now that we get all the information,let's print it out!
+					while (true)
 					{
-						System.out.printf(CS.level3()
-								+ "What about the address?\n"
-								+ CS.level3()+"Please enter here:");
-						String address = ioPak.nextLine(CS.LEVEL3);
-						System.out
-								.printf(CS.level3()
-										+ "Then the telephone number.\n"
-										+CS.level3()+"Please enter it here:");
-						String tele = ioPak.nextLine(CS.LEVEL3);// TODO It should be an integer.
-						// Now that we get all the information,let's print it
-						// out!
-						while (true)
-						{
-							ioPak.printf(CS.LEVEL3, "\nSale confirmation:\n");
-							ioPak.printTable(30, CS.LEVEL3, /*"!!",*/
-									"ID of the employee:!!%d\n"
-											+ "Product ID:!!%d\n"
-											+ "Amount of the product:!!%d\n"
-											+ "Total price:!!%.2f\n"
-											+ "Total profit:!!%.2f\n"
-											+ "Address:!!%s\n"
-											+ "Telephone number:!!%s\n"
-											+ "Compared to alarming rate:!!%s",
-									salesman.getAccountID(), productChoice,
-									productNum, totalPrice, totalProfit,
-									address, tele, judge);
+						ioPak.printf(CS.LEVEL3, "Sale confirmation:");
+						ioPak.printTable(30, CS.LEVEL3,
+								"ID of the employee:!!%d\n"
+										+ "Product :!!%s\n"
+										+ "Amount of the product:!!%d\n"
+										+ "Total price:!!%.2f\n"
+										+ "Total profit:!!%.2f\n"
+										+ "Customer:!!%s\n"
+										+ "Address:!!%s\n"
+										+ "Telephone number:!!%s\n"
+										+ "Compared to alarming rate:!!%s",
+								salesman.getAccountID(), Data.id2Name(productChoice),
+								productNum, totalPrice, totalProfit,
+								name, address, tele, judge);
 
-							ioPak.printf(CS.LEVEL3, "Confirm this order?");
-							System.out.printf(CS.level3()
-									+ "Please enter yes or no here:");
-							String confirm = ioPak.nextLine(CS.LEVEL3);
-							if (confirm.contains("yes"))
+						ioPak.printf(CS.LEVEL3, "Confirm this order?");
+						System.out.printf(CS.level3()
+								+ "Please enter yes or no here:");
+						String confirm = ioPak.nextLine(CS.LEVEL3);
+						if (confirm.contains("yes"))
+						{
+							ioPak.printf(CS.LEVEL3,"Deal accomplished!");
+							Data.changeStorageAmount(productChoice,
+									0-productNum,productPrice);
+							salesman.changeSaleAmount(totalPrice);
+							salesman.changeSaleProfit(totalProfit);
+							String s;
+							s = String.format(
+									salesman.getSaleRec()
+									+ "\n"
+									+ "Product :%s\n"
+									+ "Amount of the product:%d\n"
+									+ "Total price:%.2f\n"
+									+ "Total profit:%.2f\n"
+									+ "Customer:%s\n"
+									+ "Address:%s\n"
+									+ "Telephone number:%s\n"
+									+ "Compared to alarming rate:%s\n"
+									+ "------------------------------------",
+									Data.id2Name(productChoice),
+									productNum, totalPrice, totalProfit,
+									name, address, tele, judge);
+							salesman.setSaleRec(s);
+							if (judge.equals("BELOW"))
 							{
-								ioPak.printf(CS.LEVEL3,"Deal accomplished!");
-								Data.changeStorageAmount(productChoice,
-										-productNum,productPrice);
-								Data.changeCurrentFunds(totalPrice);
-								salesman.changeSaleAmount(totalPrice);
-								salesman.changeSaleProfit(totalProfit);
-								if (judge.equals("BELOW"))
-								{
-									salesman.changeAlarmDegree((Data
-											.getAlarmPrice(productChoice)
-											.subtract(productPrice))
-											.multiply(new BigDecimal(""
-													+ productNum)));
-								}
-								ioPak.printTable(
-										23,
-										CS.LEVEL3,
-										/*"!!",*/
-										"Total sales amount:!!%.2f\n"
-												+ "The profit you made:!!%.2f\n"
-												+ "Alarming sales made:!!%.2f\n"
-												+ "Products remained:!!%d",
-										salesman.getSale(),
-										salesman.getSaleProfit(),
-										salesman.getAlarmDegree(),
-										Data.getStorageAmount(productChoice));
-								break;
+								salesman.changeAlarmDegree((Data
+										.getAlarmPrice(productChoice)
+										.subtract(productPrice))
+										.multiply(new BigDecimal(""
+												+ productNum)));
 							}
-							if (confirm.contains("no"))
-							{
-								ioPak.printf(
-										CS.LEVEL3,
-										"No deal accomplished.\n"
-												+ "Maybe you are right! Think twice before doing!");
-								break;
-							}
-							else
-							{
-								ioPak.printf(CS.LEVEL3,
-										"Error.Let's see the order again!");
-							}
-						}// end while(true)
-					}// end if(EnterInfo == 1)
+							ioPak.printTable(
+									23,
+									CS.LEVEL3,
+									"Total sales amount:!!%.2f\n"
+											+ "The profit you made:!!%.2f\n"
+											+ "Alarming sales made:!!%.2f\n"
+											+ "Products remained:!!%d",
+									salesman.getSale(),
+									salesman.getSaleProfit(),
+									salesman.getAlarmDegree(),
+									Data.getStorageAmount(productChoice));
+							break;
+						}
+						if (confirm.contains("no"))
+						{
+							ioPak.printf(
+									CS.LEVEL3,
+									"No deal accomplished.\n"
+											+ "Maybe you are right! Think twice before doing!");
+							break;
+						}
+						else
+						{
+							ioPak.printf(CS.LEVEL3,
+									"Error.Let's see the order again!");
+						}
+					}// end while(true)
 				}// end if (pruductNum!=0)
 			}// end if (productPrice.compareTo(new BigDecimal("0")) != 0)
 		}// end if (productChoice != 0)
@@ -332,7 +363,7 @@ public class Sale_Op
 		return salesman;
 	}
 
-	public static void setPasswordInMain(Salesman salesman)
+	private static Salesman setPasswordInMain(Salesman salesman)
 	{
 		ioPak.printNextLevel(CS.LEVEL2, CS.LEVEL3, CS.LEVEL_G);
 		ioPak.printf(CS.LEVEL3,"SETTING PASSWORD!");
@@ -350,6 +381,7 @@ public class Sale_Op
 		salesman.setPassword(pd);
 		ioPak.typeATC(CS.LEVEL3);
 		ioPak.printBackLevel(CS.LEVEL2, CS.LEVEL3, CS.LEVEL_G);
+		return salesman;
 	}
 }// end class
 

@@ -10,6 +10,7 @@ public class Salesman implements Serializable {
 	private String name = "Tom";
 	private BigDecimal alarmDegree = new BigDecimal("0");
 	private boolean disabled = false;
+	private String saleRecord = "";
 	// constructors~~!
 
 	public Salesman(int accountID, String name, String password,
@@ -64,6 +65,10 @@ public class Salesman implements Serializable {
 	{
 		disabled = false;
 	}
+	public void setSaleRec(String s)
+	{
+		this.saleRecord = s;
+	}
 
 	// end sets!!
 	// a lot of gets!!
@@ -92,6 +97,9 @@ public class Salesman implements Serializable {
 	}
 	public boolean isDisabled(){
 		return disabled;
+	}
+	public String getSaleRec(){
+		return this.saleRecord;
 	}
 	// Wow,gets end!!
 

@@ -43,9 +43,9 @@ public class ioPak
 		while (true)
 		{
 			System.out.printf(shift(SHIFT_BEFORE, "Please set the password:"));
-			s1 = getConPD();
+			s1 = getConPD(SHIFT_BEFORE);
 			System.out.printf(shift(SHIFT_BEFORE,"Please type the password again:"));
-			s2 = getConPD();
+			s2 = getConPD(SHIFT_BEFORE);
 			if (s1.equals(s2))
 			{
 				ioPak.printf(SHIFT_BEFORE, "Successfully set the password for %s!", name_of_account);
@@ -223,8 +223,8 @@ public class ioPak
 					else if (b < min)
 					{
 						flag = false;
-						ioPak.printf(SHIFT_BEFORE, min_tip + "\n"
-								+ "The number should be within %d to %d\n", min,
+						ioPak.printWarn(SHIFT_BEFORE, min_tip + "\n"
+								+ "The number should be within %d to %d.", min,
 								max);
 					}
 				}catch (NumberFormatException e){
@@ -287,7 +287,7 @@ public class ioPak
 					if (num < min)
 					{
 						ioPak.printf(SHIFT_BEFORE,"Sorry, The number is too small.\n"
-								+ "The number should be higher than %.2f.\n",
+								+ "The number should be higher than %.2f.",
 								min);
 					}
 					else
@@ -328,8 +328,8 @@ public class ioPak
 						cls(1);
 						ioPak.printWarn(SHIFT_BEFORE,
 								"Come on, don't be naughty, never try to press Ctrl-Z\n"
-								+ "or whatever else again.\n");
-						System.out.printf("Try again:");
+								+ "or whatever else again.");
+						System.out.printf(shift(SHIFT_BEFORE,"Try again:"));
 					}else{
 						break;
 					}
@@ -342,7 +342,7 @@ public class ioPak
 						+ "or whatever else again.This forces System to quit.\n");
 				if (System.console() != null)
 				{
-					System.out.printf("Try again:");
+					System.out.printf(shift(SHIFT_BEFORE,"Try again:"));
 				}else{
 					String ac = Main_Interface.getAccessCode();
 					if (ac.length() != 0)
@@ -506,13 +506,16 @@ public class ioPak
 	}
 	public static void typeATC(int SHIFT_BEFORE)
 	{
-		ioPak.printf(SHIFT_BEFORE, "Please Press ENTER to Continue !");
+		/**
+		 * Type Anything To Continue
+		 */
+		ioPak.printf(false, false, 0, SHIFT_BEFORE, "Please Press ENTER to Continue !");
 		getStr(SHIFT_BEFORE);
 	}
 	public static void printWarn(int SHIFT_BEFORE, String content, Object...args )
 	{
 		// Print warning message to the screen.
-		printf('-', '*', false, false, CS.All_LENGTH, 15, 3, 0, "", 0, content, args);
+		printf('-', '*', false, false, CS.All_LENGTH, SHIFT_BEFORE, 3, 0, "", 0, content, args);
 	}
 	public static void printNextDo(int SHIFT_BEFORE, String content, Object...args )
 	{

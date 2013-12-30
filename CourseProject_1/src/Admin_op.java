@@ -61,12 +61,11 @@ public class Admin_op
 				"As An Administrator, You Can:\n"
 				+ "1. Account Management:\n" 
 				+ "  (a). Change My Password;\n"
-				+ "  (b). Change Password.\n"
-				+ "  (c). Display all Existing Acounts.\n"
-				+ "  (d). Enable Saleman's Account.\n"
-				+ "  (e). Disable Saleman's Accounts.\n"
-				+ "  (f). Reset Salesman's password.\n"
-				+ "  (g). Set Announcement.\n"
+				+ "  (b). Display all Existing Acounts.\n"
+				+ "  (c). Enable Saleman's Account.\n"
+				+ "  (d). Disable Saleman's Accounts.\n"
+				+ "  (e). Reset Salesman's password.\n"
+				+ "  (f). Set Announcement for Salesmen.\n"
 				+ "2. My Products:\n" 
 				+ "  (a). Check Inventory;\n"
 				+ "  (b). Update Inventory Information: Stockpiling;\n"
@@ -222,8 +221,11 @@ public class Admin_op
 				ioPak.printNextLevel(CS.LEVEL3, CS.LEVEL4, CS.LEVEL_G);
 				ioPak.printf(false, false, 0, CS.LEVEL4, "Current announcement:");
 				Data.printAnoce(CS.LEVEL4);
-				System.out.printf(ioPak.shift(CS.LEVEL4,"Please type your new message:"));
+				ioPak.printf(CS.LEVEL4,"Please type your new message.\n"
+						+ "Use \"\\\" for line feed.");
+				System.out.printf(ioPak.shift(CS.LEVEL4, "Message:"));
 				String ance = ioPak.nextLine(CS.LEVEL4);
+				ance = ance.replace('\\', '\n');
 				Data.setAnoce(ance);
 				ioPak.printf(false, false, 0, CS.LEVEL4, "New announcement:");
 				Data.printAnoce(CS.LEVEL4);
@@ -510,10 +512,10 @@ public class Admin_op
 			acode = ioPak.setConPD(CS.LEVEL3, "Access Code");
 			Main_Interface.setAccessCode(acode);
 		}else{
-			ioPak.printf(CS.LEVEL3,"Mismatched AccessCode. \n"
+			ioPak.printf(CS.LEVEL3,"Mismatched Access Code. \n"
 					+ "Sorry, you cannot set the access code");
 		}
-		ioPak.typeATC(CS.LEVEL4);
+		ioPak.typeATC(CS.LEVEL3);
 		ioPak.printBackLevel(CS.LEVEL2, CS.LEVEL3, CS.LEVEL_G);
 	}
 }

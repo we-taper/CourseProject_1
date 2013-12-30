@@ -18,7 +18,7 @@ public class Money implements Serializable
 			sugPrice = new BigDecimal[6]; 
 	private BigDecimal alarmPrice;
 	private BigDecimal currentFunds;
-	private static String anocMen = "Work Harder and achieve Greater!";// Store announcement for all Salesmen
+	private String anocMen = "Work Harder and achieve Greater!";// Store announcement for all Salesmen
 
 	public void initiateData()
 	{
@@ -95,10 +95,10 @@ public class Money implements Serializable
 		BigDecimal moneyCost;
 		if(amount < 0){
 			// reduce storage amount
-			storageAmount[goodsID+SHIFT] = storageAmount[goodsID+SHIFT] - amount;
+			storageAmount[goodsID+SHIFT] = storageAmount[goodsID+SHIFT] + amount;
 			// meanwhile add money to current funds.
-			currentFunds = currentFunds.add(price.multiply(new BigDecimal(amount)));
-		}else{
+			currentFunds = currentFunds.add(price.multiply(new BigDecimal(0-amount)));
+		}else{ // amount > 0
 			// add storage amount
 			moneyCost = price.multiply(new BigDecimal(amount));
 			if( stillMoneyLeft(moneyCost)){

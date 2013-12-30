@@ -407,7 +407,7 @@ public class Data
 		else
 		{
 			return CREAT_FAILED;
-		}*/
+		}*/ // This method is now needless and may cause subtle error.
 		return accountID;
 	}
 
@@ -453,7 +453,7 @@ public class Data
 	public static BigDecimal getBasePrice(int goodsID)
 	{
 		/*
-		 * Get the base price����ۣ� for product whose name is goodsID. Receive
+		 * Get the base price. Receive
 		 * goodsID as parameter. Return the base price for this product.
 		 */
 		return money.getBasePrice(goodsID);
@@ -461,17 +461,11 @@ public class Data
 
 	public static void setAlarmPrice(BigDecimal price)
 	{
-		/*
-		 * Set the ��������.
-		 */
 		money.setAlarmPrice(price);
 	}
 
 	public static BigDecimal getAlarmPrice(int goodsID)
 	{
-		/*
-		 * Get the ��������.
-		 */
 		return money.getAlarmPrice(goodsID);
 	}
 
@@ -622,8 +616,7 @@ public class Data
 		}
 		else
 		{
-			ioPak.printf(SHIFT_BEFORE, "ACCNOUNCEMENT.");
-			ioPak.printf(SHIFT_BEFORE, ""+money.getAnoce());
+			ioPak.printf(SHIFT_BEFORE, "Announcement:\n\n"+money.getAnoce());
 		}
 	}
 	public static String getAnoce()
@@ -721,5 +714,24 @@ public class Data
 		}
 		return getSalesman(maxProfitID).getName();
 	}
-	
+	public static String id2Name(int productID)
+	{
+		switch (productID)
+		{
+		case Money.IPAD2:
+			return "iPad 2";
+		case Money.IPAD3:
+			return "iPad 3";
+		case Money.IPHONE4:
+			return "iPhone 4";
+		case Money.IPHONE4S:
+			return "iPhone 4S";
+		case Money.IPHONE5:
+			return "iPhone 5";
+		case Money.IPHONE5S:
+			return "iPhone 5S";
+		default:
+			return "No such Product";
+		}
+	}
 }

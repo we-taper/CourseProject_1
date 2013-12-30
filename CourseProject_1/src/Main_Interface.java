@@ -164,6 +164,7 @@ public class Main_Interface {
 				if (Data.getSalesmanCount() == 0)
 				{
 					ioPak.printf(CS.LEVEL1,"No account exists yet, please register one.");
+					ioPak.typeATC(CS.LEVEL1);
 				}
 				else
 				{
@@ -178,21 +179,21 @@ public class Main_Interface {
 				printAboutUs();
 			} else if (choice == 5) {
 				ioPak.printWait(CS.LEVEL1, CS.WAIT_FOR_BAR, "Storing Data...","  Done!\n");
-				ioPak.printf(CS.LEVEL1,"Auf Wiedersehen~~\nPress anykey to exit.");
 				ioPak.printf(
-"                     / )   \n"+
-"     (\\__/)         ( (   \n"+
-"     )    (          ) )   \n"+
-"   ={      }=       / /   \n"+
-"     )     `-------/ /   \n"+
-"    (               /   \n"+
-"     \\     B y e !  |   \n"+
-"    ,\'\\       ,    ,\'   \n"+
-"    `-\'\\  ,---\\   | \\   \n"+
-"       _) )    `. \\ /   \n"+
-"      (__/       ) )    \n"+
-"                (_/   \n"+
+				"                     / )   \n"+
+				"     (\\__/)         ( (   \n"+
+				"     )    (          ) )   \n"+
+				"   ={      }=       / /   \n"+
+				"     )     `-------/ /   \n"+
+				"    (               /   \n"+
+				"     \\              |   \n"+
+				"    ,\'\\       ,    ,\'   \n"+
+				"    `-\'\\  ,---\\   | \\   \n"+
+				"       _) )    `. \\ /   \n"+
+				"      (__/       ) )    \n"+
+				"                (_/   \n"+
 						"");
+				ioPak.printf(CS.LEVEL1,"Auf Wiedersehen~~\nPress anykey to exit.");
 				break;
 			} else {}// end of if
 		}// end while(true)
