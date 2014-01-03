@@ -5,19 +5,19 @@ import java.security.GeneralSecurityException;
  * 1. Support to temporarily store last time data.
  * 2. Pass Money as an object to avoid duplicate methods.// Cann't do it.
  * 3. Support block certain employee from login in.// DONE
- * 4. Add asc2 pictures to each sub methods.
+ * 4. Add asc2 pictures to each sub methods.// DONE
  * 5. Add password tip.
  * 6. Deal with C-Z error.// DONE
- * 7. Add thank-you info.
- * 8. Add quit option to all things.
- * 9. Enable clear screen for all accounts.
- * 10.Test all data.
+ * 7. Add thank-you info. // DONE
+ * 8. Add quit option to all things. //DONE
+ * 9. Enable clear screen for all accounts. //Skipped
+ * 10.Test all data. // DONE
  * 11.业绩，数据分析
- * 12.管理员 ranking
+ * 12.Salesman ranking //DONE
  * 13.订单记录
- * 14.销售员 记录老客户
- * 15.Admin knows all the profit // By Zao
- * 16.Change access code
+ * 14.销售员 记录老客户 //DONE
+ * 15.Admin knows all the profit // DONE
+ * 16.Change access code //DONE
  */
 public class Main_Interface {
 	private static int CurrentUserID = 0;

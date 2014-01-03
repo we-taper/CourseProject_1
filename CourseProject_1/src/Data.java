@@ -696,8 +696,6 @@ public class Data
 				maxSaleID=s.getAccountID();
 			}
 		}
-		// TODO tell world about this error
-		// return salesman.get(maxSaleID).getName();
 		return getSalesman(maxSaleID).getName();
 	}
 	public static String getStarNameForProfit()
@@ -731,7 +729,7 @@ public class Data
 		case Money.IPHONE5S:
 			return "iPhone 5S";
 		default:
-			return "No such Product";
+			return "No such Product!";
 		}
 	}
 }

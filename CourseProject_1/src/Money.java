@@ -18,7 +18,8 @@ public class Money implements Serializable
 			sugPrice = new BigDecimal[6]; 
 	private BigDecimal alarmPrice;
 	private BigDecimal currentFunds;
-	private String anocMen = "Work Harder and achieve Greater!";// Store announcement for all Salesmen
+	private String anocMent = 
+			"Work Harder and achieve Greater!";// Store announcement for all Salesmen
 
 	public void initiateData()
 	{
@@ -54,15 +55,6 @@ public class Money implements Serializable
 		basePrice[IPHONE5 + SHIFT] = new BigDecimal("6000");
 		basePrice[IPHONE5S + SHIFT] = new BigDecimal("7000");
 	}
-	/*public void initiateMinPrice()
-	{
-		minPrice[IPAD2 + SHIFT] = basePrice[IPAD2 + SHIFT].multiply(alarmPrice)new BigDecimal("3000");
-		minPrice[IPAD3 + SHIFT] = new BigDecimal("3999");
-		minPrice[IPHONE4 + SHIFT] = new BigDecimal("3000");
-		minPrice[IPHONE4S + SHIFT] = new BigDecimal("4005");
-		minPrice[IPHONE5 + SHIFT] = new BigDecimal("6000");
-		minPrice[IPHONE5S + SHIFT] = new BigDecimal("7000");
-	}*/
 	public void iniAllScale(){
 		for(int i = 0; i < 6; i++){
 			basePrice[i] = basePrice[i].setScale(2, BigDecimal.ROUND_HALF_EVEN);
@@ -216,10 +208,10 @@ public class Money implements Serializable
 	}
 	public void setAnoce(String s)
 	{
-		anocMen = s;
+		anocMent = s;
 	}
 	public String getAnoce()
 	{
-		return anocMen;
+		return anocMent;
 	}
 }

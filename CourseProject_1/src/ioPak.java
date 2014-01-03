@@ -4,12 +4,17 @@ import java.util.IllegalFormatException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
-// I/O package used to simplify programming.
+/**
+ *  I/O package used to simplify programming.
+ * @author we.taper
+ *
+ */
 public class ioPak
 {
 	private static Scanner input = new Scanner(System.in);
 	public static int LEFT_ARROW = 0;
 	public static int RIGHT_ARROW = 1;
+	private static int NO_SHIFT = 0;
 	public static String setUserName(int SHIFT_BEFORE)
 	{
 		String name;
@@ -34,7 +39,7 @@ public class ioPak
 		return name;
 	}
 	public static String setUserName(){
-		return setUserName(0);
+		return setUserName(NO_SHIFT);
 	}
 
 	public static String setConPD(int SHIFT_BEFORE, String name_of_account)
@@ -60,7 +65,7 @@ public class ioPak
 	}
 	public static String setConPD(String name_of_account)
 	{
-		return setConPD(0,name_of_account);
+		return setConPD(NO_SHIFT,name_of_account);
 	}
 
 	public static String getConPD(int SHIFT_BEFORE)
@@ -106,7 +111,7 @@ public class ioPak
 						"Come on, don't be naughty, never try to \n"
 						+ "press Ctrl-Z or whatever else.");
 				/*
-				 * If program reaches here, it must be inside a ioPak Console, then
+				 * If program reaches here, it must be under a Console, then
 				 * System could automatically clear the Ctrl-Z character.
 				 */
 				System.out.printf(shift(SHIFT_BEFORE,"Please try again:"));
@@ -116,7 +121,7 @@ public class ioPak
 	}
 	public static String getConPD()
 	{
-		return getConPD(0);
+		return getConPD(NO_SHIFT);
 	}
 	public static String getStr(int SHIFT_BEFORE)
 	{
@@ -146,7 +151,7 @@ public class ioPak
 						"Come on, don't be naughty, never try to \n"
 						+ "press Ctrl-Z or whatever else.");
 				/*
-				 * If program reaches here, it must be inside a ioPak Console, then
+				 * If program reaches here, it must be under a Console, then
 				 * System could automatically clear the Ctrl-Z character.
 				 */
 				System.out.printf(shift(SHIFT_BEFORE,"Please try again:"));
@@ -159,6 +164,10 @@ public class ioPak
 		try
 		{
 			Runtime.getRuntime().exec("cls");
+			/*
+			 * Try using pre-installed program cls.exe
+			 * Although always failed.
+			 */
 		} catch (IOException e)
 		{
 			for (int i = 1; i <= 40; i++)
@@ -173,6 +182,10 @@ public class ioPak
 		try
 		{
 			Runtime.getRuntime().exec("cls");
+			/*
+			 * Try using pre-installed program cls.exe
+			 * Although always failed.
+			 */
 		} catch (IOException e)
 		{
 			for (int i = 1; i <= lines; i++)
@@ -228,7 +241,7 @@ public class ioPak
 								max);
 					}
 				}catch (NumberFormatException e){
-					// catch the too long a number
+					// catch the too long number
 					ioPak.printWarn(SHIFT_BEFORE,
 							"The number should be within %d and %d.", min,
 							max);
@@ -242,7 +255,7 @@ public class ioPak
 	public static int getInt(String ask_phrase, int min, String min_tip,
 			int max, String max_tip)
 	{
-		return getInt(0, ask_phrase, min, min_tip,max, max_tip);
+		return getInt(NO_SHIFT, ask_phrase, min, min_tip,max, max_tip);
 	}
 
 	public static int getInt(int SHIFT_BEFORE,String ask_phrase, int min, int max)
@@ -252,7 +265,7 @@ public class ioPak
 	}
 	public static int getInt(String ask_phrase, int min, int max)
 	{
-		return getInt(0, ask_phrase, min, "Sorry, the number is too small.", max,
+		return getInt(NO_SHIFT, ask_phrase, min, "Sorry, the number is too small.", max,
 				"Oh! The number is too big.");
 	}
 	public static int getInt(int SHIFT_BEFORE, String ask_phrase, int min)
@@ -262,7 +275,7 @@ public class ioPak
 	}
 	public static int getInt( String ask_phrase, int min)
 	{
-		return getInt(0, ask_phrase, min, "Sorry, the number is too small.", Integer.MAX_VALUE,
+		return getInt(NO_SHIFT, ask_phrase, min, "Sorry, the number is too small.", Integer.MAX_VALUE,
 				"Oh! The number is too big.");
 	}
 	public static BigDecimal getBD(int SHIFT_BEFORE,String ask_phrase, double min)
@@ -307,7 +320,7 @@ public class ioPak
 	}
 	public static BigDecimal getBD(String ask_phrase, double min)
 	{
-		return getBD(0, ask_phrase, min);
+		return getBD(NO_SHIFT, ask_phrase, min);
 	}
 	public static String nextLine(int SHIFT_BEFORE){
 		String str = "";
@@ -526,7 +539,7 @@ public class ioPak
 	}
 	public static void printf(String content, Object... args)
 	{
-		printf('-', '*', true, true, 0, 3, 3, 0, "", 0, content, args);
+		printf('-', '*', true, true, 0, 3, 3, 0, "", NO_SHIFT, content, args);
 	}
 	public static void printf(int SHIFT_BEFORE, String content, Object... args)
 	{
@@ -536,7 +549,7 @@ public class ioPak
 	public static void printf(boolean HEAD, boolean TAIL, int slash_m,
 			String content, Object... args)
 	{
-		printf('-', '*', HEAD, TAIL, slash_m, 3, 3, 0, "", 0, content, args);
+		printf('-', '*', HEAD, TAIL, slash_m, 3, 3, 0, "", NO_SHIFT, content, args);
 	}
 	public static void printf(boolean HEAD, boolean TAIL, int slash_m,
 			int SHIFT_BEFORE, String content, Object... args)
@@ -547,7 +560,7 @@ public class ioPak
 	public static void printf(char h_LINE, char v_LINE, String content,
 			Object... args)
 	{
-		ioPak.printf(h_LINE, v_LINE, true, true, 0, 3, 3, 0, "", 0, content, args);
+		ioPak.printf(h_LINE, v_LINE, true, true, 0, 3, 3, 0, "", NO_SHIFT, content, args);
 	}
 	public static void printf(char h_LINE, char v_LINE,int SHIFT_BEFORE, String content,
 			Object... args)
@@ -558,7 +571,7 @@ public class ioPak
 	public static void printf(int slash_m, int SPACE_AHEAD, int SPACE_LAST,
 			String content, Object... args)
 	{
-		printf('-', '*', true, true, slash_m, SPACE_AHEAD, SPACE_LAST, 0, "", 0,
+		printf('-', '*', true, true, slash_m, SPACE_AHEAD, SPACE_LAST, 0, "", NO_SHIFT,
 				content, args);
 	}
 	public static void printf(int slash_m, int SPACE_AHEAD, int SPACE_LAST,
@@ -571,7 +584,7 @@ public class ioPak
 	public static void printTable(int c_length, String SPLIT, String content,
 			Object... args)
 	{
-		printf('-', '*', true, true, 0, 3, 3, c_length, SPLIT, 0, content, args);
+		printf('-', '*', true, true, 0, 3, 3, c_length, SPLIT, NO_SHIFT, content, args);
 	}
 	public static void printTable(int c_length, String SPLIT, int SHIFT_BEFORE, String content,
 			Object... args)
@@ -593,13 +606,13 @@ public class ioPak
 			int c_length, String SPLIT, int SHIFT_BEFORE, String content,
 			Object... args)
 	{
-		/**
+		/**@author we.taper
 		 * Parameters: 
 		 * h_LINE: Character used to draw horizontal lines. 
 		 * v_LINE: Character used to draw vertical lines. 
 		 * HEAD: True if print the header. 
 		 * TAIL: True if print the bottom line. 
-		 * slash_m: The width of lines. Zero(0) to indicate using the default value,
+		 * slash_m: The width of lines. Zero(0) indicates using the default value,
 		 *  	which is the max length of strings added with SPACE_AHEAD and SPACE_LAST.
 		 * SPACE_AHEAD: First few spaces to insert. 
 		 * SPACE_LAST: The number of spaces inserted last.
